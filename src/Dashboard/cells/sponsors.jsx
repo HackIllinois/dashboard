@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React from 'react';
 
 import bus from 'assets/vehicle/bus.svg';
@@ -9,6 +8,10 @@ import capitalOne from 'assets/sponsors/capitalOne.svg';
 import caterpillar from 'assets/sponsors/caterpillar.svg';
 import imc from 'assets/sponsors/imc.svg';
 import optum from 'assets/sponsors/optum.svg';
+
+import google from 'assets/sponsors/google.svg';
+import grainger from 'assets/sponsors/grainger.svg';
+import schlumberger from 'assets/sponsors/schlumberger.svg';
 
 function shuffle(array) {
   let currentIndex = array.length;
@@ -34,7 +37,7 @@ export default class Sponsors extends React.Component {
 
     this.state = {
       listOfSponsors: [],
-    }
+    };
   }
 
   render() {
@@ -53,6 +56,9 @@ export default class Sponsors extends React.Component {
         <div className="bottom-half">
           <div className="small car-sponsors">
             <img src={car} alt="car" id="car" />
+            <img src={grainger} alt="Grainger" id="grainger" />
+            <img src={google} alt="Google" id="google" />
+            <img src={schlumberger} alt="Schlumberger" id="schlumberger" />
           </div>``
           <div className="small bike-sponsors">
             <img src={bike} alt="bike" id="bike" />

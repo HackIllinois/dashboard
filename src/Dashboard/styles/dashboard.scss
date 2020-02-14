@@ -28,6 +28,11 @@
     width: 100px;
     height: 100px;
     z-index: 1;
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+  }
+  #theme-handler:focus {
+    outline: none;
   }
 }
 
@@ -49,12 +54,6 @@
   h1 {
     color: $day-dash-header-color;
   }
-
-  // .clock {
-  //   p {
-  //     text-shadow: 3px 3px $day-dash-text-shadow-color;
-  //   }
-  // }
 
   #countdown-cell {
     .clock {

@@ -1,6 +1,6 @@
 import React from 'react';
 import './styles/dashboard.scss';
-import cityscape from 'assets/cityscape.svg';
+import cityscapeDay from 'assets/cityscape.svg';
 import cityscapeNight from 'assets/night_cityscape.svg';
 
 import ThemeContext from './theme-context';
@@ -62,7 +62,6 @@ export default class Dashboard extends React.Component {
   }
 
   disableTheme() {
-    console.log('disabled Theme');
     clearInterval(this.themeInterval);
     this.setState({
       disabledThemes: true,
@@ -70,7 +69,6 @@ export default class Dashboard extends React.Component {
   }
 
   changeTheme() {
-    console.log('clicked');
     const { theme: oldTheme } = this.state;
     if (oldTheme === 'day') {
       this.setState({
@@ -88,10 +86,10 @@ export default class Dashboard extends React.Component {
     return (
       <ThemeContext.Provider value={theme}>
         <div className="dashboard-wrapper">
-          <div id="theme-handler" type="button" aria-label="button" onClick={disabledThemes ? this.changeTheme : this.disableTheme} />
+          <button id="theme-handler" type="button" aria-label="button" onClick={disabledThemes ? this.changeTheme : this.disableTheme} />
           {
             theme === 'day'
-            ? <img src={cityscape} id="cityscape" alt="cityscape background" />
+            ? <img src={cityscapeDay} id="cityscape" alt="cityscape background" />
             : <img src={cityscapeNight} id="cityscape" alt="cityscape background" />
           }
           <div className={`dashboard ${theme}`}>

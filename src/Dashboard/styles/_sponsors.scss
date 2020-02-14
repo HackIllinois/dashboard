@@ -54,6 +54,11 @@
     .small {
       width: 100%;
       display: grid;
+
+      img {
+        margin: auto;
+        height: 100%;
+      }
     }
 
     .car-sponsors {
@@ -61,6 +66,9 @@
       grid-template-rows: 1fr;
       grid-template-columns: 1fr 1fr 1fr 1fr;
 
+      img {
+        width: 80%;
+      }
       #car {
         grid-column: 1;
         width: 80%;
