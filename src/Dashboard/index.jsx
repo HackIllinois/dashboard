@@ -6,9 +6,10 @@ import ThemeContext from './theme-context';
 // All the various cells I'm using have their own jsx files
 import TwitterFeed from './cells/twitter';
 import CountDown from './cells/countdown';
-import TimeAndEvents from './cells/timeAndEvents';
 import Logo from './cells/logo';
-import Temp from './cells/tempcell';
+import Sponsors from './cells/sponsors';
+import Time from './cells/time';
+import Events from './cells/events';
 
 // This function will retrieve the new theme that should be applied to the dashboard.
 function getTheme() {
@@ -16,8 +17,7 @@ function getTheme() {
   let currentHour = currentTime.getHours();
   const currentMinute = currentTime.getMinutes();
   currentHour += currentMinute / 60;
-
-  if (currentHour >= 7 && currentHour < 18) {
+  if (currentHour >= 7 && currentHour < 17.533333) {
     // 7Aam to 6pm
     return 'day';
   }
@@ -38,7 +38,7 @@ export default class Dashboard extends React.Component {
   }
 
   componentDidMount() {
-    this.interval = setInterval(this.updateTheme, 30 * 1000); // every 30 seconds
+    this.themeInterval = setInterval(this.updateTheme, 30 * 1000); // every 30 seconds
   }
 
   componentWillUnmount() {
@@ -65,11 +65,10 @@ export default class Dashboard extends React.Component {
           <div className={`dashboard ${theme}`}>
             <Logo />
             <CountDown />
-            <Temp />
+            <Time />
             <TwitterFeed />
-            <TimeAndEvents />
-            <Temp />
-            <Temp />
+            <Events />
+            <Sponsors />
           </div>
         </div>
       </ThemeContext.Provider>

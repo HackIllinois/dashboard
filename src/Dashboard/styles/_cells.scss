@@ -22,10 +22,6 @@
     padding: 0;
   }
 
-  p {
-    font-size: 3em; 
-  }
-
 }
 
 .short-cell {
@@ -56,12 +52,20 @@
 
 #twitter-cell{
   background-color: rgba(0,0,0,0);
-  height: calc(100% + 5px)
+  height: calc(100% + 5px);
+
+  .twitter-wrapper {
+    width: 100%;
+    height: 100%;
+  }
+  .hidden {
+    display: none;
+  }
 }
 
-
 @import 'sponsors';
-@import 'timeAndEvent';
+@import 'time';
 @import 'countdown';
 @import 'variables';
 @import 'responsive';
+@import 'events';

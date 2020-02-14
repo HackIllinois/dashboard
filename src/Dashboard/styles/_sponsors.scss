@@ -1,59 +1,59 @@
 #sponsors-cell {
-  width: 100%; 
-  background-repeat: no-repeat;
-  background-size: 200%;
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+  padding: 0;
   
-  .sponsor-grid-wrapper{
-    padding-top: 5px;
-    padding-bottom: 5px;
+  .top-half {
     box-sizing: border-box;
-    height: 100%;
+    display: grid;
+    height: 50%;
+    padding: 15% 0;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+
+    img {
+      height: 100%;
+      width: 90%;
+      grid-row: auto;
+      grid-column: auto;
+    }
+
+    #bus {
+      grid-row: 1 / 3;
+      grid-column: 1;
+      width: 80%;
+      height: 100%;
+      
+      margin-top: auto;
+      margin-bottom: auto;
+    }
+  }
+
+  .bottom-half {
+    height: 50%;
+    width: 100%;
     display: flex;
     flex-direction: column;
 
-    .lane{
-      padding-top: 3px;
-      padding-bottom: 3px;
-      height: 100%;
+    .car-sponsors {
+      height: 50%;
       width: 100%;
-      background-color: rgb(121, 110, 110);
-
-      overflow: hidden;
-      .car{
-        position: relative;
-
+      background-color: red;
+      #car {
         height: 100%;
-        width: 90%;
-        display: flex;
-        justify-content: center;
-
-        animation-name: driveright;
-        animation-duration: 8s; //ensure this number matches the duration specified in sponsors.js
-        animation-iteration-count: infinite;
-        animation-timing-function: linear;
-        
-        img{
-          height: 80%;
-          max-width: 40%;
-        }
       }
     }
 
-    .lane:first-of-type{
-      padding-top: 0px;
+    .bike-sponsors {
+      height: 50%;
+      width: 100%;
+      background-color: green;
+      #bike {
+        height: 100%;
+      }
     }
-    .lane:last-of-type{
-      padding-bottom: 0px;
-    }
+
   }
 }
 
-
-@keyframes driveright {
-  0% {
-    transform: translateX(-90%);
-  }
-  100%{
-    transform: translateX(100%);
-  }
-}

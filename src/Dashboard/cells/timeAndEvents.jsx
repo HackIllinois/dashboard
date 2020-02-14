@@ -117,7 +117,7 @@ class Time extends React.Component {
       );
     }
 
-    // Only want to display the next 2 events!
+    // Only want to display the next 2 events
     const eventsToDisplay = [];
     if (leadingEventIndex < events.length) {
       eventsToDisplay.push(events[leadingEventIndex]);

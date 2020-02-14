@@ -93,7 +93,6 @@ class CountDown extends React.Component {
     }
   }
 
-
   setTime() {
     const { startTime, endTime } = this.state;
     const currentTime = Math.floor(new Date().getTime() / 1000);

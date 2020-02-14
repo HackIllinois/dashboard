@@ -1,37 +1,14 @@
-#time-cell {
-  text-align: center;
+#events-cell {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   height: 100%;
-
   .top-half {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-
-    .clock {
-      box-sizing: border-box;
-      height: 50%;
-      padding: 0;
-      margin: 0;
-
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      p {
-        transition-duration: $theme-transition-duration;
-        display: inline-block;
-      }
-    }
+    height: 50%;
   }
-
   .bottom-half {
-    height: 100%;
-    padding-top: 1vh;
+    height: 50%;
+
   }
-  
   .event-block {
     display: flex;
     background-color: #FFFFFF;
@@ -39,10 +16,6 @@
     padding: 20px;
     margin-bottom: 1vh;
     height: 8vh;
-    // padding: 20px;
-    // margin-bottom: 3vh;
-    // margin-top: 1vh;
-    // height: 8vh;
 
     .vertical-center-text {
       display: flex;
@@ -56,13 +29,11 @@
       color: #222B5C;
 
       h2 {
-        transition-duration: $theme-transition-duration;
-        font-size: calc(2vh + 6px);
+        font-size: calc(1vw + 6px);
         font-weight: 600;
       }
       h3 {
-        transition-duration: $theme-transition-duration;
-        font-size: calc(1.5vh + 5px);
+        font-size: calc(1vw + 5px);
         font-weight: 500;
       }
     }

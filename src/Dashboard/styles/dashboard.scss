@@ -31,8 +31,9 @@
 
 //alter text colors here to propagate to ALL cells
 .day {
-  transition-duration: $theme-transition-duration;
+  transition: color $theme-transition-duration linear;
   background: $day-dash-bg-color;
+  
   p {
     color: $day-dash-text-color;
   }
@@ -46,6 +47,16 @@
     }
   }
 
+  #countdown-cell {
+    .clock {
+      .counter {
+        h4 {  
+          color: $day-dash-text-color;
+        }
+      }
+    }
+  }
+  
   .digit {
     color: $day-countdown-text-color;
   }
@@ -60,7 +71,7 @@
 
 .night {
   transition-duration: $theme-transition-duration;
-  background-color: $night-dash-bg-color;
+  background: $night-dash-bg-color;
   h1, h4, p {
     color: $night-dash-text-color;
   }

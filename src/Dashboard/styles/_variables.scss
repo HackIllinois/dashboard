@@ -1,5 +1,5 @@
 //THEMING COLORS
-$theme-transition-duration: 40s;
+$theme-transition-duration: 0s;
 
 $day-dash-bg-color: url('../../assets/gradient_background.png');
 $day-dash-text-color: #E35058;
@@ -9,7 +9,7 @@ $day-countdown-text-color: #FFFFFF;
 $day-countdown-top-color: #35353F;
 $day-countdown-bottom-color: #232A34;
 
-$night-dash-bg-color: #222B5C;
+$night-dash-bg-color: url('../../assets/gradient_background_dark.png');
 $night-dash-text-color: white;
 $night-countdown-text-color: #6BAEC5;
 $night-countdown-top-color: #FFFFFF;
