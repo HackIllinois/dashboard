@@ -76,13 +76,16 @@ export default class Events extends React.Component {
     getEvents().then(events => {
       events.sort((a, b) => (a.startTime - b.startTime));
 
-      // Filter out events that have already completed
+      // Testing how it'll look when the time changes
       const myTimeTest = (new Date(2020, 1, 28, 16, 10, 0)).getTime() / 1000;
       const currentTime = Math.floor(myTimeTest);
-      // const notCompletedEvents = events.filter(event => currentTime < event.endTime);
+      // const currentTime = Math.floor(Date.now() / 1000);
+
+      // Filter out events that have already completed
+      const notCompletedEvents = events.filter(event => currentTime < event.endTime);
       const happeningNow = [];
       const upcoming = [];
-      events.forEach(event => {
+      notCompletedEvents.forEach(event => {
         if (currentTime > event.startTime) {
           happeningNow.push(event);
         } else {

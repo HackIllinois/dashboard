@@ -36,7 +36,6 @@ export default class Dashboard extends React.Component {
       disabledThemes: false,
     };
 
-    this.setInterval = null;
     this.updateTheme = this.updateTheme.bind(this);
 
     this.disableTheme = this.disableTheme.bind(this);
@@ -48,7 +47,7 @@ export default class Dashboard extends React.Component {
   }
 
   componentWillUnmount() {
-    clearInterval(this.interval);
+    clearInterval(this.themeInterval);
   }
 
   updateTheme() {
@@ -63,8 +62,8 @@ export default class Dashboard extends React.Component {
   }
 
   disableTheme() {
-    console.log('clicked');
-    clearInterval(this.interval);
+    console.log('disabled Theme');
+    clearInterval(this.themeInterval);
     this.setState({
       disabledThemes: true,
     });

@@ -41,17 +41,20 @@ export default class Sponsors extends React.Component {
     return (
       <div className="cell long-cell" id="sponsors-cell">
         <div className="top-half">
-          <img src={bus} alt="bus" id="bus" />
-          <img src={capitalOne} alt="Capital One" id="capitalOne" />
-          <img src={imc} alt="IMC" id="imc" />
-          <img src={caterpillar} alt="Caterpillar" id="caterpillar" />
-          <img src={optum} alt="Optum" id="optum" />
+          <h2>Sponsors</h2>
+          <div className="bus-sponsors">
+            <img src={bus} alt="bus" id="bus" />
+            <img src={capitalOne} alt="Capital One" id="capitalOne" />
+            <img src={imc} alt="IMC" id="imc" />
+            <img src={caterpillar} alt="Caterpillar" id="caterpillar" />
+            <img src={optum} alt="Optum" id="optum" />
+          </div>
         </div>
         <div className="bottom-half">
-          <div className="car-sponsors">
+          <div className="small car-sponsors">
             <img src={car} alt="car" id="car" />
-          </div>
-          <div className="bike-sponsors">
+          </div>``
+          <div className="small bike-sponsors">
             <img src={bike} alt="bike" id="bike" />
           </div>
         </div>
