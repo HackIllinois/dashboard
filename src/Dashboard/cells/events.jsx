@@ -142,11 +142,13 @@ export default class Events extends React.Component {
     return (
       <div className="cell long-cell" id="events-cell">
         <div className="top-half">
+          <h1>Happening Now</h1>
           {
             renderEvents(nowToDisplay, true)
           }
         </div>
         <div className="bottom-half">
+          <h1>Upcoming</h1>
           {
             renderEvents(upcomingToDisplay, false)
           }
