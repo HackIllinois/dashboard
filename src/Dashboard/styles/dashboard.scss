@@ -20,6 +20,15 @@
     grid-template-columns: 33.33333% 33.33333% 33.33333%;
     grid-template-rows: 33.33333% 33.33333% 33.33333%;
   }
+
+  #theme-handler {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100px;
+    height: 100px;
+    z-index: 1;
+  }
 }
 
 #cityscape {

@@ -1,6 +1,8 @@
 import React from 'react';
 import './styles/dashboard.scss';
 import cityscape from 'assets/cityscape.svg';
+import cityscapeNight from 'assets/night_cityscape.svg';
+
 import ThemeContext from './theme-context';
 
 // All the various cells I'm using have their own jsx files
@@ -31,10 +33,14 @@ export default class Dashboard extends React.Component {
 
     this.state = {
       theme: getTheme(),
+      disabledThemes: false,
     };
 
     this.setInterval = null;
     this.updateTheme = this.updateTheme.bind(this);
+
+    this.disableTheme = this.disableTheme.bind(this);
+    this.changeTheme = this.changeTheme.bind(this);
   }
 
   componentDidMount() {
@@ -56,12 +62,39 @@ export default class Dashboard extends React.Component {
     }
   }
 
+  disableTheme() {
+    console.log('clicked');
+    clearInterval(this.interval);
+    this.setState({
+      disabledThemes: true,
+    });
+  }
+
+  changeTheme() {
+    console.log('clicked');
+    const { theme: oldTheme } = this.state;
+    if (oldTheme === 'day') {
+      this.setState({
+        theme: 'night',
+      });
+    } else {
+      this.setState({
+        theme: 'day',
+      });
+    }
+  }
+
   render() {
-    const { theme } = this.state;
+    const { theme, disabledThemes } = this.state;
     return (
       <ThemeContext.Provider value={theme}>
         <div className="dashboard-wrapper">
-          <img src={cityscape} id="cityscape" alt="cityscape background" />
+          <div id="theme-handler" type="button" aria-label="button" onClick={disabledThemes ? this.changeTheme : this.disableTheme} />
+          {
+            theme === 'day'
+            ? <img src={cityscape} id="cityscape" alt="cityscape background" />
+            : <img src={cityscapeNight} id="cityscape" alt="cityscape background" />
+          }
           <div className={`dashboard ${theme}`}>
             <Logo />
             <CountDown />

@@ -45,7 +45,7 @@ export default class Sponsors extends React.Component {
           <img src={capitalOne} alt="Capital One" id="capitalOne" />
           <img src={imc} alt="IMC" id="imc" />
           <img src={caterpillar} alt="Caterpillar" id="caterpillar" />
-          <img src={optum} alt="Optum" id="Optum" />
+          <img src={optum} alt="Optum" id="optum" />
         </div>
         <div className="bottom-half">
           <div className="car-sponsors">
