@@ -96,6 +96,7 @@ class CountDown extends React.Component {
   setTime() {
     const { startTime, endTime } = this.state;
     const currentTime = Math.floor(new Date().getTime() / 1000);
+    // const currentTime = (new Date(2020, 1, 29, 16, 10, 0)).getTime() / 1000;
     let difference = startTime - currentTime;
 
     let hasStarted = false;

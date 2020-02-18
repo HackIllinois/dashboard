@@ -4,44 +4,148 @@ import bus from 'assets/vehicle/bus.svg';
 import car from 'assets/vehicle/car.svg';
 import bike from 'assets/vehicle/bike.svg';
 
+// Bus Sponsors
 import capitalOne from 'assets/sponsors/capital_one.svg';
 import caterpillar from 'assets/sponsors/caterpillar.svg';
 import imc from 'assets/sponsors/imc.svg';
 import optum from 'assets/sponsors/optum.svg';
 
+// Car Sponsors
 import google from 'assets/sponsors/google.svg';
 import grainger from 'assets/sponsors/grainger.svg';
 import schlumberger from 'assets/sponsors/schlumberger.svg';
 
-
+// Bike Sponsors
 import orchidLabs from 'assets/sponsors/orchid_labs.svg';
 import hrt from 'assets/sponsors/hrt.svg';
 
-function shuffle(array) {
-  let currentIndex = array.length;
+const carSponsors = [grainger, google, schlumberger];
+const altCarSponsors = ['Grainger', 'Google', 'Schlumberger'];
 
-  // While there remain elements to shuffle...
-  while (currentIndex > 0) {
-    // Pick a remaining element...
-    const randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex -= 1;
-
-    // And swap it with the current element.
-    const temp = array[currentIndex];
-    array[currentIndex] = array[randomIndex];
-    array[randomIndex] = temp;
-  }
-
-  return array;
-}
-
+const bikeSponsors = [hrt, orchidLabs, hrt, orchidLabs, google];
+const altBikeSponsors = ['HRT', 'OrchidLabs', 'HRT', 'OrchidLabs', 'Google'];
 export default class Sponsors extends React.Component {
   constructor(props) {
     super(props);
 
+    const renderedCarSponsors = [];
+    renderedCarSponsors.push(carSponsors[0]);
+    renderedCarSponsors.push(carSponsors[1]);
+    renderedCarSponsors.push(carSponsors[2]);
+
+    const renderedBikeSponsors = []; // Array of images actually displayed.
+    renderedBikeSponsors.push(bikeSponsors[0]);
+    renderedBikeSponsors.push(bikeSponsors[1]);
+    renderedBikeSponsors.push(bikeSponsors[2]);
+    renderedBikeSponsors.push(bikeSponsors[3]);
     this.state = {
-      listOfSponsors: [],
+      renderedCarSponsors,
+      nextCarRenderIndex: 2,
+      nextCarSponsorIndex: 2 % carSponsors.length,
+
+      renderedBikeSponsors, // length 4
+      nextBikeRenderIndex: 3, // index in rendered bike sponsors to change
+      nextBikeSponsorIndex: 3 % bikeSponsors.length,
     };
+
+    this.renderBikeSponsors = this.renderBikeSponsors.bind(this);
+    this.incrementBike = this.incrementBike.bind(this);
+
+    this.renderCarSponsors = this.renderCarSponsors.bind(this);
+    this.incrementCar = this.incrementCar.bind(this);
+
+    this.bikeInterval = null;
+    this.carInterval = null;
+  }
+
+  componentDidMount() {
+    this.bikeInterval = setInterval(this.incrementBike, 6000); // 8 seconds
+    this.carInterval = setInterval(this.incrementCar, 10000); // 10 seocnds
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.bikeInterval);
+    clearInterval(this.carInterval);
+  }
+
+  incrementCar() {
+    const {
+      nextCarRenderIndex,
+      nextCarSponsorIndex,
+      renderedCarSponsors,
+    } = this.state;
+    renderedCarSponsors[nextCarRenderIndex] = carSponsors[nextCarSponsorIndex];
+
+    this.setState({
+      renderedCarSponsors,
+      nextCarRenderIndex: (nextCarRenderIndex + 1) % 3,
+      nextCarSponsorIndex: (nextCarSponsorIndex + 1) % carSponsors.length,
+    });
+  }
+
+  incrementBike() {
+    const {
+      nextBikeRenderIndex,
+      nextBikeSponsorIndex,
+      renderedBikeSponsors,
+    } = this.state;
+    renderedBikeSponsors[nextBikeRenderIndex] = bikeSponsors[nextBikeSponsorIndex];
+    this.setState({
+      renderedBikeSponsors,
+      nextBikeRenderIndex: (nextBikeRenderIndex + 1) % 4,
+      nextBikeSponsorIndex: (nextBikeSponsorIndex + 1) % bikeSponsors.length,
+    });
+  }
+
+  renderCarSponsors() {
+    const {
+      renderedCarSponsors,
+      nextCarRenderIndex,
+      nextCarSponsorIndex,
+    } = this.state;
+
+    console.log(nextCarRenderIndex);
+    console.log(nextCarSponsorIndex);
+
+    return renderedCarSponsors.map((sponsor, index) => {
+      if (index === nextCarRenderIndex) {
+        return (
+          <div className="sponsor-wrapper" key={`car-${index}`}>
+            <img src={sponsor} className="old-image" alt={altCarSponsors[index]} />
+            <img src={carSponsors[nextCarSponsorIndex]} className="new-image" alt={altCarSponsors[nextCarSponsorIndex]} />
+          </div>
+        );
+      }
+      return (
+        <div className="sponsor-wrapper" key={`car-${index}`}>
+          <img src={sponsor} alt={altCarSponsors[index]} />
+        </div>
+      );
+    });
+  }
+
+  renderBikeSponsors() {
+    const {
+      renderedBikeSponsors,
+      nextBikeRenderIndex,
+      nextBikeSponsorIndex,
+    } = this.state;
+
+    return renderedBikeSponsors.map((sponsor, index) => {
+      if (index === nextBikeRenderIndex) {
+        return (
+          <div className="sponsor-wrapper" key={`bike-${index}`}>
+            <img src={sponsor} className="old-image" alt={altBikeSponsors[index]} />
+            <img src={bikeSponsors[nextBikeSponsorIndex]} className="new-image" alt={altBikeSponsors[nextBikeSponsorIndex]} />
+          </div>
+        );
+      }
+      return (
+        <div className="sponsor-wrapper" key={`bike-${index}`}>
+          <img src={sponsor} alt={altBikeSponsors[index]} />
+        </div>
+      );
+    });
   }
 
   render() {
@@ -58,18 +162,17 @@ export default class Sponsors extends React.Component {
           </div>
         </div>
         <div className="bottom-half">
-          <div className="small car-sponsors">
+          <div className="car-sponsors">
             <img src={car} alt="car" id="car" />
-            <img src={grainger} alt="Grainger" id="grainger" />
-            <img src={google} alt="Google" id="google" />
-            <img src={schlumberger} alt="Schlumberger" id="schlumberger" />
+            {
+              this.renderCarSponsors()
+            }
           </div>
-          <div className="small bike-sponsors">
+          <div className="bike-sponsors">
             <img src={bike} alt="bike" id="bike" />
-            <img src={hrt} alt="HRT" id="hrt" />
-            <img src={orchidLabs} alt="Orchid Labs" id="orchid-labs" />
-            <img src={hrt} alt="HRT" id="hrt" />
-            <img src={orchidLabs} alt="Orchid Labs" id="orchid-labs" />
+            {
+              this.renderBikeSponsors()
+            }
           </div>
         </div>
       </div>

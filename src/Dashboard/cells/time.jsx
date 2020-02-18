@@ -6,13 +6,7 @@ export default class Time extends React.Component {
   constructor(props) {
     super(props);
 
-    const initialState = getTime(new Date());
-    initialState.loadingEvents = true;
-    initialState.events = [];
-    initialState.leadingEventIndex = 0; // Which event is closest approaching/ocurring
-    initialState.eventsToRemove = []; //
-
-    this.state = initialState;
+    this.state = getTime(new Date());
 
     this.interval = null;
 
