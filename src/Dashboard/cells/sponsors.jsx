@@ -19,6 +19,9 @@ import schlumberger from 'assets/sponsors/schlumberger.svg';
 import orchidLabs from 'assets/sponsors/orchid_labs.svg';
 import hrt from 'assets/sponsors/hrt.svg';
 
+const NUM_CAR_SPONSORS = 3;
+const NUM_BIKE_SPONSORS = 4;
+// Temp fix while not enough sponsors to create unique arrays
 let a = [];
 for (let i = 0; i < 40; ++i) a[i] = i;
 
@@ -43,8 +46,8 @@ a = shuffle(a);
 const carSponsors = [grainger, google, schlumberger];
 const altCarSponsors = ['Grainger', 'Google', 'Schlumberger'];
 
-const bikeSponsors = [hrt, orchidLabs, hrt, orchidLabs, google];
-const altBikeSponsors = ['HRT', 'OrchidLabs', 'HRT', 'OrchidLabs', 'Google'];
+const bikeSponsors = [hrt, orchidLabs, hrt, orchidLabs];
+const altBikeSponsors = ['HRT', 'OrchidLabs', 'HRT', 'OrchidLabs'];
 export default class Sponsors extends React.Component {
   constructor(props) {
     super(props);
@@ -99,7 +102,7 @@ export default class Sponsors extends React.Component {
 
     this.setState({
       renderedCarSponsors,
-      nextCarRenderIndex: (nextCarRenderIndex + 1) % 3,
+      nextCarRenderIndex: (nextCarRenderIndex + 1) % NUM_CAR_SPONSORS,
       nextCarSponsorIndex: (nextCarSponsorIndex + 1) % carSponsors.length,
     });
   }
@@ -113,7 +116,7 @@ export default class Sponsors extends React.Component {
     renderedBikeSponsors[nextBikeRenderIndex] = bikeSponsors[nextBikeSponsorIndex];
     this.setState({
       renderedBikeSponsors,
-      nextBikeRenderIndex: (nextBikeRenderIndex + 1) % 4,
+      nextBikeRenderIndex: (nextBikeRenderIndex + 1) % NUM_BIKE_SPONSORS,
       nextBikeSponsorIndex: (nextBikeSponsorIndex + 1) % bikeSponsors.length,
     });
   }

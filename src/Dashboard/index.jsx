@@ -19,7 +19,7 @@ function getTheme() {
   let currentHour = currentTime.getHours();
   const currentMinute = currentTime.getMinutes();
   currentHour += currentMinute / 60;
-  if (currentHour >= 7 && currentHour < 17.533333) {
+  if (currentHour >= 7 && currentHour < 18) {
     // 7Aam to 6pm
     return 'day';
   }

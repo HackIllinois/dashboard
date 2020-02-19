@@ -76,10 +76,7 @@ export default class Events extends React.Component {
     getEvents().then(events => {
       events.sort((a, b) => (a.startTime - b.startTime));
 
-      // Testing how it'll look when the time changes
-      const myTimeTest = (new Date(2020, 1, 28, 16, 10, 0)).getTime() / 1000;
-      const currentTime = Math.floor(myTimeTest);
-      // const currentTime = Math.floor(Date.now() / 1000);
+      const currentTime = Math.floor(Date.now() / 1000);
 
       // Filter out events that have already completed
       const notCompletedEvents = events.filter(event => currentTime < event.endTime);
@@ -141,13 +138,13 @@ export default class Events extends React.Component {
 
     return (
       <div className="cell long-cell" id="events-cell">
-        <div className="top-half">
+        <div className="half top-half">
           <h1>Happening Now</h1>
           {
             renderEvents(nowToDisplay, true)
           }
         </div>
-        <div className="bottom-half">
+        <div className="half bottom-half">
           <h1>Upcoming</h1>
           {
             renderEvents(upcomingToDisplay, false)
