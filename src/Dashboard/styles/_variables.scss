@@ -1,15 +1,15 @@
 //THEMING COLORS
-$theme-transition-duration: 40s;
+$theme-transition-duration: 0s;
 
 $day-dash-bg-color: url('../../assets/gradient_background.png');
 $day-dash-text-color: #E35058;
 $day-dash-header-color: #222B5C;
 $day-dash-text-shadow-color: #A43B5C; // the day design has a textshadow
-$day-countdown-text-color: #FFFFFF;
-$day-countdown-top-color: #35353F;
-$day-countdown-bottom-color: #232A34;
+$day-countdown-text-color: #E28B79;
+$day-countdown-top-color: rgba(40, 81, 99, .85);
+$day-countdown-bottom-color: rgba(40, 81, 99, 1);
 
-$night-dash-bg-color: #222B5C;
+$night-dash-bg-color: url('../../assets/gradient_background_dark.png');
 $night-dash-text-color: white;
 $night-countdown-text-color: #6BAEC5;
 $night-countdown-top-color: #FFFFFF;

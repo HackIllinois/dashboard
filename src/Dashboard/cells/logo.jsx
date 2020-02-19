@@ -1,6 +1,6 @@
 import React from 'react';
-import hackillinoisLogoDay from 'assets/logo.svg';
-import hackillinoisLogoNight from 'assets/logo_dark_bg.svg';
+import hackillinoisLogoDay from 'assets/logos/logo.svg';
+import hackillinoisLogoNight from 'assets/logos/logo_dark_bg.svg';
 import exploreConnectBuild from 'assets/home/tagline.svg';
 import ThemeContext from '../theme-context';
 

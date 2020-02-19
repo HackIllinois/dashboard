@@ -20,6 +20,20 @@
     grid-template-columns: 33.33333% 33.33333% 33.33333%;
     grid-template-rows: 33.33333% 33.33333% 33.33333%;
   }
+
+  #theme-handler {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100px;
+    height: 100px;
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+  }
+  #theme-handler:focus {
+    outline: none;
+  }
 }
 
 #cityscape {
@@ -31,8 +45,9 @@
 
 //alter text colors here to propagate to ALL cells
 .day {
-  transition-duration: $theme-transition-duration;
+  transition: color $theme-transition-duration linear;
   background: $day-dash-bg-color;
+  
   p {
     color: $day-dash-text-color;
   }
@@ -40,12 +55,16 @@
     color: $day-dash-header-color;
   }
 
-  .clock {
-    p {
-      text-shadow: 3px 3px $day-dash-text-shadow-color;
+  #countdown-cell {
+    .clock {
+      .counter {
+        h4 {  
+          color: $day-dash-text-color;
+        }
+      }
     }
   }
-
+  
   .digit {
     color: $day-countdown-text-color;
   }
@@ -60,7 +79,7 @@
 
 .night {
   transition-duration: $theme-transition-duration;
-  background-color: $night-dash-bg-color;
+  background: $night-dash-bg-color;
   h1, h4, p {
     color: $night-dash-text-color;
   }

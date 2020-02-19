@@ -1,14 +1,17 @@
 import React from 'react';
 import './styles/dashboard.scss';
-import cityscape from 'assets/cityscape.svg';
+import cityscapeDay from 'assets/cityscape.svg';
+import cityscapeNight from 'assets/night_cityscape.svg';
+
 import ThemeContext from './theme-context';
 
 // All the various cells I'm using have their own jsx files
 import TwitterFeed from './cells/twitter';
 import CountDown from './cells/countdown';
-import TimeAndEvents from './cells/timeAndEvents';
 import Logo from './cells/logo';
-import Temp from './cells/tempcell';
+import Sponsors from './cells/sponsors';
+import Time from './cells/time';
+import Events from './cells/events';
 
 // This function will retrieve the new theme that should be applied to the dashboard.
 function getTheme() {
@@ -16,7 +19,6 @@ function getTheme() {
   let currentHour = currentTime.getHours();
   const currentMinute = currentTime.getMinutes();
   currentHour += currentMinute / 60;
-
   if (currentHour >= 7 && currentHour < 18) {
     // 7Aam to 6pm
     return 'day';
@@ -31,18 +33,21 @@ export default class Dashboard extends React.Component {
 
     this.state = {
       theme: getTheme(),
+      disabledThemes: false,
     };
 
-    this.setInterval = null;
     this.updateTheme = this.updateTheme.bind(this);
+
+    this.disableTheme = this.disableTheme.bind(this);
+    this.changeTheme = this.changeTheme.bind(this);
   }
 
   componentDidMount() {
-    this.interval = setInterval(this.updateTheme, 30 * 1000); // every 30 seconds
+    this.themeInterval = setInterval(this.updateTheme, 30 * 1000); // every 30 seconds
   }
 
   componentWillUnmount() {
-    clearInterval(this.interval);
+    clearInterval(this.themeInterval);
   }
 
   updateTheme() {
@@ -56,20 +61,44 @@ export default class Dashboard extends React.Component {
     }
   }
 
+  disableTheme() {
+    clearInterval(this.themeInterval);
+    this.setState({
+      disabledThemes: true,
+    });
+  }
+
+  changeTheme() {
+    const { theme: oldTheme } = this.state;
+    if (oldTheme === 'day') {
+      this.setState({
+        theme: 'night',
+      });
+    } else {
+      this.setState({
+        theme: 'day',
+      });
+    }
+  }
+
   render() {
-    const { theme } = this.state;
+    const { theme, disabledThemes } = this.state;
     return (
       <ThemeContext.Provider value={theme}>
         <div className="dashboard-wrapper">
-          <img src={cityscape} id="cityscape" alt="cityscape background" />
+          <button id="theme-handler" type="button" aria-label="button" onClick={disabledThemes ? this.changeTheme : this.disableTheme} />
+          {
+            theme === 'day'
+            ? <img src={cityscapeDay} id="cityscape" alt="cityscape background" />
+            : <img src={cityscapeNight} id="cityscape" alt="cityscape background" />
+          }
           <div className={`dashboard ${theme}`}>
             <Logo />
             <CountDown />
-            <Temp />
+            <Time />
             <TwitterFeed />
-            <TimeAndEvents />
-            <Temp />
-            <Temp />
+            <Events />
+            <Sponsors />
           </div>
         </div>
       </ThemeContext.Provider>
