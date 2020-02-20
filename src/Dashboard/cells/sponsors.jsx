@@ -14,10 +14,14 @@ import optum from 'assets/sponsors/optum.svg';
 import google from 'assets/sponsors/google.svg';
 import grainger from 'assets/sponsors/grainger.svg';
 import schlumberger from 'assets/sponsors/schlumberger.svg';
+import checkbook from 'assets/sponsors/checkbook.svg';
+import facebook from 'assets/sponsors/facebook.svg';
+import mirusResearch from 'assets/sponsors/mirus_research.svg';
 
 // Bike Sponsors
 import orchidLabs from 'assets/sponsors/orchid_labs.svg';
 import hrt from 'assets/sponsors/hrt.svg';
+import bp from 'assets/sponsors/bp.svg';
 
 const NUM_CAR_SPONSORS = 3;
 const NUM_BIKE_SPONSORS = 4;
@@ -43,11 +47,11 @@ function shuffle(array) {
 
 a = shuffle(a);
 
-const carSponsors = [grainger, google, schlumberger];
-const altCarSponsors = ['Grainger', 'Google', 'Schlumberger'];
+const carSponsors = [grainger, google, schlumberger, checkbook, facebook, mirusResearch];
+const altCarSponsors = ['Grainger', 'Google', 'Schlumberger', 'Checkbook', 'Facebook', 'Mirus Research'];
 
-const bikeSponsors = [hrt, orchidLabs, hrt, orchidLabs];
-const altBikeSponsors = ['HRT', 'OrchidLabs', 'HRT', 'OrchidLabs'];
+const bikeSponsors = [hrt, orchidLabs, bp];
+const altBikeSponsors = ['HRT', 'OrchidLabs', 'BP'];
 export default class Sponsors extends React.Component {
   constructor(props) {
     super(props);
