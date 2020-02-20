@@ -197,7 +197,11 @@ export default class Sponsors extends React.Component {
           <div className="bike-sponsors">
             <img src={bike} alt="bike" id="bike" />
             {
-              this.renderBikeSponsors()
+              bikeSponsors.map((sponsor, index) => (
+                <div className="sponsor-wrapper" key={altBikeSponsors[index]}>
+                  <img src={sponsor} alt={altBikeSponsors[index]} />
+                </div>
+              ))
             }
           </div>
         </div>
