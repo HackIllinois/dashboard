@@ -65,6 +65,13 @@
     }
   }
   
+  #sponsors-cell{
+    .top-half {
+      h2 {
+        color: $day-dash-header-color;
+      }
+    }
+  }
   .digit {
     color: $day-countdown-text-color;
   }
@@ -82,6 +89,14 @@
   background: $night-dash-bg-color;
   h1, h4, p {
     color: $night-dash-text-color;
+  }
+  
+  #sponsors-cell{
+    .top-half {
+      h2 {
+        color: $night-dash-text-color;
+      }
+    }
   }
 
   .digit {

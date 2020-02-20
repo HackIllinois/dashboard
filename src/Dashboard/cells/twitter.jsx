@@ -17,7 +17,7 @@ function renderTwitterFeed(theme) {
           noScrollbar
           noBorders
           noFooter
-          options={{ height: 1000 }}
+          options={{ height: 400, tweetLimit: 5 }}
         />
       </div>
       <div className={lightClass}>
@@ -29,7 +29,7 @@ function renderTwitterFeed(theme) {
           noScrollbar
           noBorders
           noFooter
-          options={{ height: 1000 }}
+          options={{ height: 400, tweetLimit: 5 }}
         />
       </div>
     </div>

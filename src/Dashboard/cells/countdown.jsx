@@ -56,6 +56,7 @@ function renderValue(value, type, shouldAnimate) {
   );
 }
 
+
 // This component is in the top row, center
 class CountDown extends React.Component {
   constructor(props) {
@@ -178,14 +179,15 @@ class CountDown extends React.Component {
         shouldUpdateDays = hours === 0;
       }
     }
+
     return (
       <div className="cell short-cell" id="countdown-cell">
+        <h1>{!hasStarted ? 'HACKILLINOIS STARTS IN' : 'HACKING ENDS IN'}</h1>
         <div className="clock">
           {renderValue(days, 'Days', shouldUpdateDays)}
           {renderValue(hours, 'Hours', shouldUpdateHours)}
           {renderValue(minutes, 'Minutes', shouldUpdateMinutes)}
         </div>
-        <h1>{hasStarted ? 'LEFT' : 'UNTIL HACKILLINOIS'}</h1>
       </div>
     );
   }
