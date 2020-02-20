@@ -14,40 +14,23 @@ import optum from 'assets/sponsors/optum.svg';
 import google from 'assets/sponsors/google.svg';
 import grainger from 'assets/sponsors/grainger.svg';
 import schlumberger from 'assets/sponsors/schlumberger.svg';
+import checkbook from 'assets/sponsors/checkbook.svg';
+import facebook from 'assets/sponsors/facebook.svg';
+import mirusResearch from 'assets/sponsors/mirus_research.svg';
 
 // Bike Sponsors
 import orchidLabs from 'assets/sponsors/orchid_labs.svg';
 import hrt from 'assets/sponsors/hrt.svg';
+import bp from 'assets/sponsors/bp.svg';
 
 const NUM_CAR_SPONSORS = 3;
 const NUM_BIKE_SPONSORS = 4;
-// Temp fix while not enough sponsors to create unique arrays
-let a = [];
-for (let i = 0; i < 40; ++i) a[i] = i;
 
-// http://stackoverflow.com/questions/962802#962890
-function shuffle(array) {
-  let tmp;
-  let current;
-  let top = array.length;
-  if (top) {
-    while (--top) {
-      current = Math.floor(Math.random() * (top + 1));
-      tmp = array[current];
-      array[current] = array[top];
-      array[top] = tmp;
-    }
-  }
-  return array;
-}
+const carSponsors = [grainger, google, schlumberger, checkbook, facebook, mirusResearch];
+const altCarSponsors = ['Grainger', 'Google', 'Schlumberger', 'Checkbook', 'Facebook', 'Mirus Research'];
 
-a = shuffle(a);
-
-const carSponsors = [grainger, google, schlumberger];
-const altCarSponsors = ['Grainger', 'Google', 'Schlumberger'];
-
-const bikeSponsors = [hrt, orchidLabs, hrt, orchidLabs];
-const altBikeSponsors = ['HRT', 'OrchidLabs', 'HRT', 'OrchidLabs'];
+const bikeSponsors = [hrt, orchidLabs, bp];
+const altBikeSponsors = ['HRT', 'OrchidLabs', 'BP'];
 export default class Sponsors extends React.Component {
   constructor(props) {
     super(props);
@@ -132,14 +115,14 @@ export default class Sponsors extends React.Component {
     return renderedCarSponsors.map((sponsor, index) => {
       if (index === nextCarRenderIndex) {
         return (
-          <div className="sponsor-wrapper" key={a[index]}>
+          <div className="sponsor-wrapper" key={altCarSponsors[index]}>
             <img src={sponsor} className="old-image" alt={altCarSponsors[index]} />
             <img src={carSponsors[nextCarSponsorIndex]} className="new-image" alt={altCarSponsors[nextCarSponsorIndex]} />
           </div>
         );
       }
       return (
-        <div className="sponsor-wrapper" key={a[index]}>
+        <div className="sponsor-wrapper" key={altCarSponsors[index]}>
           <img src={sponsor} alt={altCarSponsors[index]} />
         </div>
       );
@@ -156,14 +139,14 @@ export default class Sponsors extends React.Component {
     return renderedBikeSponsors.map((sponsor, index) => {
       if (index === nextBikeRenderIndex) {
         return (
-          <div className="sponsor-wrapper" key={a[index]}>
+          <div className="sponsor-wrapper" key={altCarSponsors[index]}>
             <img src={sponsor} className="old-image" alt={altBikeSponsors[index]} />
             <img src={bikeSponsors[nextBikeSponsorIndex]} className="new-image" alt={altBikeSponsors[nextBikeSponsorIndex]} />
           </div>
         );
       }
       return (
-        <div className="sponsor-wrapper" key={a[index]}>
+        <div className="sponsor-wrapper" key={altCarSponsors[index]}>
           <img src={sponsor} alt={altBikeSponsors[index]} />
         </div>
       );
@@ -174,7 +157,7 @@ export default class Sponsors extends React.Component {
     return (
       <div className="cell long-cell" id="sponsors-cell">
         <div className="top-half">
-          <h2>Sponsors</h2>
+          <h2>SPONSORS</h2>
           <div className="bus-sponsors">
             <img src={bus} alt="bus" id="bus" />
             <img src={capitalOne} alt="Capital One" id="capital-one" />
@@ -193,7 +176,11 @@ export default class Sponsors extends React.Component {
           <div className="bike-sponsors">
             <img src={bike} alt="bike" id="bike" />
             {
-              this.renderBikeSponsors()
+              bikeSponsors.map((sponsor, index) => (
+                <div className="sponsor-wrapper" key={altBikeSponsors[index]}>
+                  <img src={sponsor} alt={altBikeSponsors[index]} />
+                </div>
+              ))
             }
           </div>
         </div>

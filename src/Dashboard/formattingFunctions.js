@@ -5,11 +5,11 @@ export default function getTime(givenDate) {
 
   const isAm = hours < 12;
 
-  if (hours === 0) {
-    hours = 12;
-  }
   if (!isAm) {
     hours -= 12;
+  }
+  if (hours === 0) {
+    hours = 12;
   }
 
   minutes = minutes.toString().padStart(2, '0');
