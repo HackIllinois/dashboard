@@ -55,6 +55,14 @@
     color: $day-dash-header-color;
   }
 
+
+  #time-cell {
+    .clock {
+      p {
+        text-shadow: 3px 3px $day-dash-text-shadow-color;
+      }
+    }
+  }
   #countdown-cell {
     .clock {
       .counter {
@@ -91,6 +99,13 @@
     color: $night-dash-text-color;
   }
   
+  #time-cell {
+    .clock {
+      p {
+        text-shadow: 3px 3px $night-dash-text-shadow-color;
+      }
+    }
+  }
   #sponsors-cell{
     .top-half {
       h2 {
