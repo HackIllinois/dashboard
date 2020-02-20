@@ -157,7 +157,7 @@ export default class Sponsors extends React.Component {
     return (
       <div className="cell long-cell" id="sponsors-cell">
         <div className="top-half">
-          <h2>Sponsors</h2>
+          <h2>SPONSORS</h2>
           <div className="bus-sponsors">
             <img src={bus} alt="bus" id="bus" />
             <img src={capitalOne} alt="Capital One" id="capital-one" />

@@ -143,7 +143,7 @@ export default class Events extends React.Component {
           <div className="half top-half">
             {
               upcomingToDisplay.length > 0
-              ? <h1>Upcoming</h1>
+              ? <h1>UPCOMING</h1>
               : ''
             }
             {
@@ -162,7 +162,7 @@ export default class Events extends React.Component {
           <div className="half top-half">
             {
               nowToDisplay.length > 0
-              ? <h1>Happening Now</h1>
+              ? <h1>HAPPENING NOW</h1>
               : ''
             }
             {
@@ -177,13 +177,13 @@ export default class Events extends React.Component {
     return (
       <div className="cell long-cell" id="events-cell">
         <div className="half top-half">
-          <h1>Happening Now</h1>
+          <h1>HAPPENING NOW</h1>
           {
             renderEvents(nowToDisplay, true)
           }
         </div>
         <div className="half bottom-half">
-          <h1>Upcoming</h1>
+          <h1>UPCOMING</h1>
           {
             renderEvents(upcomingToDisplay, false)
           }
