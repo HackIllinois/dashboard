@@ -1,7 +1,5 @@
 import React from 'react';
 import './styles/dashboard.scss';
-import cityscapeDay from 'assets/cityscape.svg';
-import cityscapeNight from 'assets/night_cityscape.svg';
 
 import ThemeContext from './theme-context';
 
@@ -87,11 +85,6 @@ export default class Dashboard extends React.Component {
       <ThemeContext.Provider value={theme}>
         <div className="dashboard-wrapper">
           <button id="theme-handler" type="button" aria-label="button" onClick={disabledThemes ? this.changeTheme : this.disableTheme} />
-          {
-            theme === 'day'
-            ? <img src={cityscapeDay} id="cityscape" alt="cityscape background" />
-            : <img src={cityscapeNight} id="cityscape" alt="cityscape background" />
-          }
           <div className={`dashboard ${theme}`}>
             <Logo />
             <CountDown />

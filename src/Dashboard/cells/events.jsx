@@ -21,7 +21,7 @@ function renderEvents(eventsToDisplay, isNow) {
       isAm: eventTimeIsAm,
     } = getTime(new Date(startTime * 1000));
 
-    const timeString = isNow ? 'NOW' : `${eventTimeHour} : ${eventTimeMinute} ${eventTimeIsAm ? 'AM' : 'PM'}`;
+    const timeString = isNow ? 'NOW' : `${eventTimeHour}:${eventTimeMinute} ${eventTimeIsAm ? 'AM' : 'PM'}`;
 
     return (
       <EventBlock
@@ -139,13 +139,21 @@ export default class Events extends React.Component {
     return (
       <div className="cell long-cell" id="events-cell">
         <div className="half top-half">
-          <h1>Happening Now</h1>
+          {
+            nowToDisplay.length > 0
+            ? <h1>Happening Now</h1>
+            : ''
+          }
           {
             renderEvents(nowToDisplay, true)
           }
         </div>
         <div className="half bottom-half">
-          <h1>Upcoming</h1>
+          {
+            upcomingToDisplay.length > 0
+            ? <h1>Upcoming</h1>
+            : ''
+          }
           {
             renderEvents(upcomingToDisplay, false)
           }
