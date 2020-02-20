@@ -136,24 +136,54 @@ export default class Events extends React.Component {
     const nowToDisplay = getEventsToDisplay(eventsNow, NUM_EVENTS_DISPLAYED);
     const upcomingToDisplay = getEventsToDisplay(eventsUpcoming, NUM_EVENTS_DISPLAYED);
 
+    // If there are no events happening now, display the upcoming evensts in the top block
+    if (nowToDisplay.length === 0) {
+      return (
+        <div className="cell long-cell" id="events-cell">
+          <div className="half top-half">
+            {
+              upcomingToDisplay.length > 0
+              ? <h1>Upcoming</h1>
+              : ''
+            }
+            {
+              renderEvents(upcomingToDisplay, false)
+            }
+          </div>
+          <div className="half bottom-half" />
+        </div>
+      );
+    }
+
+    // If there are no upcoming events, do not display that bottom block.
+    if (upcomingToDisplay.length === 0) {
+      return (
+        <div className="cell long-cell" id="events-cell">
+          <div className="half top-half">
+            {
+              nowToDisplay.length > 0
+              ? <h1>Happening Now</h1>
+              : ''
+            }
+            {
+              renderEvents(nowToDisplay, false)
+            }
+          </div>
+          <div className="half bottom-half" />
+        </div>
+      );
+    }
+
     return (
       <div className="cell long-cell" id="events-cell">
         <div className="half top-half">
-          {
-            nowToDisplay.length > 0
-            ? <h1>Happening Now</h1>
-            : ''
-          }
+          <h1>Happening Now</h1>
           {
             renderEvents(nowToDisplay, true)
           }
         </div>
         <div className="half bottom-half">
-          {
-            upcomingToDisplay.length > 0
-            ? <h1>Upcoming</h1>
-            : ''
-          }
+          <h1>Upcoming</h1>
           {
             renderEvents(upcomingToDisplay, false)
           }
