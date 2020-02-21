@@ -41,7 +41,7 @@ export default class Dashboard extends React.Component {
   }
 
   componentDidMount() {
-    this.themeInterval = setInterval(this.updateTheme, 1 * 1000 * 60); // every 30 seconds
+    this.themeInterval = setInterval(this.updateTheme, 2 * 1000 * 60); // every 30 seconds
   }
 
   componentWillUnmount() {
