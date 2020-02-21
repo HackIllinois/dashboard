@@ -41,7 +41,7 @@ export default class Dashboard extends React.Component {
   }
 
   componentDidMount() {
-    this.themeInterval = setInterval(this.updateTheme, 30 * 1000); // every 30 seconds
+    this.themeInterval = setInterval(this.updateTheme, 1 * 1000 * 60); // every 30 seconds
   }
 
   componentWillUnmount() {
@@ -50,13 +50,22 @@ export default class Dashboard extends React.Component {
 
   updateTheme() {
     const { theme } = this.state;
-    const newTheme = getTheme();
-
-    if (newTheme !== theme) {
+    // const newTheme = getTheme();
+    if (theme === 'day') {
       this.setState({
-        theme: newTheme,
+        theme: 'night',
+      });
+    } else {
+      this.setState({
+        theme: 'day',
       });
     }
+    // return;
+    // if (newTheme !== theme) {
+    //   this.setState({
+    //     theme: newTheme,
+    //   });
+    // }
   }
 
   disableTheme() {
