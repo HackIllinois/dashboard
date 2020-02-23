@@ -43,11 +43,11 @@ function getEventsToDisplay(array, numEvents) {
   return eventsToDisplay;
 }
 
-function removeOldEvents(array, now) {
+function removeOldUpcomingEvents(array, now) {
   const removedEvents = [];
   for (let i = 0; i < array.length; i++) {
     const event = array[i];
-    if (now > event.startTime && now < event.endTime) {
+    if (now >= event.startTime && now < event.endTime) {
       array.splice(i, 1);
       i--;
       removedEvents.push(event);
@@ -55,6 +55,15 @@ function removeOldEvents(array, now) {
   }
 
   return removedEvents;
+}
+function removeOldNewEvents(array, now) {
+  for (let i = 0; i < array.length; i++) {
+    const event = array[i];
+    if (now >= event.endTime) {
+      array.splice(i, 1);
+      i--;
+    }
+  }
 }
 
 
@@ -106,11 +115,12 @@ export default class Events extends React.Component {
     const { eventsUpcoming, eventsNow } = this.state;
     const now = Math.floor(Date.now() / 1000);
 
-    const newNowEvents = removeOldEvents(eventsUpcoming, now);
+    const newNowEvents = removeOldUpcomingEvents(eventsUpcoming, now);
     newNowEvents.forEach(event => {
       eventsNow.push(event);
     });
-    removeOldEvents(eventsNow, now);
+
+    removeOldNewEvents(eventsNow, now);
 
     this.setState({
       eventsUpcoming,

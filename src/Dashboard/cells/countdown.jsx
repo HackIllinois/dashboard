@@ -1,7 +1,8 @@
 import React from 'react';
 import { getTimes } from 'api';
 import Loading from 'components/Loading';
-import ThemeContext from '../theme-context';
+
+import ThemeContext from 'Dashboard/theme-context';
 
 function getOnesDigit(number) {
   return number % 10;
@@ -97,15 +98,14 @@ class CountDown extends React.Component {
   setTime() {
     const { startTime, endTime } = this.state;
     const currentTime = Math.floor(Date.now() / 1000);
-    // const currentTime = (new Date(2020, 1, 29, 16, 10, 0)).getTime() / 1000;
     let difference = startTime - currentTime;
 
     let hasStarted = false;
-    if (difference < 0) { // passed the start time
+    if (difference <= 0) { // passed the start time
       difference = endTime - currentTime;
       hasStarted = true;
     }
-    if (difference < 0) { // passed the end time
+    if (difference <= 0) { // passed the end time
       this.setState({
         days: 0,
         hours: 0,
@@ -116,6 +116,7 @@ class CountDown extends React.Component {
         startTime,
         endTime,
       });
+      return;
     }
 
     const seconds = difference % 60;
@@ -146,10 +147,53 @@ class CountDown extends React.Component {
 
   initializeState() {
     getTimes().then(data => {
-      const { eventStart, eventEnd } = data;
+      const { eventStart: startTime, eventEnd: endTime } = data;
+
+      const currentTime = Math.floor(Date.now() / 1000);
+      let difference = startTime - currentTime;
+
+      let hasStarted = false;
+      if (difference <= 0) { // passed the start time
+        difference = endTime - currentTime;
+        hasStarted = true;
+      }
+      if (difference <= 0) { // passed the end time
+        this.setState({
+          days: 0,
+          hours: 0,
+          minutes: 0,
+          seconds: -1,
+          completed: true,
+          hasStarted,
+          startTime,
+          endTime,
+        });
+        return;
+      }
+
+      const seconds = difference % 60;
+
+      // In order to make minutes add up, need to effectively add back in the seconds subtracted
+      // This is done with the ceil.
+      difference = Math.ceil(difference / 60);
+
+      const minutes = difference % 60;
+      difference = (difference - minutes) / 60;
+
+      const hours = difference % 24;
+      difference = (difference - hours) / 24;
+
+      const days = difference;
+
       this.setState({
-        startTime: eventStart,
-        endTime: eventEnd,
+        days,
+        hours,
+        minutes,
+        seconds,
+        completed: false,
+        hasStarted,
+        startTime,
+        endTime,
       });
     });
   }
@@ -164,6 +208,7 @@ class CountDown extends React.Component {
       hasStarted,
       startTime,
       endTime,
+      completed,
     } = this.state;
 
     if (startTime === -1 || endTime === -1) {
@@ -180,6 +225,18 @@ class CountDown extends React.Component {
       }
     }
 
+    if (completed) {
+      return (
+        <div className="cell short-cell" id="countdown-cell">
+          <h1>THANKS FOR ATTENDING</h1>
+          <div className="clock">
+            {renderValue(0, 'Days', shouldUpdateDays)}
+            {renderValue(0, 'Hours', shouldUpdateHours)}
+            {renderValue(0, 'Minutes', shouldUpdateMinutes)}
+          </div>
+        </div>
+      );
+    }
     return (
       <div className="cell short-cell" id="countdown-cell">
         <h1>{!hasStarted ? 'HACKILLINOIS STARTS IN' : 'HACKING ENDS IN'}</h1>

@@ -2,7 +2,10 @@
   box-sizing: border-box;
   height: 100%;
   width: 100%;
-  // background-color: rgba(150,150,150,0.8);
+  
+  // Bottom right
+  grid-row: 2 /4;
+  grid-column: 3 / 4;
   .top-half {
     box-sizing: border-box;
     height: 50%;
@@ -22,7 +25,7 @@
       width: 100%;
       padding-top: 5%;
       padding-bottom: 5%;
-      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-columns: 33.333333% 1fr 1fr;
       grid-template-rows: 1fr 1fr;
 
       img {
@@ -38,8 +41,7 @@
         width: 80%;
         height: 70%;
         
-        margin-top: auto;
-        margin-bottom: auto;
+        margin: auto;
       }
     }
   }
@@ -50,41 +52,44 @@
     display: flex;
     flex-direction: column;
 
+    .sponsor-wrapper {
+      grid-row: 1;
+      grid-column: auto;
+      height: 100%;
+      width: 100%;
+      position: relative;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      .old-image {
+        position: absolute;
+        animation-name: fadeOut;
+        animation-timing-function: linear;
+        animation-fill-mode: forwards;
+        animation-duration: 5s;
+      }
+      .new-image {
+        position: absolute;
+        animation-name: fadeIn;
+        animation-timing-function: linear;
+        animation-fill-mode: forwards;
+        animation-duration: 5s;
+      }
+
+      img {
+        box-sizing: border-box;
+        width: 80%;
+      }
+    }
+
     .car-sponsors {
       height: 60%;
       width: 100%;
       display: grid;
       grid-template-rows: 1fr;
-      grid-template-columns: 1fr 1fr 1fr 1fr;
-
-      .sponsor-wrapper {
-        grid-row: 1;
-        grid-column: auto;
-        height: 100%;
-        width: 100%;
-        position: relative;
-
-        .old-image {
-          position: absolute;
-          animation-name: fadeOut;
-          animation-timing-function: linear;
-          animation-fill-mode: forwards;
-          animation-duration: 5s;
-        }
-        .new-image {
-          position: absolute;
-          animation-name: fadeIn;
-          animation-timing-function: linear;
-          animation-fill-mode: forwards;
-          animation-duration: 5s;
-        }
-
-        img {
-          width: 80%;
-          height: 100%;
-          margin: 0 10%;
-        }
-      }
+      grid-template-columns: 33.333333% 1fr 1fr 1fr;
 
       #car {
         grid-row: 1 / 2;
@@ -100,36 +105,7 @@
       width: 100%;
       display: grid;
       grid-template-rows: 1fr;
-      grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-
-      .sponsor-wrapper {
-        grid-row: 1;
-        grid-column: auto;
-        height: 100%;
-        width: 100%;
-        position: relative;
-
-        .old-image {
-          position: absolute;
-          animation-name: fadeOut;
-          animation-timing-function: linear;
-          animation-fill-mode: forwards;
-          animation-duration: 5s;
-        }
-        .new-image {
-          position: absolute;
-          animation-name: fadeIn;
-          animation-timing-function: linear;
-          animation-fill-mode: forwards;
-          animation-duration: 5s;
-        }
-
-        img {
-          width: 80%;
-          height: 100%;
-          margin: 0 10%;
-        }
-      }
+      grid-template-columns: 33.333333% 1fr 1fr 1fr 1fr;
 
       #bike {
         grid-row: 1 / 2;
