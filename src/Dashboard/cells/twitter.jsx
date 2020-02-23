@@ -2,6 +2,9 @@ import React from 'react';
 import { TwitterTimelineEmbed } from 'react-twitter-embed';
 import ThemeContext from '../theme-context';
 
+/*
+  Retired Cell
+*/
 function renderTwitterFeed(theme) {
   const darkClass = `twitter-wrapper ${theme !== 'night' ? 'hidden' : ''}`;
   const lightClass = `twitter-wrapper ${theme === 'night' ? 'hidden' : ''}`;
