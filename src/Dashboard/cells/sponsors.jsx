@@ -24,11 +24,13 @@ import mirusResearch from 'assets/sponsors/mirus_research.svg';
 import johnDeere from 'assets/sponsors/john_deere.png';
 import collinsAerospaceNight from 'assets/sponsors/collins_aerospace_night.svg';
 import collinsAerospace from 'assets/sponsors/collins_aerospace.svg';
+import citadel from 'assets/sponsors/citadel.svg';
 
 // Bike Sponsors
 import orchidLabs from 'assets/sponsors/orchid_labs.svg';
 import hrt from 'assets/sponsors/hrt.svg';
 import bp from 'assets/sponsors/bp.svg';
+import abbvie from 'assets/sponsors/abbie.svg';
 
 const NUM_CAR_SPONSORS = 3;
 const NUM_BIKE_SPONSORS = 4;
@@ -42,6 +44,7 @@ const carSponsors = [
   mirusResearch,
   collinsAerospace,
   johnDeere,
+  citadel,
 ];
 const nightCarSponsors = [
   grainger,
@@ -52,6 +55,7 @@ const nightCarSponsors = [
   mirusResearch,
   collinsAerospaceNight,
   johnDeere,
+  citadel,
 ];
 const altCarSponsors = [
   'Grainger',
@@ -62,17 +66,20 @@ const altCarSponsors = [
   'Mirus Research',
   'Collins Aerospace',
   'John Deere',
+  'Citadel',
 ];
 
 const bikeSponsors = [
   bp,
   hrt,
   orchidLabs,
+  abbvie,
 ];
 const altBikeSponsors = [
   'BP',
   'HRT',
   'Orchid Labs',
+  'Abbvie',
 ];
 
 class Sponsors extends React.Component {
