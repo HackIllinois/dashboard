@@ -3,6 +3,10 @@
   flex-direction: column;
   height: 100%;
 
+  // Middle Bottom
+  grid-row: 2 / 4;
+  grid-column: 2 / 3;
+
   h1 {
     text-align: center;
     font-size: 30px;

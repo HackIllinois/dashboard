@@ -1,10 +1,13 @@
 import React from 'react';
 import './styles/dashboard.scss';
+import backgroundDay from 'assets/gradient_background.png';
+import backgroundNight from 'assets/gradient_background_dark.png';
+import cityscapeDay from 'assets/cityscape.svg';
+import cityscapeNight from 'assets/night_cityscape.png';
 
 import ThemeContext from './theme-context';
 
 // All the various cells I'm using have their own jsx files
-import TwitterFeed from './cells/twitter';
 import CountDown from './cells/countdown';
 import Logo from './cells/logo';
 import Sponsors from './cells/sponsors';
@@ -86,7 +89,17 @@ export default class Dashboard extends React.Component {
     return (
       <ThemeContext.Provider value={theme}>
         <div className="dashboard-wrapper">
+          {
+            theme === 'day'
+            ? <img src={backgroundDay} id="background-gradient" alt="background" />
+            : <img src={backgroundNight} id="background-gradient" alt="background" />
+          }
           <button id="theme-handler" type="button" aria-label="button" onClick={disabledThemes ? this.changeTheme : this.disableTheme} />
+          {
+            theme === 'day'
+            ? <img src={cityscapeDay} id="cityscape" alt="cityscape background" />
+            : <img src={cityscapeNight} style={{ transform: 'scaleX(-1)' }} id="cityscape" alt="cityscape background" />
+          }
           <div className={`dashboard ${theme}`}>
             <Logo />
             <CountDown />

@@ -1,4 +1,5 @@
 import React from 'react';
+import ThemeContext from 'Dashboard/theme-context';
 
 import bus from 'assets/vehicle/bus.svg';
 import car from 'assets/vehicle/car.svg';
@@ -8,15 +9,21 @@ import bike from 'assets/vehicle/bike.svg';
 import capitalOne from 'assets/sponsors/capital_one.svg';
 import caterpillar from 'assets/sponsors/caterpillar.svg';
 import imc from 'assets/sponsors/imc.svg';
+import optumNight from 'assets/sponsors/optum_night.svg';
 import optum from 'assets/sponsors/optum.svg';
 
 // Car Sponsors
 import google from 'assets/sponsors/google.svg';
 import grainger from 'assets/sponsors/grainger.svg';
+import schlumbergerNight from 'assets/sponsors/schlumberger_night.svg';
 import schlumberger from 'assets/sponsors/schlumberger.svg';
 import checkbook from 'assets/sponsors/checkbook.svg';
+import checkbookNight from 'assets/sponsors/checkbook_night.svg';
 import facebook from 'assets/sponsors/facebook.svg';
 import mirusResearch from 'assets/sponsors/mirus_research.svg';
+import johnDeere from 'assets/sponsors/john_deere.png';
+import collinsAerospaceNight from 'assets/sponsors/collins_aerospace_night.svg';
+import collinsAerospace from 'assets/sponsors/collins_aerospace.svg';
 
 // Bike Sponsors
 import orchidLabs from 'assets/sponsors/orchid_labs.svg';
@@ -26,25 +33,62 @@ import bp from 'assets/sponsors/bp.svg';
 const NUM_CAR_SPONSORS = 3;
 const NUM_BIKE_SPONSORS = 4;
 
-const carSponsors = [grainger, google, schlumberger, checkbook, facebook, mirusResearch];
-const altCarSponsors = ['Grainger', 'Google', 'Schlumberger', 'Checkbook', 'Facebook', 'Mirus Research'];
+const carSponsors = [
+  grainger,
+  google,
+  schlumberger,
+  checkbook,
+  facebook,
+  mirusResearch,
+  collinsAerospace,
+  johnDeere,
+];
+const nightCarSponsors = [
+  grainger,
+  google,
+  schlumbergerNight,
+  checkbookNight,
+  facebook,
+  mirusResearch,
+  collinsAerospaceNight,
+  johnDeere,
+];
+const altCarSponsors = [
+  'Grainger',
+  'Google',
+  'Schlumberger',
+  'Checkbook',
+  'Facebook',
+  'Mirus Research',
+  'Collins Aerospace',
+  'John Deere',
+];
 
-const bikeSponsors = [hrt, orchidLabs, bp];
-const altBikeSponsors = ['HRT', 'OrchidLabs', 'BP'];
-export default class Sponsors extends React.Component {
+const bikeSponsors = [
+  bp,
+  hrt,
+  orchidLabs,
+];
+const altBikeSponsors = [
+  'BP',
+  'HRT',
+  'Orchid Labs',
+];
+
+class Sponsors extends React.Component {
   constructor(props) {
     super(props);
 
     const renderedCarSponsors = [];
-    renderedCarSponsors.push(carSponsors[0]);
-    renderedCarSponsors.push(carSponsors[1]);
-    renderedCarSponsors.push(carSponsors[2]);
+    renderedCarSponsors.push(0);
+    renderedCarSponsors.push(1);
+    renderedCarSponsors.push(2);
 
-    const renderedBikeSponsors = []; // Array of images actually displayed.
-    renderedBikeSponsors.push(bikeSponsors[0]);
-    renderedBikeSponsors.push(bikeSponsors[1]);
-    renderedBikeSponsors.push(bikeSponsors[2]);
-    renderedBikeSponsors.push(bikeSponsors[3]);
+    const renderedBikeSponsors = []; // Array of indices of actually displayed.
+    renderedBikeSponsors.push(0);
+    renderedBikeSponsors.push(1);
+    renderedBikeSponsors.push(2);
+    renderedBikeSponsors.push(3);
     this.state = {
       renderedCarSponsors,
       nextCarRenderIndex: 2,
@@ -66,7 +110,6 @@ export default class Sponsors extends React.Component {
   }
 
   componentDidMount() {
-    this.bikeInterval = setInterval(this.incrementBike, 6000); // 8 seconds
     this.carInterval = setInterval(this.incrementCar, 10000); // 10 seocnds
   }
 
@@ -81,7 +124,8 @@ export default class Sponsors extends React.Component {
       nextCarSponsorIndex,
       renderedCarSponsors,
     } = this.state;
-    renderedCarSponsors[nextCarRenderIndex] = carSponsors[nextCarSponsorIndex];
+
+    renderedCarSponsors[nextCarRenderIndex] = nextCarSponsorIndex;
 
     this.setState({
       renderedCarSponsors,
@@ -96,7 +140,7 @@ export default class Sponsors extends React.Component {
       nextBikeSponsorIndex,
       renderedBikeSponsors,
     } = this.state;
-    renderedBikeSponsors[nextBikeRenderIndex] = bikeSponsors[nextBikeSponsorIndex];
+    renderedBikeSponsors[nextBikeRenderIndex] = nextBikeSponsorIndex;
     this.setState({
       renderedBikeSponsors,
       nextBikeRenderIndex: (nextBikeRenderIndex + 1) % NUM_BIKE_SPONSORS,
@@ -111,19 +155,20 @@ export default class Sponsors extends React.Component {
       nextCarSponsorIndex,
     } = this.state;
 
+    const sponsors = this.context === 'day' ? carSponsors : nightCarSponsors;
 
-    return renderedCarSponsors.map((sponsor, index) => {
+    return renderedCarSponsors.map((sponsorIndex, index) => {
       if (index === nextCarRenderIndex) {
         return (
           <div className="sponsor-wrapper" key={altCarSponsors[index]}>
-            <img src={sponsor} className="old-image" alt={altCarSponsors[index]} />
-            <img src={carSponsors[nextCarSponsorIndex]} className="new-image" alt={altCarSponsors[nextCarSponsorIndex]} />
+            <img src={sponsors[sponsorIndex]} className="old-image" alt={altCarSponsors[index]} />
+            <img src={sponsors[nextCarSponsorIndex]} className="new-image" alt={altCarSponsors[nextCarSponsorIndex]} />
           </div>
         );
       }
       return (
         <div className="sponsor-wrapper" key={altCarSponsors[index]}>
-          <img src={sponsor} alt={altCarSponsors[index]} />
+          <img src={sponsors[sponsorIndex]} alt={altCarSponsors[index]} />
         </div>
       );
     });
@@ -136,34 +181,39 @@ export default class Sponsors extends React.Component {
       nextBikeSponsorIndex,
     } = this.state;
 
-    return renderedBikeSponsors.map((sponsor, index) => {
+    return renderedBikeSponsors.map((imageIndex, index) => {
       if (index === nextBikeRenderIndex) {
         return (
           <div className="sponsor-wrapper" key={altCarSponsors[index]}>
-            <img src={sponsor} className="old-image" alt={altBikeSponsors[index]} />
+            <img src={bikeSponsors[imageIndex]} className="old-image" alt={altBikeSponsors[index]} />
             <img src={bikeSponsors[nextBikeSponsorIndex]} className="new-image" alt={altBikeSponsors[nextBikeSponsorIndex]} />
           </div>
         );
       }
       return (
         <div className="sponsor-wrapper" key={altCarSponsors[index]}>
-          <img src={sponsor} alt={altBikeSponsors[index]} />
+          <img src={bikeSponsors[imageIndex]} alt={altBikeSponsors[index]} />
         </div>
       );
     });
   }
 
   render() {
+    const theme = this.context;
     return (
       <div className="cell long-cell" id="sponsors-cell">
         <div className="top-half">
           <h2>SPONSORS</h2>
           <div className="bus-sponsors">
             <img src={bus} alt="bus" id="bus" />
-            <img src={capitalOne} alt="Capital One" id="capital-one" />
+            {
+              theme === 'day'
+              ? <img src={optum} alt="Optum" id="optum" />
+              : <img src={optumNight} alt="Optum" id="optum" />
+            }
             <img src={imc} alt="IMC" id="imc" />
             <img src={caterpillar} alt="Caterpillar" id="caterpillar" />
-            <img src={optum} alt="Optum" id="optum" />
+            <img src={capitalOne} alt="Capital One" id="capital-one" />
           </div>
         </div>
         <div className="bottom-half">
@@ -188,3 +238,6 @@ export default class Sponsors extends React.Component {
     );
   }
 }
+
+Sponsors.contextType = ThemeContext;
+export default Sponsors;

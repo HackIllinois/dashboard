@@ -1,24 +1,42 @@
 @import './variables.scss';
 
-.dashboard-wrapper {
-  height: 100vh;
-  width: 100vw;
-  padding-top: 0vh;
-  padding-bottom: 0vh;
-  box-sizing: border-box;
-
-  position: relative;
+html, body{
   overflow: hidden;
+}
+.dashboard-wrapper {
+  width: 100%;
+  height: 101%; // For some reason there is a row of pixels along the bottom that is 
+                // not accepting the gradient. Forcing the wrapper of the gradient to consume those pixels
+  padding: 0;
+  padding-bottom: 1%; // Pushing the bottom back to properly align to cells
+  margin: 0;
+  box-sizing: border-box;
+  position: relative;
 
+  overflow-y: hidden;
   .dashboard {
-    background-size: cover;
     height: 100%;
     width: 100%;
     overflow: hidden;
 
     display: grid;
-    grid-template-columns: 33.33333% 33.33333% 33.33333%;
-    grid-template-rows: 33.33333% 33.33333% 33.33333%;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+  }
+
+  
+  #background-gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 105%;
+  }
+  #cityscape {
+    position: absolute;
+    left: 0%;
+    bottom: 0%;
+    width: 50vw;
   }
 
   #theme-handler {
@@ -36,17 +54,12 @@
   }
 }
 
-#cityscape {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  width: 50vw; // TO BE DECIDED
-}
-
 //alter text colors here to propagate to ALL cells
 .day {
   transition: color $theme-transition-duration linear;
-  background: $day-dash-bg-color;
+  // background: $day-dash-bg-color;
+  // background-size: cover;
+  // background-repeat: no-repeat;
   
   p {
     color: $day-dash-text-color;
@@ -94,7 +107,7 @@
 
 .night {
   transition-duration: $theme-transition-duration;
-  background: $night-dash-bg-color;
+  // background: $night-dash-bg-color;
   h1, h4, p {
     color: $night-dash-text-color;
   }
