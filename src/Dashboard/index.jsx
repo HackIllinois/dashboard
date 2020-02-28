@@ -10,6 +10,8 @@ import Logo from './cells/logo';
 import Sponsors from './cells/sponsors';
 import Time from './cells/time';
 import Events from './cells/events';
+import RecentPRs from './cells/recentprs';
+import Stats from './cells/stats';
 
 // This function will retrieve the new theme that should be applied to the dashboard.
 function getTheme() {
@@ -89,9 +91,10 @@ export default class Dashboard extends React.Component {
             <Logo />
             <CountDown />
             <Time />
-            <TwitterFeed />
+            <RecentPRs />
             <Events />
             <Sponsors />
+            <Stats />
           </div>
         </div>
       </ThemeContext.Provider>

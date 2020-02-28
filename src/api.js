@@ -84,3 +84,15 @@ export function getQR() {
 export function getEvents() {
   return request('GET', '/event/').then(res => res.events);
 }
+
+export function getRecentPRs() {
+  return request('GET', '/upload/blobstore/git-stats/').then(res => res.data.prFeed);
+}
+
+export function getStats() {
+  return request('GET', '/upload/blobstore/git-stats/').then(res => res.data);
+}
+
+export function getDashConfig() {
+  return request('GET', '/upload/blobstore/dash-config/').then(res => res.data);
+}
