@@ -44,6 +44,11 @@ export default class Stats extends React.Component {
       let languages = [];
       let languagesDict = {};
       if (result.history.length > 0) {
+        delete result.history[0].prLanguages.None;
+        delete result.history[0].prLanguages.none;
+        delete result.history[0].prLanguages.null;
+        delete result.history[0].prLanguages.undefined;
+
         languagesDict = result.history[0].prLanguages;
         languages = Object.keys(languagesDict);
       }
