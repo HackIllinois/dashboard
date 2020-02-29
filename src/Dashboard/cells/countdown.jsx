@@ -147,7 +147,7 @@ class CountDown extends React.Component {
 
   initializeState() {
     getTimes().then(data => {
-      const { eventStart: startTime, eventEnd: endTime } = data;
+      const { eventStart: startTime, hackEnd: endTime } = data;
 
       const currentTime = Math.floor(Date.now() / 1000);
       let difference = startTime - currentTime;
