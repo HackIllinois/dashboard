@@ -150,7 +150,7 @@ export default class Stats extends React.Component {
         animate={{ duration: 2000, easing: 'quadInOut' }}
         theme={VictoryTheme.grayscale}
         padding={{
-          left: 50,
+          left: 70,
           top: 40,
           right: 50,
           bottom: 95,
