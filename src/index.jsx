@@ -31,7 +31,11 @@ const App = () => {
       setSlideIndex(slideIndex => (slideIndex + 1) % slides.length);
     }, 10000);
 
-    return () => clearInterval(interval);
+    const interval2 = setInterval(() => {
+      window.location.reload();
+    }, 3600000);
+
+    return () => { clearInterval(interval); clearInterval(interval2); };
   }, [setSlideIndex]);
 
   return slides[slideIndex];
