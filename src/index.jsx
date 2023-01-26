@@ -13,13 +13,15 @@ import 'index.css';
 
 const slides = [
   Slide1,
-  Slide2,
+  // Slide2,
   Slide3,
-  Slide4,
-  Slide5,
-  Slide6,
-  Slide7
+  // Slide4,
+  // Slide5,
+  // Slide6,
+  // Slide7,
 ];
+
+// sponsors
 
 const App = () => {
   const [slideIndex, setSlideIndex] = useState(0);
@@ -27,7 +29,7 @@ const App = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setSlideIndex(slideIndex => (slideIndex + 1) % slides.length);
-    }, 5000);
+    }, 10000);
 
     return () => clearInterval(interval);
   }, [setSlideIndex]);
