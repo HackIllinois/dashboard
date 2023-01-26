@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 
 import Slide1 from './slides/slide1';
-import Slide2 from './slides/slide2';
+// import Slide2 from './slides/slide2';
 import Slide3 from './slides/slide3';
-import Slide4 from './slides/slide4';
-import Slide5 from './slides/slide5';
-import Slide6 from './slides/slide6';
-import Slide7 from './slides/slide7';
+// import Slide4 from './slides/slide4';
+// import Slide5 from './slides/slide5';
+// import Slide6 from './slides/slide6';
+// import Slide7 from './slides/slide7';
 
 import 'index.css';
 
