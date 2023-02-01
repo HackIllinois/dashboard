@@ -7,11 +7,25 @@
   font-weight: 400;
 }
 
-.slide {
-  width: 100vw;
+#root {
+  position: relative;
   height: 100vh;
-  background-size: cover;
+  width: 100vw;
+
+  background-image: url("/assets/landing.svg");
   background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.overlay {
+  background: rgba(38, 56, 85, 0.24);
+  backdrop-filter: blur(2px);
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
 }
 
 h1 {
