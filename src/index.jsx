@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 
 import Leaderboard from './leaderboard';
+import Countdown from './countdown';
+import UpcomingEvents from './upcoming-events';
 
 import 'index.css';
 
@@ -23,7 +25,10 @@ const App = () => {
           <p className="makingMemories">making memories</p>
           <Leaderboard />
         </div>
-        <div className="col col2"></div>
+        <div className="col col2">
+          <Countdown />
+          <UpcomingEvents />
+        </div>
         <div className="col col3"></div>
       </div>
     </>
