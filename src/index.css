@@ -28,6 +28,88 @@
   width: 100vw;
 }
 
+.content {
+  position: absolute;
+  left: 4%;
+  right: 4%;
+  top: 8%;
+  bottom: 4%;
+
+  display: flex;
+}
+
+.col {
+  flex: 1;
+  height: 100%;
+  /* background-color: green; */
+}
+
+.col:not(:last-child) {
+  margin-right: 6%;
+}
+
+.logo {
+  width: 80%;
+  margin-bottom: 1.5vw;
+}
+
+.makingMemories {
+  font-weight: 500;
+  font-size: 2.5vw;
+  color: #FCDC8F;
+  text-shadow: 0px 1px 20px rgba(252, 220, 143, 0.76);
+  margin-bottom: 3vw;
+}
+
+.leaderboard {
+  background: rgba(201, 210, 229, 0.91);
+  border-radius: 10px;
+  padding: 2vw;
+}
+
+.leaderboardHeader {
+  color: #0D387C;
+  font-weight: 600;
+  font-size: 2.25vw;
+  text-transform: uppercase;
+  margin-bottom: 2vw;
+}
+
+.leaderboardRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.leaderboardRow:not(:last-of-type) {
+  margin-bottom: 0.5vw;
+  padding-bottom: 0.5vw;
+  border-bottom: 1px solid black;
+}
+
+.leaderboardRow .rank {
+  font-size: 1.5vw;
+  font-weight: 600;
+  color: #1D2644;
+  margin-right: 3vw;
+}
+
+.leaderboardRow .username {
+  color: #1D2644;
+  font-size: 1.25vw;
+  font-weight: 600;
+  margin-right: auto;
+}
+
+.leaderboardRow .points {
+  color: #1D2644;
+  font-weight: 600;
+  font-size: 1vw;
+  padding: .1vw 1vw;
+  background: #FFFFFF;
+  border-radius: 20px;
+}
+
 h1 {
   font-size: 6vw;
 }
