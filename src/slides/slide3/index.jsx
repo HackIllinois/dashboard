@@ -34,7 +34,7 @@ const getDisplayTime = () => {
         <span style={{ fontWeight: 'bold', color: '#fcaf7e'}}>{minutes}</span>  {minutesText} {" "}
         <span style={{ fontWeight: 'bold', color: '#fcaf7e' }}>{seconds}</span>  {secondsText}
         </h2>
-        <i style={{fontSize: '1.5vw'}}>Friday, February 24th 6:00 PM at the Illini Union</i>
+        <i style={{fontSize: '1.5vw'}}>Friday, February 24th 6:00 PM</i>
     </>
     )
     };

@@ -33,7 +33,7 @@ const App = () => {
 
     const interval2 = setInterval(() => {
       window.location.reload();
-    }, 3600000);
+    }, 900000);
 
     return () => { clearInterval(interval); clearInterval(interval2); };
   }, [setSlideIndex]);

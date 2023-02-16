@@ -12,7 +12,7 @@ const Slide = () => {
             <br></br>
             <p className={styles.subtitle}>making memories</p>
             <br></br>
-            <p className={styles.subsubtitle}>February 24-26 at Siebel CS, CIF, & Illini Union</p>
+            <p className={styles.subsubtitle}>February 24-26 at Siebel CS & CIF</p>
       </div>
     </div>;
 };
