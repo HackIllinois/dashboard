@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import clsx from 'clsx';
 import BACKGROUND from './background.svg';
 import styles from './styles.module.scss';
-import QRCODE from './qrcode.png';
 
 
 const _second = 1000;
