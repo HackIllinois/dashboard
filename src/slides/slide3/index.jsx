@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import clsx from 'clsx';
 import BACKGROUND from './background.svg';
 import styles from './styles.module.scss';
-import QRCODE from './qrcode.png';
 
 
 const _second = 1000;
@@ -54,10 +53,6 @@ const Slide = () => {
             Opening Ceremony Starts In<br></br>
             {displayTime}
         </div>
-        <div className={styles.middleHeader}>
-            <p>Register at <span className={styles.link}>hackillinois.org/register</span></p>
-        </div>
-        <img className={styles.qrCode} src={QRCODE} alt="" />
     </div>;
 };
 
