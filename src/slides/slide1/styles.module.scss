@@ -28,7 +28,7 @@ h1  {
     font-weight: 500;
     font-size: 30px;
     color: #ffffff;
-
+    margin: 20px;
     @media screen and (max-width: 800px) {
       font-size: 32px;
     }
@@ -57,3 +57,52 @@ h1  {
       font-size: 25px;
     }
   }
+
+  .topHeader {
+    position: absolute;
+    text-align: center;
+    left: 50%;
+    transform: translate(-50%, 0);
+    top: 5%;
+    font-size: 5vw;
+    width: 100%;
+    font-weight: 500;
+
+    @media screen and (max-width: 800px) {
+      top: 15%;
+    }
+
+    i {
+        font-size: 2vw;
+    }
+  }
+
+.middleHeader {
+    position: absolute;
+    text-align: center;
+    left: 50%;
+    transform: translate(-50%, 0);
+    top: 35%;
+    font-size: 2vw;
+    width: 100%;
+}
+
+.qrCode {
+    position: absolute;
+    text-align: center;
+    left: 50%;
+    transform: translate(-50%, 0);
+    top: 45%;
+    font-size: 2vw;
+    height: 50%;
+}
+
+.link {
+    font-weight: 550;
+    text-decoration: underline;
+}
+
+h2 {
+    font-size: 3vw;
+    font-weight: 550;
+}

@@ -54,10 +54,6 @@ const Slide = () => {
             Opening Ceremony Starts In<br></br>
             {displayTime}
         </div>
-        <div className={styles.middleHeader}>
-            <p>Register at <span className={styles.link}>hackillinois.org/register</span></p>
-        </div>
-        <img className={styles.qrCode} src={QRCODE} alt="" />
     </div>;
 };
 
