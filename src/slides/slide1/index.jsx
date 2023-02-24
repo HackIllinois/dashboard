@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import clsx from "clsx";
 import BACKGROUND from "./background.svg";
 import styles from "./styles.module.scss";
+import FERRIS_WHEEL_ANIMATION from "./ferris-wheel.json";
+import Lottie from "lottie-react";
 
 const _second = 1000;
 const _minute = _second * 60;
@@ -81,6 +83,7 @@ const Slide = () => {
         src={BACKGROUND}
         alt=""
       />
+      <Lottie className={styles.ferrisWheelAnimation} animationData={FERRIS_WHEEL_ANIMATION} />;
       <div className={styles.topHeader}>
         <div className={styles.welcomeTo}>Get ready for</div>
         <h1>HackIllinois</h1>
