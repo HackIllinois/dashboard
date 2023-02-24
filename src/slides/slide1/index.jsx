@@ -10,21 +10,49 @@ const _minute = _second * 60;
 const _hour = _minute * 60;
 const _day = _hour * 24;
 
+const checkinTime = new Date("02/24/2023 3:00 PM'");
+const openingCeremonyTime = new Date("02/24/2023 6:00 PM'");
+const hackingStarts = new Date("02/24/2023 7:00 PM'");
+const hackingEnds = new Date("02/26/2023 9:00 AM'");
+const judgingStarts = new Date("02/26/2023 10:30 AM'");
+const closingCeremonyTime = new Date("02/26/2023 3:00 PM'");
+
 const Slide = () => {
   const getDisplayTime = () => {
-    const openingCeremonyTime = new Date("02/24/2023 6:00 PM'");
-    const eventEnd = new Date("02/26/2023 3:00 PM'");
-
     const now = new Date();
-    let distance = openingCeremonyTime - now;
 
-    let text = "Opening Ceremony Starts In";
+    const text = [
+      "Check-in Starts In",
+      "Opening Ceremony Starts In",
+      "Hacking Starts In",
+      "Project Submissions Due In",
+      "Judging Starts In",
+      "Closing Ceremony Starts In",
+    ];
+    const times = [
+      checkinTime,
+      openingCeremonyTime,
+      hackingStarts,
+      hackingEnds,
+      judgingStarts,
+      closingCeremonyTime,
+    ];
 
-    if (distance <= 0) {
-      text = "Closing Ceremony Starts In";
-      distance = eventEnd - now;
+    let distance = 0;
+    let textToDisplay = "";
+
+    for (let i = 0; i < times.length; i++) {
+      distance = times[i] - now;
+
+      if (distance > 0) {
+        textToDisplay = text[i];
+        break;
+      }
     }
 
+    if (textToDisplay === '') {
+      return <p className={styles.subsubtitle}>See you next year!</p>;
+    }
 
     const days = Math.floor(distance / _day);
     const hours = Math.floor((distance % _day) / _hour);
@@ -38,9 +66,7 @@ const Slide = () => {
 
     return (
       <>
-        <p className={styles.subsubtitle}>
-          {text}
-        </p>
+        <p className={styles.subsubtitle}>{textToDisplay}</p>
         <h2>
           {" "}
           <span style={{ fontWeight: "bold", color: "#FEA3AA" }}>
@@ -83,7 +109,11 @@ const Slide = () => {
         src={BACKGROUND}
         alt=""
       />
-      <Lottie className={styles.ferrisWheelAnimation} animationData={FERRIS_WHEEL_ANIMATION} />;
+      <Lottie
+        className={styles.ferrisWheelAnimation}
+        animationData={FERRIS_WHEEL_ANIMATION}
+      />
+      ;
       <div className={styles.topHeader}>
         <div className={styles.welcomeTo}>Get ready for</div>
         <h1>HackIllinois</h1>
