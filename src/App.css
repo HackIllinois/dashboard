@@ -2,37 +2,100 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.topRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  height: 25vh;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.title {
+  width: 20vw;
+}
+.title p {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: white;
+  margin: -10px;
+  transform: translateY(35px);
+
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.countdownParent {
+  margin-top: 20px;
+}
+
+.countdownParent .countdownTitle {
+  color: white;
+  font-size: 2rem;
+  font-weight: 500;
+  padding-top: 15px;
+}
+
+.topRow h2 {
+  color: white;
+  font-size: 3rem;
+  width: 20vw;
+}
+
+.logo {
+  transform: scale(2);
+}
+
+.countdown {
+  display: flex;
+  flex-direction: row;
+}
+
+.countdown div {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #662B13;
+  background-color: #FFB23E;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px;
+  width: 120px;
+  height: 120px;
 }
 
-.App-link {
-  color: #61dafb;
+.countdown div * {
+  margin: 0;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.background {
+  z-index: -1;
+  position: absolute;
+  bottom: 0px;
+  width: 100vw;
+  height: fit-content;
+}
+
+.background img {
+    object-fit: cover;
+    width: 100vw;
+    height: auto;
+    min-height: 100vh;
+    transform: translateY(5px);
+}
+
+.leaderboard {
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 20px;
+  width: 30vw;
+  background-color: #FFFACC;
+  border-radius: 20px;
+}
+
+.profile p {
+  margin: 14px;
 }
