@@ -43,7 +43,7 @@ function App() {
 
                 <h2>
                     {now.toLocaleTimeString([], {
-                        hour: "2-digit",
+                        hour: "numeric",
                         minute: "2-digit",
                     })}
                 </h2>
@@ -108,8 +108,7 @@ function App() {
                                         minute: "2-digit",
                                     })}
                                 </p>
-                            </div>
-                            <div className="timeContainer">
+                               
                                 {event.locations.map((location, i) => (
                                     <>
                                         <img
@@ -123,9 +122,34 @@ function App() {
                                     </>
                                 ))}
                             </div>
+                            {/* <div className="timeContainer">
+                                {event.locations.map((location, i) => (
+                                    <>
+                                        <img
+                                            src={Pin}
+                                            alt="pin"
+                                            className="pin"
+                                        />
+                                        <p className="location" key={i}>
+                                            {location.description}
+                                        </p>
+                                    </>
+                                ))}
+                            </div> */}
 
                             <p className="eventDescription">
                                 {event.description}
+                            </p>
+                        </div>
+                    ))}
+                </div>
+
+                <div className="leaderboard">
+                    <h2>Sponsors</h2>
+                    {leaderboard.map((profile, index) => (
+                        <div key={index} className="profile">
+                            <p>
+                                {profile.displayName} - {profile.points} points
                             </p>
                         </div>
                     ))}

@@ -99,7 +99,7 @@
   align-items: center;
   justify-content: center;
   margin: 20px;
-  width: 30vw;
+  width: 25vw;
   background-color: #FFFACC;
   border-radius: 20px;
 }
@@ -109,11 +109,15 @@
 }
 
 .events {
-  width: 30vw;
+  width: 35vw;
+  transform: scale(0.9);
+  height: 75vh;
 }
 
 .events h2 {
   color: white;
+  font-size: 2rem;
+  margin-top: -5px;
 }
 
 .eventCard {
@@ -167,8 +171,8 @@
 }
   
 .eventCard .headerContainer .points {
-    background-color: #5B619B;
-    color: #EBD5EC;
+    background-color: #964C1A;
+    color: #FFFFFF;
     border-radius: 20px;
     display: inline-block;
     padding: 3px 10px;
@@ -199,13 +203,18 @@
 }
 
 .eventCard .headerContainer .type {
-    background-color: #CA6E91;
-    color: #EBD2D2;
+    background-color: #5B619B;
+    color: #FFFFFF;
     border-radius: 20px;
     display: inline-block;
     padding: 3px 10px;
     /* margin-bottom: 10px; */
     font-weight: 600;
+}
+
+.pin, .clock {
+  transform: scale(2);
+  margin-left: 8px;
 }
 
   
