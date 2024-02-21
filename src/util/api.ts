@@ -5,6 +5,25 @@ export type Profile = {
     points: number;
 }
 
+export interface Event {
+    id: string;
+    name: string;
+    description: string;
+    isAsync?: boolean;
+    startTime: number;
+    endTime: number;
+    locations: {
+        description: string;
+        tags: string[];
+        latitude: number;
+        longitude: number;
+    }[];
+    sponsor?: string;
+    eventType: string;
+    points: number;
+    isPro: boolean;
+}
+
 async function request(endpoint: string) {
     const response = await fetch(APIv2 + endpoint, {
         method: "GET",
@@ -18,4 +37,8 @@ async function request(endpoint: string) {
 
 export function getLeaderboard(): Promise<Profile[]> {
     return request("/profile/leaderboard").then((res) => res.profiles);
+}
+
+export function getEvents(): Promise<Event[]> {
+    return request("/event").then((res) => res.events);
 }
