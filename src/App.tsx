@@ -3,17 +3,27 @@ import { useTime } from "./util/useTime";
 import { useLeaderboard } from "./util/useLeaderboard";
 import { useEvents } from "./util/useEvents";
 import { Event } from "./util/api";
+import { useReload } from "./util/useReload";
 import background from "./assets/background.svg";
 import logo from "./assets/logo.svg";
 import Pin from "./assets/pin.svg";
 import Clock from "./assets/clock.svg";
 import bottle from "./assets/bottle.svg";
+import solana from "./assets/solana.svg";
+import deere from "./assets/deere.svg";
+import cat from "./assets/cat.svg";
+import discover from "./assets/discover.svg";
+import github from "./assets/github.svg";
+import warp from "./assets/warp.svg";
+import spectrum from "./assets/spectrum.svg";
+import wolfram from "./assets/wolfram.svg";
 
 function App() {
     const { now, countdown } = useTime();
     const leaderboard = useLeaderboard();
     const events = useEvents();
-    console.log(events);
+    useReload();
+    
     return (
         <div className="App">
             <div className="topRow">
@@ -153,6 +163,28 @@ function App() {
 
                 <div className="sponsors">
                     <h2>Sponsors</h2>
+                    <div className="sponsorLogos">
+                      <div>
+                        <img src={solana} alt="solana" />
+                      </div>
+                      <div className="row">
+                        <img src={deere} alt="deere" />
+                        <img src={cat} alt="cat" />
+                      </div>
+                      <div>
+                        <img src={discover} alt="discover" />
+                      </div>
+                      <div>
+                        <img src={github} alt="github" />
+                      </div>
+                      <div>
+                        <img src={warp} alt="warp" />
+                        <img src={spectrum} alt="spectrum" />
+                      </div>
+                      <div>
+                        <img src={wolfram} alt="wolfram" />
+                      </div>
+                    </div>
                 </div>
             </div>
 

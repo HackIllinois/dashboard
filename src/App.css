@@ -1,3 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+body {
+  font-family: "Montserrat", sans-serif;
+  counter-reset: img;
+}
+
 .App {
   text-align: center;
 }
@@ -67,6 +74,10 @@
   margin: 0;
 }
 
+.countdown div p {
+  font-size: 1.5rem;
+}
+
 .background {
   z-index: -1;
   position: absolute;
@@ -119,14 +130,10 @@
   right: 0;
 }
 
-body {
-  counter-reset: img;
-}
-
 .bottle {
   position: relative;
   margin: auto;
-  transform: scale(1.1);
+  transform: scale(1.3);
 }
 
 .bottle:before {
@@ -148,7 +155,7 @@ body {
 
 .events {
   width: 38vw;
-  transform: scale(0.9);
+  transform: scale(0.92);
   height: 75vh;
 }
 
@@ -163,7 +170,7 @@ body {
   border-radius: 20px;
   padding: 12px;
   /* margin: 10px; */
-  width: 100%;
+  width: 95%;
   justify-content: center;
   margin-bottom: 12px;
 }
@@ -289,4 +296,22 @@ body {
   background-color: #ffffffc8;
   border-radius: 20px;
   margin: 20px;
+}
+
+.sponsorLogos {
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.sponsorLogos div {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 35px;
+  margin: 15px;
+  /* padding: 10px; */
 }
