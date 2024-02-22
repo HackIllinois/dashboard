@@ -7,6 +7,7 @@ import background from "./assets/background.svg";
 import logo from "./assets/logo.svg";
 import Pin from "./assets/pin.svg";
 import Clock from "./assets/clock.svg";
+import bottle from "./assets/bottle.svg";
 
 function App() {
     const { now, countdown } = useTime();
@@ -27,15 +28,15 @@ function App() {
                     <span className="countdownTitle">Hacking Ends in:</span>
                     <div className="countdown">
                         <div>
-                            <h1>{countdown.getDay()}</h1>
+                            <h1>{countdown.days}</h1>
                             <p>Days</p>
                         </div>
                         <div>
-                            <h1>{countdown.getHours()}</h1>
+                            <h1>{countdown.hours}</h1>
                             <p>Hours</p>
                         </div>
                         <div>
-                            <h1>{countdown.getMinutes()}</h1>
+                            <h1>{countdown.minutes}</h1>
                             <p>Minutes</p>
                         </div>
                     </div>
@@ -54,9 +55,19 @@ function App() {
                     <h2>Leaderboard</h2>
                     {leaderboard.map((profile, index) => (
                         <div key={index} className="profile">
-                            <p>
-                                {profile.displayName} - {profile.points} points
+                            <div key={index} className="bottle">
+                                <img
+                                    src={bottle}
+                                    alt="bottle"
+                                    className="bottle"
+                                />
+                            </div>
+                            <p className="name">
+                                {profile.displayName.length > 25
+                                    ? profile.displayName.slice(0, 24) + "..."
+                                    : profile.displayName}
                             </p>
+                            <p className="points">{profile.points} PTS</p>
                         </div>
                     ))}
                 </div>
@@ -74,13 +85,9 @@ function App() {
                                         </p>
                                     )}
                                     {event.isPro && (
-                                        <p className="knights">
-                                            KNIGHTS
-                                        </p>
+                                        <p className="knights">KNIGHTS</p>
                                     )}
-                                    <p className="type">
-                                        {event.eventType}
-                                    </p>
+                                    <p className="type">{event.eventType}</p>
                                     <p className="points">
                                         +{event.points} PTS
                                     </p>
@@ -97,18 +104,18 @@ function App() {
                                     {new Date(
                                         event.startTime * 1000
                                     ).toLocaleTimeString([], {
-                                        hour: "2-digit",
+                                        hour: "numeric",
                                         minute: "2-digit",
                                     })}{" "}
                                     -{" "}
                                     {new Date(
                                         event.endTime * 1000
                                     ).toLocaleTimeString([], {
-                                        hour: "2-digit",
+                                        hour: "numeric",
                                         minute: "2-digit",
                                     })}
                                 </p>
-                               
+
                                 {event.locations.map((location, i) => (
                                     <>
                                         <img
@@ -144,15 +151,8 @@ function App() {
                     ))}
                 </div>
 
-                <div className="leaderboard">
+                <div className="sponsors">
                     <h2>Sponsors</h2>
-                    {leaderboard.map((profile, index) => (
-                        <div key={index} className="profile">
-                            <p>
-                                {profile.displayName} - {profile.points} points
-                            </p>
-                        </div>
-                    ))}
                 </div>
             </div>
 

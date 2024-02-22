@@ -11,7 +11,7 @@
 }
 
 .title {
-  width: 20vw;
+  width: 25vw;
 }
 .title p {
   font-size: 1.2rem;
@@ -19,7 +19,6 @@
   color: white;
   margin: -10px;
   transform: translateY(35px);
-
 }
 
 .countdownParent {
@@ -36,7 +35,7 @@
 .topRow h2 {
   color: white;
   font-size: 3rem;
-  width: 20vw;
+  width: 25vw;
 }
 
 .logo {
@@ -60,8 +59,8 @@
   border-radius: 10px;
   padding: 10px;
   margin: 10px;
-  width: 120px;
-  height: 120px;
+  width: 105px;
+  height: 105px;
 }
 
 .countdown div * {
@@ -100,8 +99,47 @@
   justify-content: center;
   margin: 20px;
   width: 25vw;
-  background-color: #FFFACC;
+  background-color: #fffaccdf;
   border-radius: 20px;
+  height: 70vh;
+}
+
+.profile {
+  display: flex;
+  flex-direction: row;
+  align-self: flex-start;
+  padding-left: 15px;
+  /* width: 100%; */
+  /* counter-reset: img; */
+}
+
+.profile *:last-child {
+  width: max-content;
+  margin-left: auto;
+  right: 0;
+}
+
+body {
+  counter-reset: img;
+}
+
+.bottle {
+  position: relative;
+  margin: auto;
+  transform: scale(1.1);
+}
+
+.bottle:before {
+  transform: scale(.8);
+  counter-increment: img;
+  position: absolute;
+  z-index: 4;
+  width: 100%;
+  height: 100%;
+  top: 10%;
+  left: 0%;
+  content: counter(img);
+  color: #FFB23E;
 }
 
 .profile p {
@@ -109,7 +147,7 @@
 }
 
 .events {
-  width: 35vw;
+  width: 38vw;
   transform: scale(0.9);
   height: 75vh;
 }
@@ -123,9 +161,11 @@
 .eventCard {
   background: #FFE9E9;
   border-radius: 20px;
-  padding: 10px;
+  padding: 12px;
+  /* margin: 10px; */
   width: 100%;
-  margin-bottom: 10px;
+  justify-content: center;
+  margin-bottom: 12px;
 }
 
 .eventCard p {
@@ -165,7 +205,8 @@
     font-weight: 700;
     font-size: 1.4em;
     /* margin-bottom: 10px; */
-    margin-right: 10px;
+    margin: 15px;
+    margin-left: 0;
     color: #072C2E;
     
 }
@@ -232,7 +273,8 @@
     font-size: 18px;
     font-weight: 400;
     color: #072C2E;
-
+    padding: 5px;
+    text-align: left;
   }
   
   @media only screen and (max-width: 1024px) {
@@ -240,3 +282,11 @@
       font-size: 1.2em;
     }
   }
+
+.sponsors {
+  width: 25vw;
+  height: 70vh;
+  background-color: #ffffffc8;
+  border-radius: 20px;
+  margin: 20px;
+}
