@@ -2,7 +2,7 @@ import { getLeaderboard } from "./api";
 import { useEffect, useState } from "react";
 import { Profile } from "./api";
 
-export const useLeaderboard = (refreshCycle = 900000) => {
+export const useLeaderboard = (refreshCycle = 600000) => {
     const [leaderboard, setLeaderboard] = useState<Profile[]>([]);
 
    

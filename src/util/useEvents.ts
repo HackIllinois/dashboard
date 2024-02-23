@@ -2,7 +2,7 @@ import { getEvents } from "./api";
 import { useEffect, useState } from "react";
 import { Event } from "./api";
 
-export const useEvents = (refreshCycle = 900000) => {
+export const useEvents = (refreshCycle = 600000) => {
     console.log("useLeaderboard");
     const [events, setEvents] = useState<Event[]>([]);
 
