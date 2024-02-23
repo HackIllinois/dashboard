@@ -19,7 +19,7 @@ import spectrum from "./assets/spectrum.svg";
 import wolfram from "./assets/wolfram.svg";
 
 function App() {
-    const { now, countdown } = useTime();
+    const { now, countdown, isHacking } = useTime();
     const leaderboard = useLeaderboard();
     const events = useEvents();
     useReload();
@@ -35,12 +35,12 @@ function App() {
                 </div>
 
                 <div className="countdownParent">
-                    <span className="countdownTitle">Hacking Ends in:</span>
+                    <span className="countdownTitle">{isHacking ? "Hacking Ends in:" : "Hacking Starts in:"}</span>
                     <div className="countdown">
-                        <div>
+                        {countdown.days > 0 && <div>
                             <h1>{countdown.days}</h1>
                             <p>Days</p>
-                        </div>
+                        </div>}
                         <div>
                             <h1>{countdown.hours}</h1>
                             <p>Hours</p>
@@ -48,6 +48,10 @@ function App() {
                         <div>
                             <h1>{countdown.minutes}</h1>
                             <p>Minutes</p>
+                        </div>
+                        <div>
+                            <h1>{countdown.seconds}</h1>
+                            <p>Seconds</p>
                         </div>
                     </div>
                 </div>
