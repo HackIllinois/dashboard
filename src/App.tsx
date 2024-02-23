@@ -126,6 +126,20 @@ function App() {
                                     })}
                                 </p>
 
+                                {/* {event.locations.map((location, i) => (
+                                    <>
+                                        <img
+                                            src={Pin}
+                                            alt="pin"
+                                            className="pin"
+                                        />
+                                        <p className="location" key={i}>
+                                            {location.description}
+                                        </p>
+                                    </>
+                                ))} */}
+                            </div>
+                            <div className="timeContainer">
                                 {event.locations.map((location, i) => (
                                     <>
                                         <img
@@ -139,20 +153,6 @@ function App() {
                                     </>
                                 ))}
                             </div>
-                            {/* <div className="timeContainer">
-                                {event.locations.map((location, i) => (
-                                    <>
-                                        <img
-                                            src={Pin}
-                                            alt="pin"
-                                            className="pin"
-                                        />
-                                        <p className="location" key={i}>
-                                            {location.description}
-                                        </p>
-                                    </>
-                                ))}
-                            </div> */}
 
                             <p className="eventDescription">
                                 {event.description}
@@ -162,7 +162,7 @@ function App() {
                 </div>
 
                 <div className="sponsors">
-                    <h2>Sponsors!</h2>
+                    <h2>Sponsors</h2>
                     <div className="sponsorLogos">
                       <div>
                         <img src={solana} alt="solana" />
