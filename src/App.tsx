@@ -164,7 +164,7 @@ function App() {
                 <div className="sponsors">
                     <h2>Sponsors</h2>
                     <div className="sponsorLogos">
-                      <div>
+                      <div className="solana">
                         <img src={solana} alt="solana" />
                       </div>
                       <div className="row">

@@ -7,6 +7,7 @@ body {
 
 .App {
   text-align: center;
+  overflow: hidden;
 }
 
 .topRow {
@@ -325,4 +326,9 @@ body {
 
 .sponsorLogos div img {
   transform: scale(1.2);
+}
+
+.solana {
+  transform: scale(1.5);
+  padding-bottom: 5px;
 }
