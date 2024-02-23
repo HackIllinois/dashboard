@@ -299,19 +299,27 @@ body {
 }
 
 .sponsorLogos {
+  height: 70vh;
+  position: relative;
   height: fit-content;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 }
 
 .sponsorLogos div {
+  position: relative;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  /* height: 15%; */
   gap: 35px;
   margin: 15px;
   /* padding: 10px; */
+}
+
+.sponsorLogos div img {
+  transform: scale(1.2);
 }
