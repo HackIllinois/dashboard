@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-export const useReload = (refreshCycle = 3600000) => {
+export const useReload = (refreshCycle = 300000) => {
     useEffect(() => {
         const intervalId = setInterval(() => {
             window.location.reload();     
