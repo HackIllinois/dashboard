@@ -162,7 +162,7 @@ function App() {
                 </div>
 
                 <div className="sponsors">
-                    <h2>Sponsors</h2>
+                    <h2>Sponsors!</h2>
                     <div className="sponsorLogos">
                       <div>
                         <img src={solana} alt="solana" />
