@@ -23,7 +23,7 @@ function App() {
     const leaderboard = useLeaderboard();
     const events = useEvents();
     useReload();
-    
+
     return (
         <div className="App">
             <div className="topRow">
@@ -35,12 +35,16 @@ function App() {
                 </div>
 
                 <div className="countdownParent">
-                    <span className="countdownTitle">{isHacking ? "Hacking Ends in:" : "Hacking Starts in:"}</span>
+                    <span className="countdownTitle">
+                        {isHacking ? "Hacking Ends in:" : "Hacking Starts in:"}
+                    </span>
                     <div className="countdown">
-                        {countdown.days > 0 && <div>
-                            <h1>{countdown.days}</h1>
-                            <p>Days</p>
-                        </div>}
+                        {countdown.days > 0 && (
+                            <div>
+                                <h1>{countdown.days}</h1>
+                                <p>Days</p>
+                            </div>
+                        )}
                         <div>
                             <h1>{countdown.hours}</h1>
                             <p>Hours</p>
@@ -152,7 +156,12 @@ function App() {
                                             className="pin"
                                         />
                                         <p className="location" key={i}>
-                                            {location.description}
+                                            {location.description.length > 300
+                                                ? location.description.slice(
+                                                      0,
+                                                      300
+                                                  ) + "..."
+                                                : location.description}
                                         </p>
                                     </>
                                 ))}
@@ -168,26 +177,26 @@ function App() {
                 <div className="sponsors">
                     <h2>Sponsors</h2>
                     <div className="sponsorLogos">
-                      <div className="solana">
-                        <img src={solana} alt="solana" />
-                      </div>
-                      <div className="row">
-                        <img src={deere} alt="deere" />
-                        <img src={cat} alt="cat" />
-                      </div>
-                      <div>
-                        <img src={discover} alt="discover" />
-                      </div>
-                      <div>
-                        <img src={github} alt="github" />
-                      </div>
-                      <div>
-                        <img src={warp} alt="warp" />
-                        <img src={spectrum} alt="spectrum" />
-                      </div>
-                      <div>
-                        <img src={wolfram} alt="wolfram" />
-                      </div>
+                        <div className="solana">
+                            <img src={solana} alt="solana" />
+                        </div>
+                        <div className="row">
+                            <img src={deere} alt="deere" />
+                            <img src={cat} alt="cat" />
+                        </div>
+                        <div>
+                            <img src={discover} alt="discover" />
+                        </div>
+                        <div>
+                            <img src={github} alt="github" />
+                        </div>
+                        <div>
+                            <img src={warp} alt="warp" />
+                            <img src={spectrum} alt="spectrum" />
+                        </div>
+                        <div>
+                            <img src={wolfram} alt="wolfram" />
+                        </div>
                     </div>
                 </div>
             </div>
