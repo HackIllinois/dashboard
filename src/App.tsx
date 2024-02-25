@@ -171,7 +171,7 @@ function App() {
                                 {event.description}
                             </p>
                         </div>
-                    )) : <p className="noEvents">No upcoming events</p>}
+                    )) : <p className="noEvents">No upcoming events :'(</p>}
                 </div>
 
                 <div className="sponsors">
