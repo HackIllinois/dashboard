@@ -92,7 +92,7 @@ function App() {
 
                 <div className="events">
                     <h2>Upcoming Events</h2>
-                    {events.map((event: Event, index: number) => (
+                    {events.length > 0 ? events.map((event: Event, index: number) => (
                         <div className="eventCard" key={index}>
                             <div className="headerContainer">
                                 <h3 className="eventTitle">{event.name}</h3>
@@ -171,7 +171,7 @@ function App() {
                                 {event.description}
                             </p>
                         </div>
-                    ))}
+                    )) : <p className="noEvents">No upcoming events</p>}
                 </div>
 
                 <div className="sponsors">
