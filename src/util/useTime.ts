@@ -28,6 +28,7 @@ const getTime = () => {
 
 const getCountdown = () => {
     const t = 1708866000000 - Date.now();
+    if (t < 0) return {days: 0, hours: 0, minutes: 0, seconds: 0};
     var days = Math.floor(t / (1000 * 60 * 60 * 24));
     var hours = Math.floor((t % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     var minutes = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60));
