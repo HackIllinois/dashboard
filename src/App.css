@@ -135,13 +135,13 @@ body {
   right: 0;
 }
 
-.bottle {
+.scroll {
   position: relative;
   margin: auto;
   transform: scale(1.3);
 }
 
-.bottle:before {
+.scroll:before {
   transform: scale(.8);
   counter-increment: img;
   position: absolute;

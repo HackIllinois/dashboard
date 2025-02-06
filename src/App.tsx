@@ -3,12 +3,12 @@ import { useTime } from "./util/useTime";
 import { useLeaderboard } from "./util/useLeaderboard";
 import { useEvents } from "./util/useEvents";
 import { Event } from "./util/api";
-import { useReload } from "./util/useReload";
+import  useTimeSyncedReload  from "./util/useReload";
 import background from "./assets/background.svg";
 import logo from "./assets/logo.svg";
 import Pin from "./assets/pin.svg";
 import Clock from "./assets/clock.svg";
-import bottle from "./assets/bottle.svg";
+import scroll from "./assets/scroll.svg";
 import solana from "./assets/solana.svg";
 import deere from "./assets/deere.svg";
 import cat from "./assets/cat.svg";
@@ -22,7 +22,7 @@ function App() {
     const { now, countdown, isHacking } = useTime();
     const leaderboard = useLeaderboard();
     const events = useEvents();
-    useReload();
+    useTimeSyncedReload();
 
     return (
         <div className="App">
@@ -30,7 +30,7 @@ function App() {
                 <div className="title">
                     <img src={logo} alt="logo" className="logo" />
                     <p>
-                        <i>Adventure Awaits!</i>
+                        <i>Pursue your prophecy!</i>
                     </p>
                 </div>
 
@@ -73,11 +73,11 @@ function App() {
                     <h2>Leaderboard</h2>
                     {leaderboard.map((profile, index) => (
                         <div key={index} className="profile">
-                            <div key={index} className="bottle">
+                            <div key={index} className="scroll">
                                 <img
-                                    src={bottle}
-                                    alt="bottle"
-                                    className="bottle"
+                                    src={scroll}
+                                    alt="scroll"
+                                    className="scroll"
                                 />
                             </div>
                             <p className="name">
