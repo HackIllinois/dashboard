@@ -25,7 +25,7 @@ body {
 .title p {
   font-size: 1.2rem;
   font-weight: 600;
-  color: white;
+  color: #3A464F;
   margin: -10px;
   transform: translateY(35px);
 }
@@ -35,14 +35,14 @@ body {
 }
 
 .countdownParent .countdownTitle {
-  color: white;
+  color: #3A464F;
   font-size: 2rem;
   font-weight: 500;
   padding-top: 15px;
 }
 
 .topRow h2 {
-  color: white;
+  color: #3A464F;
   font-size: 3rem;
   width: 25vw;
 }
@@ -64,7 +64,7 @@ body {
   font-size: 2rem;
   font-weight: bold;
   color: #662B13;
-  background-color: #FFB23E;
+  background-color: #eed394;
   border-radius: 10px;
   padding: 10px;
   margin: 10px;
@@ -113,7 +113,7 @@ body {
   justify-content: flex-start;
   margin: 20px;
   width: 25vw;
-  background-color: #fffaccdf;
+  background-color: #ffe5add6;
   border-radius: 20px;
   height: 70vh;
 }
@@ -166,18 +166,19 @@ body {
 
 .noEvents {
   margin: auto;
-  color: white;
+  color: #3A464F;
   font-size: 1.2rem;
 }
 
 .events h2 {
-  color: white;
+  color: #3A464F;
   font-size: 2rem;
   margin-top: -5px;
 }
 
 .eventCard {
-  background: #FFE9E9;
+  /* background: rgb(176, 228, 239); */
+  background-color: #FFF7F0;
   border-radius: 20px;
   padding: 12px;
   /* margin: 10px; */
@@ -225,14 +226,14 @@ body {
     /* margin-bottom: 10px; */
     margin: 15px;
     margin-left: 0;
-    color: #072C2E;
+    color: #6D291A;
     text-align: left;
     
 }
   
 .eventCard .headerContainer .points {
-    background-color: #964C1A;
-    color: #FFFFFF;
+    background-color: #409297;
+    color: black;
     border-radius: 20px;
     display: inline-block;
     padding: 3px 10px;
@@ -241,7 +242,7 @@ body {
 }
 
 .eventCard .headerContainer .knights {
-  background-color: #DE8E45;
+  background-color: #83404A;
   color: #FFFACC;
   border-radius: 20px;
   display: inline-block;
@@ -251,9 +252,9 @@ body {
 }
       
 .eventCard .headerContainer .sponsor {
-    border: 2px solid #fbffac;
-    background-color: #953e31;
-    color: #ffc7be;
+    border: 2px solid rgb(233, 186, 166);
+    background-color: #DE8E45;
+    color: black;
     text-transform: uppercase;
     border-radius: 20px;
     display: inline-block;
@@ -263,8 +264,8 @@ body {
 }
 
 .eventCard .headerContainer .type {
-    background-color: #5B619B;
-    color: #FFFFFF;
+    background-color: #C5673F;
+    color: black;
     border-radius: 20px;
     display: inline-block;
     padding: 3px 10px;
