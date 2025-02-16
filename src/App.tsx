@@ -85,7 +85,7 @@ function App() {
                                     ? profile.displayName.slice(0, 24) + "..."
                                     : profile.displayName}
                             </p>
-                            <p className="points">{profile.points} PTS</p>
+                            <p>{profile.points.toLocaleString('en-US')} PTS</p>
                         </div>
                     ))}
                 </div>
