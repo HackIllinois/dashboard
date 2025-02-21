@@ -9,14 +9,22 @@ import logo from "./assets/logo.svg";
 import Pin from "./assets/pin.svg";
 import Clock from "./assets/clock.svg";
 import scroll from "./assets/scroll.svg";
-import solana from "./assets/solana.svg";
+import solana from "./assets/solana.png";
 import deere from "./assets/deere.svg";
 import cat from "./assets/cat.svg";
 import discover from "./assets/discover.svg";
-import github from "./assets/github.svg";
 import warp from "./assets/warp.svg";
-import spectrum from "./assets/spectrum.svg";
-import wolfram from "./assets/wolfram.svg";
+import capitalone from "./assets/capitalone.svg";
+import klaviyo from "./assets/klaviyo.png";
+import agco from "./assets/agco.png";
+
+import cloudflare from "./assets/cloudflare.png";
+import deshaw from "./assets/deshaw.png";
+import hrt from "./assets/hrt.png";
+import researchpark from "./assets/researchpark.png";
+import slb from "./assets/slb.png";
+import telora from "./assets/telora.jpeg";
+
 
 function App() {
     const { now, countdown, isHacking } = useTime();
@@ -177,25 +185,42 @@ function App() {
                 <div className="sponsors">
                     <h2>Sponsors</h2>
                     <div className="sponsorLogos">
-                        <div className="solana">
-                            <img src={solana} alt="solana" />
+                        <div>
+                            <img src={cat} alt="cat" width="140"/>
                         </div>
-                        <div className="row">
+                        <div style={{ marginTop: "-5px" }}>
                             <img src={deere} alt="deere" />
-                            <img src={cat} alt="cat" />
+                            <img src={solana} alt="solana" width="140" />
                         </div>
-                        <div>
+                        <div style={{ marginTop: "30px" }}>
                             <img src={discover} alt="discover" />
+                            <img src={klaviyo} alt="klaviyo" width="120" />
+                          
                         </div>
-                        <div>
-                            <img src={github} alt="github" />
+                        <div style={{ marginTop: "10px" }}>
+                            <img src={capitalone} alt="capitalone" />
+                            <img src={agco} alt="agco" width="120" />
                         </div>
-                        <div>
+                        <div style={{ marginTop: "10px" }}>
+                            <img src={slb} alt="slb" width="90" />
+                            <img src={cloudflare} alt="cloudflare" width="120" />
+                    
+                        </div>
+                        <div style={{ marginTop: "25px" }}>
+                            <img src={deshaw} alt="deshaw" width="120" />
+                            <img src={researchpark} alt="researchpark" width="140" />
+                        </div>
+                        <div style={{ marginTop: "20px" }}>
                             <img src={warp} alt="warp" />
-                            <img src={spectrum} alt="spectrum" />
+                            <img src={telora} alt="telora" width="40" />
                         </div>
+                        <div style={{ marginTop: "10px" }}>
+                            <img src={hrt} alt="hrt" width="80" />
+                        </div>
+                    
+
                         <div>
-                            <img src={wolfram} alt="wolfram" />
+                       
                         </div>
                     </div>
                 </div>

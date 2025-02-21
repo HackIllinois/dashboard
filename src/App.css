@@ -1,15 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
-
 body {
   font-family: "Montserrat", sans-serif;
   counter-reset: img;
-  overflow: hidden !important;
+  overflow: auto !important; /* Allow scrolling */
+  height: 100vh;
 }
 
 .App {
   text-align: center;
-  overflow: hidden;
+  overflow: visible; /* Allow scrolling */
+  min-height: 100vh; /* Ensure content grows */
 }
+
+html {
+  overflow-y: auto; /* Ensure scrolling is enabled */
+}
+
 
 .topRow {
   display: flex;
@@ -305,7 +311,7 @@ body {
 
 .sponsors {
   width: 25vw;
-  height: 70vh;
+  height: 75vh;
   background-color: #ffffffe4;
   border-radius: 20px;
   margin: 20px;
@@ -329,7 +335,7 @@ body {
   align-items: center;
   /* height: 15%; */
   gap: 35px;
-  margin: 20px;
+  margin: -10px;
   /* padding: 10px; */
 }
 
