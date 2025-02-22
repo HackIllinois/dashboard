@@ -20,7 +20,7 @@ import agco from "./assets/agco.png";
 
 import cloudflare from "./assets/cloudflare.png";
 import deshaw from "./assets/deshaw.png";
-import hrt from "./assets/hrt.png";
+import hrt from "./assets/hrt.svg";
 import researchpark from "./assets/researchpark.png";
 import slb from "./assets/slb.png";
 import telora from "./assets/telora.jpeg";
