@@ -183,45 +183,40 @@ function App() {
                 </div>
 
                 <div className="sponsors">
-                    <h2>Sponsors</h2>
                     <div className="sponsorLogos">
+                        <h2>Sponsors</h2>
                         <div>
-                            <img src={cat} alt="cat" width="140"/>
+                            <img src={cat} alt="cat"/>
                         </div>
-                        <div style={{ marginTop: "-5px" }}>
+                        <div>
                             <img src={deere} alt="deere" />
-                            <img src={solana} alt="solana" width="140" />
+                            <img src={solana} alt="solana" />
                         </div>
-                        <div style={{ marginTop: "30px" }}>
-                            <img src={discover} alt="discover" />
-                            <img src={klaviyo} alt="klaviyo" width="120" />
-                          
-                        </div>
-                        <div style={{ marginTop: "10px" }}>
-                            <img src={capitalone} alt="capitalone" />
-                            <img src={agco} alt="agco" width="120" />
-                        </div>
-                        <div style={{ marginTop: "10px" }}>
-                            <img src={slb} alt="slb" width="90" />
-                            <img src={cloudflare} alt="cloudflare" width="120" />
-                    
-                        </div>
-                        <div style={{ marginTop: "25px" }}>
-                            <img src={deshaw} alt="deshaw" width="120" />
-                            <img src={researchpark} alt="researchpark" width="140" />
-                        </div>
-                        <div style={{ marginTop: "20px" }}>
-                            <img src={warp} alt="warp" />
-                            <img src={telora} alt="telora" width="40" />
-                        </div>
-                        <div style={{ marginTop: "10px" }}>
-                            <img src={hrt} alt="hrt" width="80" />
-                        </div>
-                    
-
                         <div>
-                       
+                            <img src={discover} alt="discover" />
+                            <img src={klaviyo} alt="klaviyo" />
                         </div>
+                        <div>
+                            <img src={capitalone} alt="capitalone" />
+                            <img src={agco} alt="agco" />
+                        </div>
+                        <div>
+                            <img src={slb} alt="slb" />
+                            <img src={cloudflare} alt="cloudflare" />
+                    
+                        </div>
+                        <div>
+                            <img src={deshaw} alt="deshaw" />
+                            <img src={researchpark} alt="researchpark" />
+                        </div>
+                        <div>
+                            <img src={warp} alt="warp" />
+                            <img src={telora} alt="telora" />
+                        </div>
+                        <div>
+                            <img src={hrt} alt="hrt" />
+                        </div>
+                        <div></div>
                     </div>
                 </div>
             </div>
