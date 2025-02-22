@@ -9,14 +9,22 @@ import logo from "./assets/logo.svg";
 import Pin from "./assets/pin.svg";
 import Clock from "./assets/clock.svg";
 import scroll from "./assets/scroll.svg";
-import solana from "./assets/solana.svg";
+import solana from "./assets/solana.png";
 import deere from "./assets/deere.svg";
 import cat from "./assets/cat.svg";
 import discover from "./assets/discover.svg";
-import github from "./assets/github.svg";
 import warp from "./assets/warp.svg";
-import spectrum from "./assets/spectrum.svg";
-import wolfram from "./assets/wolfram.svg";
+import capitalone from "./assets/capitalone.svg";
+import klaviyo from "./assets/klaviyo.png";
+import agco from "./assets/agco.png";
+
+import cloudflare from "./assets/cloudflare.png";
+import deshaw from "./assets/deshaw.png";
+import hrt from "./assets/hrt.png";
+import researchpark from "./assets/researchpark.png";
+import slb from "./assets/slb.png";
+import telora from "./assets/telora.jpeg";
+
 
 function App() {
     const { now, countdown, isHacking } = useTime();
@@ -175,28 +183,40 @@ function App() {
                 </div>
 
                 <div className="sponsors">
-                    <h2>Sponsors</h2>
                     <div className="sponsorLogos">
-                        <div className="solana">
-                            <img src={solana} alt="solana" />
+                        <h2>Sponsors</h2>
+                        <div>
+                            <img src={cat} alt="cat"/>
                         </div>
-                        <div className="row">
+                        <div>
                             <img src={deere} alt="deere" />
-                            <img src={cat} alt="cat" />
+                            <img src={solana} alt="solana" />
                         </div>
                         <div>
                             <img src={discover} alt="discover" />
+                            <img src={klaviyo} alt="klaviyo" />
                         </div>
                         <div>
-                            <img src={github} alt="github" />
+                            <img src={capitalone} alt="capitalone" />
+                            <img src={agco} alt="agco" />
+                        </div>
+                        <div>
+                            <img src={slb} alt="slb" />
+                            <img src={cloudflare} alt="cloudflare" />
+                    
+                        </div>
+                        <div>
+                            <img src={deshaw} alt="deshaw" />
+                            <img src={researchpark} alt="researchpark" />
                         </div>
                         <div>
                             <img src={warp} alt="warp" />
-                            <img src={spectrum} alt="spectrum" />
+                            <img src={telora} alt="telora" />
                         </div>
                         <div>
-                            <img src={wolfram} alt="wolfram" />
+                            <img src={hrt} alt="hrt" />
                         </div>
+                        <div></div>
                     </div>
                 </div>
             </div>
