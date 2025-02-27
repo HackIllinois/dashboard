@@ -330,5 +330,5 @@ body {
 
 .sponsorLogos img {
   max-width: 10vw;
-  height: 6vh;
+  max-height: 6vh;
 }
