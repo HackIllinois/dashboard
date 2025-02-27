@@ -114,9 +114,9 @@ function App() {
                                         <p className="knights">KNIGHTS</p>
                                     )}
                                     <p className="type">{event.eventType}</p>
-                                    <p className="points">
+                                    {event.points > 0 && <p className="points">
                                         +{event.points} PTS
-                                    </p>
+                                    </p>}
                                 </div>
                             </div>
 
