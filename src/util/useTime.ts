@@ -6,18 +6,15 @@ const HACK_END = 1740920400000;
 
 export const useTime = (refreshCycle = 1000) => {
     const [now, setNow] = useState(getTime());
-    const [countdown, setCountdown] = useState(getCountdown());
-    const [isHacking, setIsHacking] = useState(false);
+    const [countdown, setCountdown] = useState(getHacking() ? getCountdown() : getStartCountdown());
+    const [isHacking, setIsHacking] = useState(getHacking());
 
     useEffect(() => {
         const intervalId = setInterval(() => {
             setNow(getTime());
-            if (Date.now() < HACK_START) {
-              setCountdown(getStartCountdown);
-            } else {
-              setIsHacking(true);
-              setCountdown(getCountdown());
-            }
+            const hacking = getHacking();
+            setIsHacking(hacking);
+            setCountdown(hacking ? getCountdown() : getStartCountdown());
         }, refreshCycle);
         return () => clearInterval(intervalId);
     }, [refreshCycle, setNow, setCountdown]);
@@ -28,6 +25,10 @@ export const useTime = (refreshCycle = 1000) => {
 const getTime = () => {
     return new Date();
 };
+
+const getHacking = () => {
+    return Date.now() > HACK_START;
+}
 
 const getCountdown = () => {
     const t = HACK_END - Date.now();
