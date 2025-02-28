@@ -98,7 +98,8 @@ function App() {
                     ))}
                 </div>
 
-                <div className="events">
+                <iframe width="1920" height="1080" src="https://www.youtube.com/embed/6GEPDfJKcE0?si=l3Vs_Mvmz2RKoIdZ&autoplay=1" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" ></iframe>
+                {/* <div className="events">
                     <h2>Upcoming Events</h2>
                     {events.length > 0 ? events.map((event: Event, index: number) => (
                         <div className="eventCard" key={index}>
@@ -153,7 +154,7 @@ function App() {
                                             {location.description}
                                         </p>
                                     </>
-                                ))} */}
+                                ))} }
                             </div>
                             <div className="timeContainer">
                                 {event.locations.map((location, i) => (
@@ -180,7 +181,7 @@ function App() {
                             </p>
                         </div>
                     )) : <p className="noEvents">No upcoming events :')</p>}
-                </div>
+                </div> */}
 
                 <div className="sponsors">
                     <div className="sponsorLogos">
