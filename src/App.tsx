@@ -1,7 +1,7 @@
 import "./App.css";
 import { useTime } from "./util/useTime";
 import { useLeaderboard } from "./util/useLeaderboard";
-// import { useEvents } from "./util/useEvents";
+import { useEvents } from "./util/useEvents";
 // import { Event } from "./util/api";
 import  useTimeSyncedReload  from "./util/useReload";
 import background from "./assets/background.svg";
