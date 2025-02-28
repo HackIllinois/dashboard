@@ -2,12 +2,12 @@ import "./App.css";
 import { useTime } from "./util/useTime";
 import { useLeaderboard } from "./util/useLeaderboard";
 import { useEvents } from "./util/useEvents";
-// import { Event } from "./util/api";
+import { Event } from "./util/api";
 import  useTimeSyncedReload  from "./util/useReload";
 import background from "./assets/background.svg";
 import logo from "./assets/logo.svg";
-// import Pin from "./assets/pin.svg";
-// import Clock from "./assets/clock.svg";
+import Pin from "./assets/pin.svg";
+import Clock from "./assets/clock.svg";
 import scroll from "./assets/scroll.svg";
 import solana from "./assets/solana.png";
 import deere from "./assets/deere.svg";
@@ -29,7 +29,7 @@ import telora from "./assets/telora.jpeg";
 function App() {
     const { now, countdown, isHacking } = useTime();
     const leaderboard = useLeaderboard();
-    // const events = useEvents();
+    const events = useEvents();
     useTimeSyncedReload();
 
     return (
