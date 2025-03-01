@@ -11,7 +11,7 @@ import Clock from "./assets/clock.svg";
 import scroll from "./assets/scroll.svg";
 import solana from "./assets/solana.png";
 import deere from "./assets/deere.svg";
-import cat from "./assets/cat.svg";
+import cat from "./assets/cat.png";
 import discover from "./assets/discover.svg";
 import warp from "./assets/warp.svg";
 import capitalone from "./assets/capitalone.svg";
