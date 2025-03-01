@@ -5,6 +5,7 @@ import { useEvents } from "./util/useEvents";
 import { Event } from "./util/api";
 import  useTimeSyncedReload  from "./util/useReload";
 import background from "./assets/background.svg";
+import zeus from "./assets/zeus.svg";
 import logo from "./assets/logo.svg";
 import Pin from "./assets/pin.svg";
 import Clock from "./assets/clock.svg";
@@ -24,16 +25,50 @@ import hrt from "./assets/hrt.svg";
 import researchpark from "./assets/researchpark.png";
 import slb from "./assets/slb.png";
 import telora from "./assets/telora.jpeg";
+import { useEffect, useState } from "react";
 
 
 function App() {
     const { now, countdown, isHacking } = useTime();
+    const [zeusAppear, setZeusAppear] = useState(false);
+    const [lightningAppear, setLightningAppear] = useState(false);
     const leaderboard = useLeaderboard();
     const events = useEvents();
     useTimeSyncedReload();
 
+    useEffect(() => {
+        if (Math.random() < (2 / 3)) {
+            return;
+        }
+
+        const now = new Date();
+        const minutes = now.getMinutes();
+        const seconds = now.getSeconds();
+        const ms = now.getMilliseconds();
+    
+        const currentMs = (minutes * 60 + seconds) * 1000 + ms;
+        const nextFiveMin = Math.ceil((minutes+1) / 5) * 5;
+        const nextFiveMinMs = nextFiveMin * 60 * 1000;
+        const delay = nextFiveMinMs - currentMs;
+
+        setTimeout(() => {
+            setZeusAppear(true);
+        }, delay - (10 * 1000));
+
+        setTimeout(() => {
+            setLightningAppear(true);
+        }, delay - (2 * 1000));
+    }, [])
+
     return (
         <div className="App">
+            <div className={`zeus-container ${zeusAppear ? "zeus-appear" : ""}`}>
+                <img src={zeus} alt="zeus" className="zeus"/>
+                <div className="lightning-container">
+                    <div className={`lightning lightning-one ${lightningAppear ? "lightning-appear" : ""}`}></div>
+                    <div className={`lightning lightning-two ${lightningAppear ? "lightning-appear" : ""}`}></div>
+                </div>
+            </div>
             <div className="topRow">
                 <div className="title">
                     <img src={logo} alt="logo" className="logo" />
