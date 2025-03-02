@@ -3,7 +3,7 @@ import { useTime } from "./util/useTime";
 import { useLeaderboard } from "./util/useLeaderboard";
 import { useEvents } from "./util/useEvents";
 import { Event } from "./util/api";
-import  useTimeSyncedReload  from "./util/useReload";
+import useTimeSyncedReload from "./util/useReload";
 import background from "./assets/background.svg";
 import zeus from "./assets/zeus.svg";
 import logo from "./assets/logo.svg";
@@ -41,9 +41,9 @@ function App() {
         const minutes = now.getMinutes();
         const seconds = now.getSeconds();
         const ms = now.getMilliseconds();
-    
+
         const currentMs = (minutes * 60 + seconds) * 1000 + ms;
-        const nextEventMin = Math.floor((minutes+10) / 10) * 10;
+        const nextEventMin = Math.floor((minutes + 10) / 10) * 10;
         const nextEventMinMs = nextEventMin * 60 * 1000;
         const delay = nextEventMinMs - currentMs;
 
@@ -59,7 +59,7 @@ function App() {
     return (
         <div className="App">
             <div className={`zeus-container ${zeusAppear ? "zeus-appear" : ""}`}>
-                <img src={zeus} alt="zeus" className="zeus"/>
+                <img src={zeus} alt="zeus" className="zeus" />
                 <div className="lightning-container">
                     <div className={`lightning lightning-one ${lightningAppear ? "lightning-appear" : ""}`}></div>
                     <div className={`lightning lightning-two ${lightningAppear ? "lightning-appear" : ""}`}></div>
@@ -161,33 +161,26 @@ function App() {
                                     className="clock"
                                 />
                                 <p className="time">
-                                    {new Date(
-                                        event.startTime * 1000
-                                    ).toLocaleTimeString([], {
-                                        hour: "numeric",
-                                        minute: "2-digit",
-                                    })}{" "}
-                                    -{" "}
-                                    {new Date(
-                                        event.endTime * 1000
-                                    ).toLocaleTimeString([], {
-                                        hour: "numeric",
-                                        minute: "2-digit",
-                                    })}
+                                    {
+                                        event.startTime === event.endTime ? new Date(
+                                            event.startTime * 1000
+                                        ).toLocaleTimeString([], {
+                                            hour: "numeric",
+                                            minute: "2-digit",
+                                        }) : `${new Date(
+                                            event.startTime * 1000
+                                        ).toLocaleTimeString([], {
+                                            hour: "numeric",
+                                            minute: "2-digit",
+                                        })} - 
+                                    ${new Date(
+                                            event.endTime * 1000
+                                        ).toLocaleTimeString([], {
+                                            hour: "numeric",
+                                            minute: "2-digit",
+                                        })}`
+                                    }
                                 </p>
-
-                                {/* {event.locations.map((location, i) => (
-                                    <>
-                                        <img
-                                            src={Pin}
-                                            alt="pin"
-                                            className="pin"
-                                        />
-                                        <p className="location" key={i}>
-                                            {location.description}
-                                        </p>
-                                    </>
-                                ))} */}
                             </div>
                             <div className="timeContainer">
                                 {event.locations.map((location, i) => (
@@ -200,9 +193,9 @@ function App() {
                                         <p className="location" key={i}>
                                             {location.description.length > 300
                                                 ? location.description.slice(
-                                                      0,
-                                                      300
-                                                  ) + "..."
+                                                    0,
+                                                    300
+                                                ) + "..."
                                                 : location.description}
                                         </p>
                                     </>
@@ -220,7 +213,7 @@ function App() {
                     <div className="sponsorLogos">
                         <h2>Sponsors</h2>
                         <div>
-                            <img src={cat} alt="cat"/>
+                            <img src={cat} alt="cat" />
                         </div>
                         <div>
                             <img src={deere} alt="deere" />
@@ -237,7 +230,7 @@ function App() {
                         <div>
                             <img src={slb} alt="slb" />
                             <img src={cloudflare} alt="cloudflare" />
-                    
+
                         </div>
                         <div>
                             <img src={deshaw} alt="deshaw" />
