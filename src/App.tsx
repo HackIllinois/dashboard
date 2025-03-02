@@ -121,7 +121,7 @@ function App() {
                                 <div className="profile-picture">
                                     <img
                                         src={profile.avatarUrl}
-                                        alt="profile picture"
+                                        alt="profile"
                                         className="profile-picture"
                                     />
                                 </div>
