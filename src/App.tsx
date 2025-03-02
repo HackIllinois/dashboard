@@ -9,7 +9,7 @@ import zeus from "./assets/zeus.svg";
 import logo from "./assets/logo.svg";
 import Pin from "./assets/pin.svg";
 import Clock from "./assets/clock.svg";
-import scroll from "./assets/scroll.svg";
+// import scroll from "./assets/scroll.svg";
 import solana from "./assets/solana.png";
 import deere from "./assets/deere.svg";
 import cat from "./assets/cat.png";
@@ -116,18 +116,21 @@ function App() {
                     <h2>Leaderboard</h2>
                     {leaderboard.map((profile, index) => (
                         <div key={index} className="profile">
-                            <div key={index} className="scroll">
-                                <img
-                                    src={scroll}
-                                    alt="scroll"
-                                    className="scroll"
-                                />
+                            <p className="rank">{index + 1}</p>
+                            <div className="name-profile">
+                                <div className="profile-picture">
+                                    <img
+                                        src={profile.avatarUrl}
+                                        alt="profile picture"
+                                        className="profile-picture"
+                                    />
+                                </div>
+                                <p className="name">
+                                    {profile.displayName.length > 25
+                                        ? profile.displayName.slice(0, 24) + "..."
+                                        : profile.displayName}
+                                </p>
                             </div>
-                            <p className="name">
-                                {profile.displayName.length > 25
-                                    ? profile.displayName.slice(0, 24) + "..."
-                                    : profile.displayName}
-                            </p>
                             <p>{profile.points.toLocaleString('en-US')} PTS</p>
                         </div>
                     ))}
@@ -150,7 +153,7 @@ function App() {
                                     )}
                                     <p className="type">{event.eventType}</p>
                                     {event.points > 0 && <p className="points">
-                                        +{event.points} PTS
+                                        +{event.points.toLocaleString("en-US")} PTS
                                     </p>}
                                 </div>
                             </div>

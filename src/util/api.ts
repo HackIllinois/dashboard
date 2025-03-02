@@ -3,6 +3,7 @@ const APIv2 = "https://adonix.hackillinois.org";
 export type Profile = {
     displayName: string;
     points: number;
+    avatarUrl: string;
 }
 
 export interface Event {

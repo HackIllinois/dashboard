@@ -120,23 +120,46 @@ body {
 .profile {
   /* position: relative; */
   display: flex;
+  flex-grow: 1;
+  width: calc(100% - 2rem);
   flex-direction: row;
   align-self: flex-start;
-  padding-left: 15px;
-  margin: auto;
-  margin-left: 5px;
+  align-items: center;
+  justify-content: center;
+  /* padding-left: 15px; */
+  padding: 0 1rem;
+  padding: auto;
+  /* margin-left: 5px; */
+  gap: 1.5rem;
   /* width: 80%; */
   /* counter-reset: img; */
 }
 
-.profile p:last-child {
+.profile:nth-child(even) {
+  background-color: #94785d20;
+}
+
+.name-profile {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 10vw;
+}
+
+.rank {
+  width: 1rem;
+  text-align: right;
+}
+
+/* .profile p:last-child {
   position: absolute;
   right: 0;
-}
+} */
 
 .scroll {
   position: relative;
-  margin: auto;
+  /* margin: auto; */
   transform: scale(1.2);
 }
 
@@ -150,11 +173,12 @@ body {
   top: 10%;
   left: 0%;
   content: counter(img);
-  color: #FFB23E;
+  color: #886025;
+  font-weight: bold;
 }
 
-.profile p {
-  margin: 14px;
+.scroll img {
+  opacity: 0;
 }
 
 .events {
@@ -385,4 +409,9 @@ body {
 
 .lightning-appear {
   box-shadow: 0 0 20vw 60vw white;
+}
+
+.profile-picture {
+  width: 60px;
+  height: 60px;
 }
