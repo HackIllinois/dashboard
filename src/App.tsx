@@ -37,19 +37,15 @@ function App() {
     useTimeSyncedReload();
 
     useEffect(() => {
-        if (Math.random() < (2 / 3)) {
-            return;
-        }
-
         const now = new Date();
         const minutes = now.getMinutes();
         const seconds = now.getSeconds();
         const ms = now.getMilliseconds();
     
         const currentMs = (minutes * 60 + seconds) * 1000 + ms;
-        const nextFiveMin = Math.ceil((minutes+1) / 5) * 5;
-        const nextFiveMinMs = nextFiveMin * 60 * 1000;
-        const delay = nextFiveMinMs - currentMs;
+        const nextEventMin = Math.floor((minutes+10) / 10) * 10;
+        const nextEventMinMs = nextEventMin * 60 * 1000;
+        const delay = nextEventMinMs - currentMs;
 
         setTimeout(() => {
             setZeusAppear(true);
