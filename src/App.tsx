@@ -524,7 +524,7 @@ const sunTop = lerp(sunStart.top, sunEnd.top, sunProgress);
 const sunLeft = lerp(sunStart.left, sunEnd.left, sunProgress);
 
 const showUfos = segment === "night"
-|| segment === "day";
+// || segment === "day";
 const { phase, t } = useCycle(showUfos);
 
 
