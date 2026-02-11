@@ -9,7 +9,10 @@ export const useLeaderboard = (refreshCycle = 600000) => {
 
     useEffect(() => {
         getLeaderboard().then((res) => setLeaderboard(res.slice(0, 10)));
+
+        
         const intervalId = setInterval(() => {
+            // console.log("events")
             getLeaderboard().then((res) => setLeaderboard(res.slice(0, 10)));
             
         }, refreshCycle);
