@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 // import "./App.css";
 // import { useTime } from "./util/useTime";
 // import { useLeaderboard } from "./util/useLeaderboard";
@@ -263,8 +264,8 @@ import logo from "./assets/logo2.svg";
 import { useTime } from "./util/useTime";
 import TopBar from "./assets/topbar.svg"
 import BottomBar from "./assets/bottombar.svg"
-import TopBar2 from "./assets/topbar2.svg"
-import BottomBar2 from "./assets/bottombar2.svg"
+// import TopBar2 from "./assets/topbar2.svg"
+// import BottomBar2 from "./assets/bottombar2.svg"
 import EventCard from "./Event";
 import bg1 from "./assets/bg1.svg"
 import bg2 from "./assets/bg2.svg"
@@ -489,6 +490,7 @@ useEffect(() => {
   const update = () => setSegment(getTimeSegment());
   const id = setInterval(update, 60000); // how often it checks if it is day/evening/night
   return () => clearInterval(id);
+// eslint-disable-next-line react-hooks/exhaustive-deps
 }, []);
 
 useEffect(() => {

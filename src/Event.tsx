@@ -2,8 +2,8 @@ import { useState, useEffect, useMemo } from "react";
 import { Event } from "./util/api";
 import Clock from "./assets/clock2.svg";
 import Pin from "./assets/pin2.svg";
-import { color } from "framer-motion";
-import { textSpanOverlapsWith } from "typescript";
+// import { color } from "framer-motion";
+// import { textSpanOverlapsWith } from "typescript";
 
 type EventCardProps = {
   event: any; // you can tighten this type later
@@ -112,11 +112,11 @@ export default function EventCard({
   ` : "drop-shadow(0 0 3px rgba(239, 120, 61, .8))"
   };
 
-  const descRow = {
-    textAlign:"left" as const,
-    color:"white",
-    fontSize:"1vh"
-  }
+  // const descRow = {
+  //   textAlign:"left" as const,
+  //   color:"white",
+  //   fontSize:"1vh"
+  // }
 
   return (
     <article style={cardStyle}>

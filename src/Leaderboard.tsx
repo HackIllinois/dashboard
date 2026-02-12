@@ -3,7 +3,7 @@ import { useEffect, useMemo, useState, useRef } from "react";
 import { useLeaderboard } from "./util/useLeaderboard";
 import player1 from "./assets/player1.svg"
 import players from "./assets/players.svg"
-import number from "./assets/number.svg"
+// import number from "./assets/number.svg"
 
 export default function Leaderboard() {
 
