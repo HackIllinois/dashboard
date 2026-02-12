@@ -83,7 +83,7 @@ export default function EventCard({
     backgroundColor: "#ed783d",
     borderRadius: "2vh",
     fontWeight: 600,
-    fontSize: "1.6vh",
+    fontSize: "2vh",
   };
 
   const infoRow = {
