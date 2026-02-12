@@ -69,7 +69,7 @@ export default function EventCard({
     margin: 0,
     marginLeft: ".4vh",
     fontWeight: 700,
-    fontSize: "2vh",
+    fontSize: "2.7vh",
     color: "#F7F8FF",
     fontFamily: '"Tsukimi Rounded", "Montserrat", sans-serif',
     textTransform: "uppercase" as const,
@@ -93,11 +93,12 @@ export default function EventCard({
   };
 
   const infoText = {
+    fontWeight: 600,
     margin: 0,
     padding: "0.3vh",
     // color: "rgba(247, 248, 255, 0.82)",
     color: "#F5F7FA",
-    fontSize: "1.6vh",
+    fontSize: "1.8vh",
     textShadow: isHappeningNow ? "0 0 3px rgba(239, 120, 61, 0.4), 0 2px 6px rgba(239,120,61,0.4)" : "0 0 3px rgba(0,0,0,0.9), 0 2px 6px rgba(0,0,0,0.8)"
   };
 
