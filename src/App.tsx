@@ -265,6 +265,8 @@ import TopBar from "./assets/topbar.svg"
 import BottomBar from "./assets/bottombar.svg"
 import TopBar2 from "./assets/topbar2.svg"
 import BottomBar2 from "./assets/bottombar2.svg"
+import TopBar3 from "./assets/topbar3.svg"
+import BottomBar3 from "./assets/bottombar3.svg"
 import EventCard from "./Event";
 import bg1 from "./assets/bg1.svg"
 import bg2 from "./assets/bg2.svg"
@@ -526,7 +528,8 @@ const sunTop = lerp(sunStart.top, sunEnd.top, sunProgress);
 const sunLeft = lerp(sunStart.left, sunEnd.left, sunProgress);
 
 const showUfos = segment === "night"
-|| segment === "evening";
+|| segment === "evening"
+|| segment === "day"
 const { phase, t } = useCycle(showUfos);
 
 
@@ -560,7 +563,7 @@ const ufo1 = getPosForPhase({
   t,
   p0: { top: -40, left: -10 },
   p1: { top: -10, left: 10 },
-  p2: { top: 18 + Math.sin(randSpeed2 * pos * Math.PI * 2 + phase2) * floatAmp, left: 4 },
+  p2: { top: 21 + Math.sin(randSpeed2 * pos * Math.PI * 2 + phase2) * floatAmp, left: 4 },
 });
 
 const ufo2 = getPosForPhase({
@@ -568,7 +571,7 @@ const ufo2 = getPosForPhase({
   t,
   p0: { top: -45, left: 90 },
   p1: { top: -5, left: 60 },
-  p2: { top: 20 + Math.sin(randSpeed3 * pos * Math.PI * 2 + phase3) * floatAmp, left: 73 },
+  p2: { top: 23 + Math.sin(randSpeed3 * pos * Math.PI * 2 + phase3) * floatAmp, left: 73 },
 });
 
 const ufo3 = getPosForPhase({
@@ -576,7 +579,7 @@ const ufo3 = getPosForPhase({
   t,
   p0: { top: -50, left: 140 },
   p1: { top: -8, left: 160 },
-  p2: { top: 11 + Math.sin(randSpeed4 * pos * Math.PI * 2 + phase4) * floatAmp, left: 114 },
+  p2: { top: 13 + Math.sin(randSpeed4 * pos * Math.PI * 2 + phase4) * floatAmp, left: 118 },
 });
 
 const raysOpacity = getRaysOpacity(phase, t);
@@ -607,7 +610,7 @@ const raysOpacity = getRaysOpacity(phase, t);
                     position:"absolute",
                     top: segment === "day" ? "23.5vh" : "12vh",
                     left: "-10vh",
-                    width:"200vh",
+                    width:"220vh",
                     zIndex:2
                     }}/>
 
@@ -746,7 +749,8 @@ const raysOpacity = getRaysOpacity(phase, t);
                    top:"11vh",
                    left:"6vh",
                    fontFamily:"Tsukimi Rounded",
-                   color:"white"
+                   color:"white",
+                   zIndex:999
                 }}>
                                       {now.toLocaleTimeString([], {
                                               hour: "numeric",
@@ -861,10 +865,10 @@ const raysOpacity = getRaysOpacity(phase, t);
 
 
 
-                         <img src = {TopBar} style={{position:"absolute", width:"78.2vh", top:"19.6vh", left:"57.1vh", zIndex:"999"}}></img>
-                         <img src = {BottomBar} style={{position:"absolute", width:"71vh", top:"84.5vh", left:"60.5vh", zIndex:"999"}}></img>
+                         <img src = {TopBar3} style={{position:"absolute", width:"86.2vh", top:"19.6vh", left:"56.5vh", zIndex:"999"}}></img>
+                         <img src = {BottomBar3} style={{position:"absolute", width:"77.5vh", top:"84.5vh", left:"60.5vh", zIndex:"999"}}></img>
 
-                    <div style={{backgroundImage, position:"absolute", height:"67.5vh",top:"22vh", width:"65vh", left:"63vh", border:"0.13vh solid #00FF2B", 
+                    <div style={{backgroundImage, position:"absolute", height:"67.5vh",top:"22vh", width:"72vh", left:"63vh", border:"0.13vh solid #00FF2B", 
                         // backgroundSize: "100% 100%, 9.2% 10%, 10% 10%, 10% 10%, 10% 10%"
                         // , backgroundRepeat: "no-repeat, no-repeat",
                         //  backgroundPosition: "center"
@@ -873,12 +877,12 @@ const raysOpacity = getRaysOpacity(phase, t);
     backgroundPosition: "center, center, 0 0, 0 0",
                          }}>
                     
-                            <div style={{marginTop:"2.4vh", marginRight:"4vh", fontFamily:"Tsukimi Rounded", fontSize:"2.5vh", fontWeight:700, color:"#DDFFE4", textShadow:"0 0 3px rgba(0,0,0,0.9), 0 2px 6px rgba(0,0,0,0.8)"}}>UPCOMING EVENTS . . . . . . . . . . . . .</div>
+                            <div style={{marginTop:"1vh", marginRight:"4vh", fontFamily:"Tsukimi Rounded", fontSize:"2.8vh", fontWeight:700, color:"#DDFFE4", textShadow:"0 0 3px rgba(0,0,0,0.9), 0 2px 6px rgba(0,0,0,0.8)"}}>UPCOMING EVENTS . . . . . . . . . . . . .</div>
 
 
 
 
-                        <div style={{marginTop:"9vh"}}>
+                        <div style={{marginTop:"8vh"}}>
 
                    {eventCards.map((event) => (
   <EventCard
