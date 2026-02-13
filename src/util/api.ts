@@ -6,6 +6,13 @@ export type Profile = {
     avatarUrl: string;
 }
 
+export type AttendeeTeam = {
+    id: string;
+    name: string;
+    points: number;
+    members: number;
+}
+
 export interface Event {
     id: string;
     name: string;
@@ -42,4 +49,8 @@ export function getLeaderboard(): Promise<Profile[]> {
 
 export function getEvents(): Promise<Event[]> {
     return request("/event").then((res) => res.events);
+}
+
+export function getAttendeeTeams(): Promise<AttendeeTeam[]> {
+    return request("/attendee-team").then((res) => res.teams);
 }

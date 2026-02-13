@@ -56,7 +56,7 @@ export default function EventCard({
   }, [nowSec, event.startTime, event.endTime]);
 
   const cardStyle = {
-    padding: "0.6vh 2vh 0.6vh 2vh",
+    padding: "0.9vh 2vh 0.6vh 2vh",
   };
 
   const headerRow = {
@@ -73,7 +73,7 @@ export default function EventCard({
     color: "#F7F8FF",
     fontFamily: '"Tsukimi Rounded", "Montserrat", sans-serif',
     textTransform: "uppercase" as const,
-    textShadow:isHappeningNow ? "0 0 3px rgba(239, 120, 61, 0.4), 0 2px 6px rgba(239,120,61,0.4)" : "0 0 3px rgba(0,0,0,0.9), 0 2px 6px rgba(0,0,0,0.8)"
+    textShadow:isHappeningNow ? "0 0 3px rgba(239, 120, 61, 0.4), 0 2px 6px rgba(239,120,61,0.4)" : "0 0 .8vh rgba(0,0,0,0.9), 0 0.3vh 0.5vh rgba(0,0,0,0.8)"
   };
 
   const tagStyle = {
@@ -99,7 +99,7 @@ export default function EventCard({
     // color: "rgba(247, 248, 255, 0.82)",
     color: "#F5F7FA",
     fontSize: "1.8vh",
-    textShadow: isHappeningNow ? "0 0 3px rgba(239, 120, 61, 0.4), 0 2px 6px rgba(239,120,61,0.4)" : "0 0 3px rgba(0,0,0,0.9), 0 2px 6px rgba(0,0,0,0.8)"
+    textShadow: isHappeningNow ? "0 0 3px rgba(239, 120, 61, 0.4), 0 2px 6px rgba(239,120,61,0.4)" : "0 0 .8vh rgba(0,0,0,0.9), 0 0.3vh 0.5vh rgba(0,0,0,0.8)"
   };
 
   const iconStyle = {

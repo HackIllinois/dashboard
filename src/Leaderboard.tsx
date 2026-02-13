@@ -79,7 +79,12 @@ const top5 = useMemo(() => (leaderboard ?? []).slice(0, 7), [leaderboard]);
 
 
     return (
-        <div style={{position:"absolute", height:"78vh",top:"19.5vh", width:"45vh", borderRadius:"3.5vh",left:"6vh", border:"0.13vh solid #00FF2B", overflow:"hidden",
+        <div style={{
+            // position:"absolute", height:"78vh",top:"19.5vh",
+            position:"relative",
+             width:"100%", height:"100%", borderRadius:"3.5vh",
+            //  left:"6vh",
+              border:"0.13vh solid #00FF2B", overflow:"hidden",
 // backgroundImage: `
 //       linear-gradient(180deg,
 //         rgba(0, 204, 3, 0.50) 0%,
@@ -96,7 +101,7 @@ const top5 = useMemo(() => (leaderboard ?? []).slice(0, 7), [leaderboard]);
         backgroundImage,
                         backgroundSize: "100% 100%, 100% 100%, 14% 10%, 10% 10%, 10% 10%, 10% 10%", backgroundRepeat: "no-repeat, no-repeat, repeat, repeat", backgroundPosition: "center, center, 0 0, 0 0"}}>
 
-            <h1 style={{fontSize:"2.8vh", fontFamily:"Tsukimi Rounded", color:"#DDFFE4", textShadow:"0 0 3px rgba(0,0,0,0.9), 0 2px 6px rgba(0,0,0,0.8)"}}>LEADERBOARD</h1>
+            <h1 style={{fontSize:"2.8vh", fontFamily:"Tsukimi Rounded", color:"#DDFFE4", textShadow:"0 0 .8vh rgba(0,0,0,0.9), 0 0.3vh 0.5vh rgba(0,0,0,0.8)"}}>LEADERBOARD</h1>
 
 
             {/* floating top 5 */}
