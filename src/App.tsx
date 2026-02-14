@@ -521,7 +521,7 @@ const raysOpacity = getRaysOpacity(phase, t);
 
   <div
     style={{
-        maxWidth: "72vh",
+        maxWidth: "75vh",
         marginTop:"2vh",
       position: "relative",
       width: "100%",
@@ -560,7 +560,10 @@ const raysOpacity = getRaysOpacity(phase, t);
         UPCOMING EVENTS
       </div>
 
-      <div style={{ marginTop: "7.6vh", marginLeft:"2.8vh" }}>
+      <div style={{ marginTop:
+      window.innerWidth / window.innerHeight > 3/1.8
+        ? "7.6vh"
+        : "6vh", marginLeft:"2.8vh" }}>
         {eventCards.map((event) => (
           <EventCard key={event.id} event={event} />
         ))}

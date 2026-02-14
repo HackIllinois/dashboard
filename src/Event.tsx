@@ -79,7 +79,7 @@ export default function EventCard({
 
   const tagStyle = {
     marginLeft:"auto",
-    padding: "0.5vh 1.2vh",
+    padding: "0.3vh 1vh",
     color: "#F5F7FA",
     backgroundColor: "#ed783d",
     borderRadius: "2vh",
