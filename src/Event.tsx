@@ -57,6 +57,7 @@ export default function EventCard({
 
   const cardStyle = {
     padding: "0.9vh 2vh 0.6vh 2vh",
+    borderLeft: "0.4vh solid #00FF2B"
   };
 
   const headerRow = {
@@ -112,14 +113,28 @@ export default function EventCard({
   ` : "drop-shadow(0 0 3px rgba(239, 120, 61, .8))"
   };
 
-  const descRow = {
-    textAlign:"left" as const,
-    color:"white",
-    fontSize:"1vh"
-  }
-
   return (
     <article style={cardStyle}>
+       <div
+    style={{
+      position: "absolute",
+      marginLeft:"-2.56vh",
+      marginTop: "-1.87vh",
+      width: ".7vh",
+      height: "2.3vh",
+      background: "#DFFFE4",
+    }}
+  />
+  <div
+    style={{
+      position: "absolute",
+      marginLeft:"-2.56vh",
+      marginTop: "6.3vh",
+      width: ".7vh",
+      height: "2.3vh",
+      background: "#DFFFE4",
+    }}
+  />
       <div style={headerRow}>
         <h3 style={titleStyle}>{event.name}</h3>
 
@@ -136,7 +151,6 @@ export default function EventCard({
             ` – ${formatDateTime(event.endTime)}`}
         </p>
       </div>
-      {/* <div style={descRow}>{event.description}</div> */}
     </article>
   );
 }

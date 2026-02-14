@@ -33,9 +33,13 @@ export interface Event {
 }
 
 async function request(endpoint: string) {
+    const token = localStorage.getItem("jwt");
+
+
     const response = await fetch(APIv2 + endpoint, {
         method: "GET",
         headers: {
+            "Authorization": `Bearer ${token}`,
             "Content-Type": "application/json",
         }
     });
@@ -52,5 +56,5 @@ export function getEvents(): Promise<Event[]> {
 }
 
 export function getAttendeeTeams(): Promise<AttendeeTeam[]> {
-    return request("/attendee-team").then((res) => res.teams);
+    return request("/attendee-team");
 }

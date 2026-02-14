@@ -19,5 +19,18 @@ export const useAttendeeTeams = (refreshCycle = 600000) => {
         return () => clearInterval(intervalId);
     }, [refreshCycle, setTeams]);
 
-    return useAttendeeTeams;
+
+
+//     useEffect(() => {
+//   getAttendeeTeams()
+//     .then((res) => {
+//       console.log("getAttendeeTeams res:", res);
+//       console.log("isArray?", Array.isArray(res), "len:", res?.length);
+//       setTeams((Array.isArray(res) ? res : []).slice(0, 10));
+//     })
+//     .catch((e) => console.error("getAttendeeTeams failed:", e));
+// }, []);
+
+    // console.log(teams)
+    return teams;
 };

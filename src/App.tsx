@@ -2,8 +2,8 @@ import { useEffect, useMemo, useState, useRef } from "react";
 import { useEvents } from "./util/useEvents";
 import logo from "./assets/logo2.svg";
 import { useTime } from "./util/useTime";
-import TopBar from "./assets/topbar.svg"
-import BottomBar from "./assets/bottombar.svg"
+// import TopBar from "./assets/topbar.svg"
+// import BottomBar from "./assets/bottombar.svg"
 import TopBar3 from "./assets/topbar3.svg"
 import BottomBar3 from "./assets/bottombar3.svg"
 import EventCard from "./Event";
@@ -24,6 +24,7 @@ import ufo31 from "./assets/ufo31.svg"
 import ufo32 from "./assets/ufo32.svg"
 import Countdown from "./Countdown";
 import useTimeSyncedReload from "./util/useReload";
+import TeamLeaderboard from "./TeamLeaderboard";
 
 
 
@@ -520,7 +521,7 @@ const raysOpacity = getRaysOpacity(phase, t);
 
   <div
     style={{
-        maxWidth: "70vh",
+        maxWidth: "72vh",
         marginTop:"2vh",
       position: "relative",
       width: "100%",
@@ -552,14 +553,14 @@ const raysOpacity = getRaysOpacity(phase, t);
         overflow: "hidden",
       }}
     >
-      <div style={{ marginTop: ".6vw", marginRight: "4vh", fontFamily: "Tsukimi Rounded", fontSize: "2.8vh", fontWeight: 700, color: "#DDFFE4", textShadow:"0 0 .8vh rgba(0,0,0,0.9), 0 0.3vh 0.5vh rgba(0,0,0,0.8)" }}>
+      <div style={{ marginTop:
+      window.innerWidth / window.innerHeight > 3/1.9
+        ? "2vh"
+        : ".8vh", marginRight: "4vh", fontFamily: "Tsukimi Rounded", fontSize: "3vh", fontWeight: 700, color: "#DDFFE4", textShadow:"0 0 .8vh rgba(0,0,0,0.9), 0 0.3vh 0.5vh rgba(0,0,0,0.8)" }}>
         UPCOMING EVENTS
       </div>
 
-      <div style={{ marginTop: "7vh" }}>
-        {eventCards.map((event) => (
-          <EventCard key={event.id} event={event} />
-        ))}
+      <div style={{ marginTop: "7.6vh", marginLeft:"2.8vh" }}>
         {eventCards.map((event) => (
           <EventCard key={event.id} event={event} />
         ))}
@@ -571,7 +572,7 @@ const raysOpacity = getRaysOpacity(phase, t);
         position: "absolute",
         left: "50%",
         bottom: 0,
-        transform: "translate(-50%, 55%)",
+        transform: "translate(-50%, 60%)",
         width: "110%",
         zIndex: 999,
         pointerEvents: "none",
@@ -584,84 +585,14 @@ const raysOpacity = getRaysOpacity(phase, t);
   <div
     style={{
       flex: "0 0 auto",    
-      width: "fit-content",
-      display: "flex",
+    //   width: "fit-content",
+      display: "grid",
       flexDirection: "row",
-      gap: "1vh",
-      marginTop: "3vh",
-      pointerEvents: "auto",
+      gap: "0vh",
+    //   marginTop: "3vh",
     }}
   >
-
-
-    <div
-                    style={{
-                        // position: "absolute",
-                        inset: 0,
-                        zIndex: 2,
-                    }}
-                >
-
-
-
-
-
-                        
-<div style={{
-    // position:"absolute",
-      width:"22vh",
-       height:"22vh", 
-    //    top:"2.5svh", 
-    //    left:"150vh",
-       border:"0.13vh solid #00FF2B", borderRadius:"3.5vh", 
-      background:`
-      linear-gradient(180deg, rgba(0, 135, 3, 0.38), rgba(0, 135, 3, 0.38)),
-      linear-gradient(to right, rgba(84, 172, 72, 0.20) 3px, transparent 1px),
-      linear-gradient(to bottom, rgba(84, 172, 72, 0.20) 3px, transparent 1px)
-      `, backgroundSize: "100% 100%, 25% 25%, 25% 25%"}}></div>
-
-      <div style={{
-        // position:"absolute",
-      width:"22vh", height:"22vh", 
-    //   top:"26.5vh", 
-    //   left:"150vh",
-      border:"0.13vh solid #00FF2B", borderRadius:"3.5vh", 
-      background:`
-      linear-gradient(180deg, rgba(0, 135, 3, 0.38), rgba(0, 135, 3, 0.38)),
-      linear-gradient(to right, rgba(84, 172, 72, 0.20) 3px, transparent 1px),
-      linear-gradient(to bottom, rgba(84, 172, 72, 0.20) 3px, transparent 1px)
-      `, backgroundSize: "100% 100%, 25% 25%, 25% 25%"}}></div>
-
-
-      <div style={{
-        // position:"absolute",
-      width:"22vh", 
-      height:"22vh", 
-    //   top:"50.5vh", 
-    //   left:"150vh",
-      border:"0.13vh solid #00FF2B", borderRadius:"3.5vh", 
-      background:`
-      linear-gradient(180deg, rgba(0, 135, 3, 0.38), rgba(0, 135, 3, 0.38)),
-      linear-gradient(to right, rgba(84, 172, 72, 0.20) 3px, transparent 1px),
-      linear-gradient(to bottom, rgba(84, 172, 72, 0.20) 3px, transparent 1px)
-      `, backgroundSize: "100% 100%, 25% 25%, 25% 25%"}}></div>
-
-
-      <div style={{
-        // position:"absolute",
-      width:"22vh",
-       height:"22vh", 
-    //    top:"74.5vh", 
-    //    left:"150vh",
-       border:"0.13vh solid #00FF2B", borderRadius:"3.5vh", 
-      background:`
-      linear-gradient(180deg, rgba(0, 135, 3, 0.38), rgba(0, 135, 3, 0.38)),
-      linear-gradient(to right, rgba(84, 172, 72, 0.20) 3px, transparent 1px),
-      linear-gradient(to bottom, rgba(84, 172, 72, 0.20) 3px, transparent 1px)
-      `, backgroundSize: "100% 100%, 25% 25%, 25% 25%"}}></div>
-                                                                        
-            </div>
-
+                        <TeamLeaderboard/>
 
   </div>
 </div>       
