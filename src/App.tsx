@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, useRef } from "react";
+import { useEffect, useMemo, useState, useRef, useCallback } from "react";
 import { useEvents } from "./util/useEvents";
 import logo from "./assets/logo2.svg";
 import { useTime } from "./util/useTime";
@@ -217,12 +217,12 @@ const p1 = travelStart + pos * (travelEnd - travelStart);
 //identify which time of day it is for bg, ufos, sun position
 type TimeSegment = "day" | "evening" | "night";
 
-function getTimeSegment(date = new Date()): TimeSegment {
+const getTimeSegment = useCallback((date = new Date()): TimeSegment => {
   const h = date.getHours();
   if (h >= 8 && h < 15) return "day";
   if (h >= 15 && h < 22) return "evening";
   return "night";
-}
+}, []);
 
 const [segment, setSegment] = useState<TimeSegment>(() =>
   getTimeSegment()
