@@ -525,7 +525,7 @@ const raysOpacity = getRaysOpacity(phase, t);
         marginTop:"2vh",
       position: "relative",
       width: "100%",
-      height: "69vh",
+      height: "71vh",
     }}
   >
     <img
@@ -562,8 +562,8 @@ const raysOpacity = getRaysOpacity(phase, t);
 
       <div style={{ marginTop:
       window.innerWidth / window.innerHeight > 3/1.8
-        ? "7.6vh"
-        : "6vh", marginLeft:"2.8vh" }}>
+        ? "8.6vh"
+        : "7vh", marginLeft:"2.8vh" }}>
         {eventCards.map((event) => (
           <EventCard key={event.id} event={event} />
         ))}
