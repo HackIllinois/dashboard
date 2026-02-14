@@ -32,14 +32,14 @@ export default function Countdown() {
         fontWeight:700,
     }}
   >
-    {isHacking && <img src={caution} style={{width:"2.3vh", marginRight: "1vh"}}></img>}
+    {isHacking && <img alt="caution" src={caution} style={{width:"2.3vh", marginRight: "1vh"}}></img>}
     {isHacking ? "Hacking Ends in:" : "Hacking Starts in:"}
-    {isHacking && <img src={caution} style={{width:"2.3vh", marginLeft: "1vh"}}></img>}
+    {isHacking && <img alt="caution" src={caution} style={{width:"2.3vh", marginLeft: "1vh"}}></img>}
   </span>
 
 
   <div style={{display:"flex", flexDirection:"row"}}>
-        <img src={isHacking ? asset2 : asset3} style={{width:"4vh"}}/>
+        <img alt="asset" src={isHacking ? asset2 : asset3} style={{width:"4vh"}}/>
 
   <div
     style={{
@@ -86,7 +86,7 @@ export default function Countdown() {
       <div style={{ fontSize: "2.5vh", fontWeight: 700, textShadow:"0 0 .8vh rgba(0,0,0,0.9), 0 0.3vh 0.5vh rgba(0,0,0,0.8)"}}>SEC</div>
     </div>
   </div>
-     <img src={isHacking ? asset2 : asset3} style={{width:"4vh", transform:"scale(-1,-1)" }}/>
+     <img alt="asset" src={isHacking ? asset2 : asset3} style={{width:"4vh", transform:"scale(-1,-1)" }}/>
 </div>
 </div>
     )

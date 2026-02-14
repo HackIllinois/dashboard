@@ -2,8 +2,6 @@ import { useState, useEffect, useMemo } from "react";
 import { Event } from "./util/api";
 import Clock from "./assets/clock2.svg";
 import Pin from "./assets/pin2.svg";
-import { color } from "framer-motion";
-import { textSpanOverlapsWith } from "typescript";
 
 type EventCardProps = {
   event: any; // you can tighten this type later

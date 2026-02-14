@@ -175,7 +175,7 @@ function getSunProgress(now = new Date()): number {
 function App() {
     const events = useEvents();
     const eventCards = useMemo(() => events, [events]);
-    const { now, countdown, isHacking } = useTime();
+    const { now } = useTime();
     const [pos, setPos] = useState(0);
     const [sunProgress, setSunProgress] = useState(() => getSunProgress(new Date()));
 
@@ -232,7 +232,7 @@ useEffect(() => {
   const update = () => setSegment(getTimeSegment());
   const id = setInterval(update, 60000); // how often it checks if it is day/evening/night
   return () => clearInterval(id);
-}, []);
+}, [getTimeSegment]);
 
 useEffect(() => {
     const update = () => setSunProgress(getSunProgress(new Date()));
@@ -346,7 +346,9 @@ const raysOpacity = getRaysOpacity(phase, t);
                 backgroundRepeat: "no-repeat",
             }}
             >
-                <img src={earth} style={{
+                <img src={earth} 
+                alt="earth"
+                style={{
 
                     position:"absolute",
                     top: segment === "day" ? "23.5vh" : "12vh",
@@ -356,6 +358,7 @@ const raysOpacity = getRaysOpacity(phase, t);
                     }}/>
 
                     <img
+                    alt="sun"
             src={sun}
             style={{
                 position: "absolute",
@@ -370,6 +373,7 @@ const raysOpacity = getRaysOpacity(phase, t);
   <>
     {/* UFO 1 */}
     <img
+    alt="ufo"
       src={ufo11}
       style={{
         zIndex: 2,
@@ -381,6 +385,7 @@ const raysOpacity = getRaysOpacity(phase, t);
       }}
     />
     <img
+    alt="ufo"
       src={ufo12}
       style={{
         zIndex: 2,
@@ -396,6 +401,7 @@ const raysOpacity = getRaysOpacity(phase, t);
 
     {/* UFO 2 */}
     <img
+    alt="ufo"
       src={ufo21}
       style={{
         zIndex: 2,
@@ -407,6 +413,7 @@ const raysOpacity = getRaysOpacity(phase, t);
       }}
     />
     <img
+    alt="ufo"
       src={ufo22}
       style={{
         zIndex: 2,
@@ -422,6 +429,7 @@ const raysOpacity = getRaysOpacity(phase, t);
 
     {/* UFO 3 */}
     <img
+    alt="ufo"
       src={ufo31}
       style={{
         zIndex: 2,
@@ -433,6 +441,7 @@ const raysOpacity = getRaysOpacity(phase, t);
       }}
     />
     <img
+        alt="ufo"
       src={ufo32}
       style={{
         zIndex: 2,
@@ -529,6 +538,7 @@ const raysOpacity = getRaysOpacity(phase, t);
     }}
   >
     <img
+    alt="topbar"
       src={TopBar3}
       style={{
         position: "absolute",
@@ -570,6 +580,7 @@ const raysOpacity = getRaysOpacity(phase, t);
       </div>
     </div>
     <img
+        alt="bottombar"
       src={BottomBar3}
       style={{
         position: "absolute",
