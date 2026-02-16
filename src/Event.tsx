@@ -2,7 +2,6 @@ import { useState, useEffect, useMemo } from "react";
 import { Event } from "./util/api";
 import Clock from "./assets/clock2.svg";
 import Pin from "./assets/pin2.svg";
-import { OperationCanceledException } from "typescript";
 
 type EventCardProps = {
   isLast: boolean

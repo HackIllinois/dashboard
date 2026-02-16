@@ -1,5 +1,5 @@
-import { useMemo } from "react";
-import { useAttendeeTeams } from "./util/useAttendeeTeams";
+// import { useMemo } from "react";
+// import { useAttendeeTeams } from "./util/useAttendeeTeams";
 import team1 from "./assets/team1.svg"
 
 export default function TeamLeaderboard() {
