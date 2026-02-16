@@ -103,7 +103,9 @@ const top5 = useMemo(() => (leaderboard ?? []).slice(0, 7), [leaderboard]);
         backgroundImage,
                         backgroundSize: "100% 100%, 100% 100%, 14% 10%, 10% 10%, 10% 10%, 10% 10%", backgroundRepeat: "no-repeat, no-repeat, repeat, repeat", backgroundPosition: "center, center, 0 0, 0 0"}}>
 
-            <h1 style={{fontSize:"2.8vh", fontFamily:"Tsukimi Rounded", color:"#DDFFE4", textShadow:"0 0 .8vh rgba(0,0,0,0.9), 0 0.3vh 0.5vh rgba(0,0,0,0.8)"}}>LEADERBOARD</h1>
+            <h1 style={{fontSize:"2.8vh", fontFamily:"Tsukimi Rounded", color:"#DDFFE4", textShadow:"0 0 .8vh rgba(0,0,0,0.9), 0 0.3vh 0.5vh rgba(0,0,0,0.8)", 
+              marginTop:"1.5vh"
+              }}>LEADERBOARD</h1>
 
 
             {/* floating top 5 */}

@@ -465,7 +465,7 @@ const raysOpacity = getRaysOpacity(phase, t);
                     }} />
                      <h2 style={{
                    position:"absolute",
-                   top:"11vh",
+                   top:"13.5vh",
                    left:"6vh",
                    fontFamily:"Tsukimi Rounded",
                    color:"white",
