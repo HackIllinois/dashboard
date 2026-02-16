@@ -33,13 +33,13 @@ export interface Event {
 }
 
 async function request(endpoint: string) {
-    const token = localStorage.getItem("jwt");
+    // const token = localStorage.getItem("jwt");
 
 
     const response = await fetch(APIv2 + endpoint, {
         method: "GET",
         headers: {
-            "Authorization": `Bearer ${token}`,
+            // "Authorization": `Bearer ${token}`,
             "Content-Type": "application/json",
         }
     });

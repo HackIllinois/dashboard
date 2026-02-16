@@ -8,17 +8,17 @@ export const useAttendeeTeams = (refreshCycle = 600000) => {
    
 
     useEffect(() => {
-        getAttendeeTeams().then((res) => setTeams(res.slice(0, 10)));
+        getAttendeeTeams().then((res) => setTeams(res));
 
         
         const intervalId = setInterval(() => {
-            // console.log("events")
-            getAttendeeTeams().then((res) => setTeams(res.slice(0, 10)));
+            getAttendeeTeams().then((res) => setTeams(res));
             
         }, refreshCycle);
         return () => clearInterval(intervalId);
     }, [refreshCycle, setTeams]);
 
+    // console.log(teams)
 
 
 //     useEffect(() => {

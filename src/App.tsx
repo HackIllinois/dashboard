@@ -495,7 +495,7 @@ const raysOpacity = getRaysOpacity(phase, t);
     paddingRight: "4vh",
     paddingTop: "2vh",
     paddingBottom: "2vh",
-    gap:"10vh",
+    gap:"9vh",
   }}
 >
  
@@ -544,8 +544,8 @@ const raysOpacity = getRaysOpacity(phase, t);
         position: "absolute",
         left: "50%",
         top: 0,
-        transform: "translate(-49.3%, -10%)",
-        width: "120.5%",
+        transform: "translate(-51.1%, -10%)",
+        width: "116.5%",
         zIndex: 999,
         pointerEvents: "none",
         display: "block",
@@ -574,8 +574,8 @@ const raysOpacity = getRaysOpacity(phase, t);
       window.innerWidth / window.innerHeight > 3/1.8
         ? "8.6vh"
         : "7vh", marginLeft:"2.8vh" }}>
-        {eventCards.map((event) => (
-          <EventCard key={event.id} event={event} />
+        {eventCards.map((event, index) => (
+          <EventCard key={event.id} event={event} isLast={index === eventCards.length - 1} />
         ))}
       </div>
     </div>
