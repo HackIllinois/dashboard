@@ -1,19 +1,19 @@
-// import { useMemo } from "react";
-// import { useAttendeeTeams } from "./util/useAttendeeTeams";
+import { useMemo } from "react";
+import { useAttendeeTeams } from "./util/useAttendeeTeams";
 import team1 from "./assets/team1.svg"
 
 export default function TeamLeaderboard() {
 
-    // const attendeeTeams = useAttendeeTeams();
-    //   const sortedTeams = useMemo(() => {
-    //     return [...attendeeTeams].sort((a,b) => b.points - a.points);
-    //   }, [attendeeTeams])
+    const attendeeTeams = useAttendeeTeams();
+      const sortedTeams = useMemo(() => {
+        return [...attendeeTeams].sort((a,b) => b.points - a.points);
+      }, [attendeeTeams])
 
     return (
         <>
-                {/* {sortedTeams.map((team) => ( */}
+                {sortedTeams.map((team) => (
                      <div 
-                    //  key={team.id} 
+                     key={team.id} 
                      style={{
       width:"23vh",
        height:"23vh", 
@@ -25,15 +25,15 @@ export default function TeamLeaderboard() {
       linear-gradient(to bottom, rgba(84, 172, 72, 0.20) 3px, transparent 1px)
       `, backgroundSize: "100% 100%, 25% 25%, 25% 25%"}}>
         <img alt="team" src={team1} style={{width:"16vh", height:"16vh"}}></img>
-        {/* <div style={{fontSize:"2.2vh", fontFamily:"Tsukimi Rounded", color:"white", fontWeight:700, marginTop:"-1vh"}}>{team.points} Points</div> */}
-        {/* <div style={{fontSize:"2.2vh", fontFamily:"Tsukimi Rounded", color:"white", fontWeight:700}}>{team.members} Members</div> */}
-         <div style={{fontSize:"2.2vh", fontFamily:"Tsukimi Rounded", color:"white", fontWeight:700, marginTop:"-1vh"}}>0 Points</div>
-        <div style={{fontSize:"2.2vh", fontFamily:"Tsukimi Rounded", color:"white", fontWeight:700}}>0 Members</div>
+        <div style={{fontSize:"2.2vh", fontFamily:"Tsukimi Rounded", color:"white", fontWeight:700, marginTop:"-1vh"}}>{team.points} Points</div>
+        <div style={{fontSize:"2.2vh", fontFamily:"Tsukimi Rounded", color:"white", fontWeight:700}}>{team.members} Members</div>
+         {/* <div style={{fontSize:"2.2vh", fontFamily:"Tsukimi Rounded", color:"white", fontWeight:700, marginTop:"-1vh"}}>0 Points</div> */}
+        {/* <div style={{fontSize:"2.2vh", fontFamily:"Tsukimi Rounded", color:"white", fontWeight:700}}>0 Members</div> */}
         
       </div>
 
 
-                {/* ))} */}
+                ))}
         </>
     )
 }
