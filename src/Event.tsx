@@ -19,6 +19,7 @@ function formatDateTime(epochSeconds: number) {
         // day: "numeric",
         hour: "numeric",
         minute: "2-digit",
+        weekday:"short"
     });
 }
 
