@@ -1,9 +1,11 @@
 
 import { useEffect, useMemo, useState, useRef } from "react";
 import { useLeaderboard } from "./util/useLeaderboard";
-import player1 from "./assets/player1.svg"
-import players from "./assets/players.svg"
-// import number from "./assets/number.svg"
+import avatar1 from "./assets/avatar1.svg"
+import avatar2 from "./assets/avatar2.svg"
+import avatar3 from "./assets/avatar3.svg"
+import avatar4 from "./assets/avatar4.svg"
+import avatar5 from "./assets/avatar5.svg"
 
 export default function Leaderboard() {
 
@@ -79,7 +81,12 @@ const top5 = useMemo(() => (leaderboard ?? []).slice(0, 7), [leaderboard]);
 
 
     return (
-        <div style={{position:"absolute", height:"78vh",top:"19.5vh", width:"45vh", borderRadius:"3.5vh",left:"6vh", border:"0.13vh solid #00FF2B", overflow:"hidden",
+        <div style={{
+            // position:"absolute", height:"78vh",top:"19.5vh",
+            position:"relative",
+             width:"100%", height:"100%", borderRadius:"3.5vh",
+            //  left:"6vh",
+              border:"0.13vh solid #00FF2B", overflow:"hidden",
 // backgroundImage: `
 //       linear-gradient(180deg,
 //         rgba(0, 204, 3, 0.50) 0%,
@@ -96,7 +103,9 @@ const top5 = useMemo(() => (leaderboard ?? []).slice(0, 7), [leaderboard]);
         backgroundImage,
                         backgroundSize: "100% 100%, 100% 100%, 14% 10%, 10% 10%, 10% 10%, 10% 10%", backgroundRepeat: "no-repeat, no-repeat, repeat, repeat", backgroundPosition: "center, center, 0 0, 0 0"}}>
 
-            <h1 style={{fontSize:"2.8vh", fontFamily:"Tsukimi Rounded", color:"#DDFFE4", textShadow:"0 0 3px rgba(0,0,0,0.9), 0 2px 6px rgba(0,0,0,0.8)"}}>LEADERBOARD</h1>
+            <h1 style={{fontSize:"2.8vh", fontFamily:"Tsukimi Rounded", color:"#DDFFE4", textShadow:"0 0 .8vh rgba(0,0,0,0.9), 0 0.3vh 0.5vh rgba(0,0,0,0.8)", 
+              marginTop:"1.5vh"
+              }}>LEADERBOARD</h1>
 
 
             {/* floating top 5 */}
@@ -162,7 +171,21 @@ const randSpeed5 = Math.floor(rand01(key, "phrase53") * 2) + 1;
 
 const turn = Math.sin(randSpeed5 * pos * Math.PI * 2 + phase5) * floatAmp5;
 
-  const imgSrc = i === 0 ? player1 : players;
+  const imgSrc =
+  p.avatarUrl?.includes("character1.png") ? avatar1 :
+  p.avatarUrl?.includes("character2.png") ? avatar2 :
+  p.avatarUrl?.includes("character3.png") ? avatar3 :
+  p.avatarUrl?.includes("character4.png") ? avatar4 :
+  p.avatarUrl?.includes("character5.png") ? avatar5 :
+  avatar1;
+
+  const characterShadow =
+  p.avatarUrl?.includes("character1.png") ? "orange" :
+  p.avatarUrl?.includes("character2.png") ? "green" :
+  p.avatarUrl?.includes("character3.png") ? "purple" :
+  p.avatarUrl?.includes("character4.png") ? "blue" :
+  p.avatarUrl?.includes("character5.png") ? "red" :
+  "orange";
 
   return (
     <div
@@ -185,7 +208,7 @@ const turn = Math.sin(randSpeed5 * pos * Math.PI * 2 + phase5) * floatAmp5;
         alt={i === 0 ? "1st place" : `place ${i + 1}`}
         style={{
           width: i === 0 ? "5.5vh" : "4.5vh",
-          filter: i === 0 ? "drop-shadow(0 0 10px rgba(255,255,0,0.6))" : "drop-shadow(0 0 8px rgba(0,255,60,0.45))",
+          filter: i === 0 ? `drop-shadow(0 0 10px ${characterShadow})` : `drop-shadow(0 0 8px ${characterShadow})`,
           opacity: 0.95,
           transform:`rotate(${turn}deg)`
         }}

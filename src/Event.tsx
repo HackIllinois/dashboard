@@ -2,10 +2,9 @@ import { useState, useEffect, useMemo } from "react";
 import { Event } from "./util/api";
 import Clock from "./assets/clock2.svg";
 import Pin from "./assets/pin2.svg";
-// import { color } from "framer-motion";
-// import { textSpanOverlapsWith } from "typescript";
 
 type EventCardProps = {
+  isLast: boolean
   event: any; // you can tighten this type later
   // Clock: string;
   // Pin: string;
@@ -20,6 +19,7 @@ function formatDateTime(epochSeconds: number) {
         // day: "numeric",
         hour: "numeric",
         minute: "2-digit",
+        weekday:"short"
     });
 }
 
@@ -35,6 +35,7 @@ function getLocationLabel(event: Event) {
 
 export default function EventCard({
   event,
+  isLast
   // Clock,
   // Pin,
   // formatDateTime,
@@ -51,12 +52,66 @@ export default function EventCard({
   return () => clearInterval(id);
   }, []);
 
+  const eventColor =
+  event.eventType === "MEAL" ? "#FFD93B" :
+  event.eventType === "MINIEVENT" ? "#FF0AC6" :
+  event.eventType === "SPEAKER" ? "#9B5CFF" :
+  event.eventType === "WORKSHOP" ? "#FF3B3B" :
+  event.eventType === "QNA" ? "#53DDFF" :
+  event.eventType === "OTHER" ? "#00FF3B" :
+  "#00FF3B";
+
   const isHappeningNow = useMemo(() => {
     return nowSec >= event.startTime && nowSec <= event.endTime;
   }, [nowSec, event.startTime, event.endTime]);
 
+
+const [pos, setPos] = useState(0);
+useEffect(() => {
+  const duration = 8000; // 10 seconds
+
+  let rafId: number;
+
+  const tick = (time: number) => {
+    setPos((time % duration) / duration);
+    rafId = requestAnimationFrame(tick);
+  };
+
+  rafId = requestAnimationFrame(tick);
+  return () => cancelAnimationFrame(rafId);
+}, []);
+
+// const hashStr = (s: string) => {
+//   let h = 21661362632;
+//   for (let i = 0; i < s.length; i++) {
+//     h ^= s.charCodeAt(i);
+//     h = Math.imul(h, 16777619);
+//   }
+//   return h >>> 0;
+// };
+// const rand01 = (key: string, salt: string) => {
+//   const h = hashStr(key + "|" + salt);
+//   return (h % 10000) / 10000;
+// };
+// const phase = rand01("strobe35356", "phase134") * Math.PI * 2;
+// const floatAmp = 3;
+// const randSpeed = Math.floor(rand01("strobe3535", "ph542") * 2) + 1;
+
+function hexToRGBA(hex:string, alpha: number) {
+  const r = parseInt(hex.slice(1, 3), 16);
+  const g = parseInt(hex.slice(3, 5), 16);
+  const b = parseInt(hex.slice(5, 7), 16);
+  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+}
+
   const cardStyle = {
-    padding: "0.6vh 2vh 0.6vh 2vh",
+    padding: "0.9vh 2vh 0.6vh 2vh",
+    borderLeft: `0.4vh solid ${isHappeningNow ? 
+      hexToRGBA(eventColor, 0.75 + 0.25 * Math.pow(0.5 + 0.5 * Math.sin(pos * Math.PI * 2), 1.5)) : hexToRGBA(eventColor,.5)
+    }`,
+  boxShadow: isHappeningNow ? `
+  -0.8vh 0 1vh -1vh ${hexToRGBA(eventColor, 0.75 + 0.25 * Math.pow(0.5 + 0.5 * Math.sin(pos * Math.PI * 2), 1.5))}
+` : "none",
   };
 
   const headerRow = {
@@ -73,12 +128,13 @@ export default function EventCard({
     color: "#F7F8FF",
     fontFamily: '"Tsukimi Rounded", "Montserrat", sans-serif',
     textTransform: "uppercase" as const,
-    textShadow:isHappeningNow ? "0 0 3px rgba(239, 120, 61, 0.4), 0 2px 6px rgba(239,120,61,0.4)" : "0 0 3px rgba(0,0,0,0.9), 0 2px 6px rgba(0,0,0,0.8)"
+    textShadow: isHappeningNow ? `0 0 .8vh ${eventColor}, 0 0.1vh 0.5vh ${eventColor}` : `0 0 0.1vh ${eventColor}, 0 0.05vh 0.1vh ${eventColor}`,
+    textAlign: "left" as const,
   };
 
   const tagStyle = {
     marginLeft:"auto",
-    padding: "0.5vh 1.2vh",
+    padding: "0.3vh 1vh",
     color: "#F5F7FA",
     backgroundColor: "#ed783d",
     borderRadius: "2vh",
@@ -99,27 +155,43 @@ export default function EventCard({
     // color: "rgba(247, 248, 255, 0.82)",
     color: "#F5F7FA",
     fontSize: "1.8vh",
-    textShadow: isHappeningNow ? "0 0 3px rgba(239, 120, 61, 0.4), 0 2px 6px rgba(239,120,61,0.4)" : "0 0 3px rgba(0,0,0,0.9), 0 2px 6px rgba(0,0,0,0.8)"
+    textShadow: isHappeningNow ? `0 0 .8vh ${eventColor}, 0 0.1vh 0.5vh ${eventColor}` : `0 0 0.1vh ${eventColor}, 0 0.05vh 0.1vh ${eventColor}`,
+    textAlign: "left" as const,
   };
 
   const iconStyle = {
     width: "1.8vh",
     height: "1.8vh",
     filter: isHappeningNow ? `
-    drop-shadow(0 0 3px rgba(239, 120, 61, .8))
-  drop-shadow(0 0 6px rgba(239, 120, 0, 0.6))
-  drop-shadow(0 0 10px rgba(239, 120, 0, 0.5))
-  ` : "drop-shadow(0 0 3px rgba(239, 120, 61, .8))"
+    drop-shadow(0 0 .05vh ${eventColor})
+  drop-shadow(0 0 0.05vh ${eventColor})
+  drop-shadow(0 0 0.05vh ${eventColor})
+  ` : `drop-shadow(0 0 0.1vh ${eventColor})`
   };
-
-  // const descRow = {
-  //   textAlign:"left" as const,
-  //   color:"white",
-  //   fontSize:"1vh"
-  // }
 
   return (
     <article style={cardStyle}>
+       <div
+    style={{
+      position: "absolute",
+      marginLeft:"-2.56vh",
+      marginTop: "-1.87vh",
+      width: ".7vh",
+      height: "2.3vh",
+      background: "#DFFFE4",
+    }}
+  />
+  {isLast &&  <div
+    style={{
+      position: "absolute",
+      marginLeft:"-2.56vh", 
+      marginTop: event.name.length >= 29 ? "10vh":"6.3vh",
+      width: ".7vh",
+      height: "2.3vh",
+      background: "#DFFFE4",
+    }}
+  />}
+ 
       <div style={headerRow}>
         <h3 style={titleStyle}>{event.name}</h3>
 
@@ -136,7 +208,6 @@ export default function EventCard({
             ` – ${formatDateTime(event.endTime)}`}
         </p>
       </div>
-      {/* <div style={descRow}>{event.description}</div> */}
     </article>
   );
 }
