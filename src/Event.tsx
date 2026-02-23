@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import { Event } from "./util/api";
 import Clock from "./assets/clock2.svg";
 import Pin from "./assets/pin2.svg";
@@ -30,7 +30,8 @@ function getLocationLabel(event: Event) {
     return event.locations
         .map((location) => location.description.trim())
         .filter(Boolean)
-        .join(" • ");
+        .join(" • ")
+        .replace("Siebel Center for Computer Science", "Siebel CS").replace("Sidney Lu Mechanical Engineering Building", "Sidney Lu Mechanical Engineering");
 }
 
 export default function EventCard({
@@ -103,6 +104,24 @@ function hexToRGBA(hex:string, alpha: number) {
   const b = parseInt(hex.slice(5, 7), 16);
   return `rgba(${r}, ${g}, ${b}, ${alpha})`;
 }
+
+const titleRef = useRef<HTMLHeadingElement>(null);
+const [titleLines, setTitleLines] = useState(1);
+
+useEffect(() => {
+  const el = titleRef.current;
+  if (!el) return;
+
+  const style = window.getComputedStyle(el);
+  let lineHeight = parseFloat(style.lineHeight);
+  if (isNaN(lineHeight)) {
+    lineHeight = parseFloat(style.fontSize) * 1.2;
+  }
+
+  const lines = Math.round(el.scrollHeight / lineHeight);
+  setTitleLines(lines);
+}, [event.name]);
+
 
   const cardStyle = {
     padding: "0.9vh 2vh 0.6vh 2vh",
@@ -185,7 +204,7 @@ function hexToRGBA(hex:string, alpha: number) {
     style={{
       position: "absolute",
       marginLeft:"-2.56vh", 
-      marginTop: event.name.length >= 29 ? "10vh":"6.3vh",
+      marginTop: titleLines >= 2 ? "10vh":"6.3vh",
       width: ".7vh",
       height: "2.3vh",
       background: "#DFFFE4",
@@ -193,7 +212,7 @@ function hexToRGBA(hex:string, alpha: number) {
   />}
  
       <div style={headerRow}>
-        <h3 style={titleStyle}>{event.name}</h3>
+        <h3 ref={titleRef} style={titleStyle}>{event.name}</h3>
 
         <span style={tagStyle}>{event.eventType}</span>
       </div>

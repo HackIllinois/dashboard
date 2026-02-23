@@ -1,0 +1,86 @@
+[
+  {
+    "buildingExitTime": "12:30 AM",
+    "busPickupTime": "12:35 AM",
+    "busPickupLocation": "Goodwin & Main (NW Corner)",
+    "busDropoffTime": "12:55 AM",
+    "busDropoffLocation": "Fourth & Peabody (NE Far Side)"
+  },
+  {
+    "buildingExitTime": "12:40 AM",
+    "busPickupTime": "12:45 AM",
+    "busPickupLocation": "Goodwin & Main (NW Corner)",
+    "busDropoffTime": "1:05 AM",
+    "busDropoffLocation": "Fourth & Peabody (NE Far Side)"
+  },
+  {
+    "buildingExitTime": "12:50 AM",
+    "busPickupTime": "12:55 AM",
+    "busPickupLocation": "Goodwin & Main (NW Corner)",
+    "busDropoffTime": "1:15 AM",
+    "busDropoffLocation": "Fourth & Peabody (NE Far Side)"
+  },
+  {
+    "buildingExitTime": "1:00 AM",
+    "busPickupTime": "1:05 AM",
+    "busPickupLocation": "Goodwin & Main (NW Corner)",
+    "busDropoffTime": "1:25 AM",
+    "busDropoffLocation": "Fourth & Peabody (NE Far Side)"
+  },
+  {
+    "buildingExitTime": "1:10 AM",
+    "busPickupTime": "1:15 AM",
+    "busPickupLocation": "Goodwin & Main (NW Corner)",
+    "busDropoffTime": "1:35 AM",
+    "busDropoffLocation": "Fourth & Peabody (NE Far Side)"
+  },
+  {
+    "buildingExitTime": "1:20 AM",
+    "busPickupTime": "1:25 AM",
+    "busPickupLocation": "Goodwin & Main (NW Corner)",
+    "busDropoffTime": "1:45 AM",
+    "busDropoffLocation": "Fourth & Peabody (NE Far Side)"
+  },
+  {
+    "buildingExitTime": "1:30 AM",
+    "busPickupTime": "1:35 AM",
+    "busPickupLocation": "Goodwin & Main (NW Corner)",
+    "busDropoffTime": "1:55 AM",
+    "busDropoffLocation": "Fourth & Peabody (NE Far Side)"
+  },
+  {
+    "buildingExitTime": "1:40 AM",
+    "busPickupTime": "1:45 AM",
+    "busPickupLocation": "Goodwin & Main (NW Corner)",
+    "busDropoffTime": "2:05 AM",
+    "busDropoffLocation": "Fourth & Peabody (NE Far Side)"
+  },
+  {
+    "buildingExitTime": "1:50 AM",
+    "busPickupTime": "1:55 AM",
+    "busPickupLocation": "Goodwin & Main (NW Corner)",
+    "busDropoffTime": "2:15 AM",
+    "busDropoffLocation": "Fourth & Peabody (NE Far Side)"
+  },
+  {
+    "buildingExitTime": "2:00 AM",
+    "busPickupTime": "2:05 AM",
+    "busPickupLocation": "Goodwin & Main (NW Corner)",
+    "busDropoffTime": "2:25 AM",
+    "busDropoffLocation": "Fourth & Peabody (NE Far Side)"
+  },
+  {
+    "buildingExitTime": "2:10 AM",
+    "busPickupTime": "2:15 AM",
+    "busPickupLocation": "Goodwin & Main (NW Corner)",
+    "busDropoffTime": "2:35 AM",
+    "busDropoffLocation": "Fourth & Peabody (NE Far Side)"
+  },
+  {
+    "buildingExitTime": "2:20 AM",
+    "busPickupTime": "2:25 AM",
+    "busPickupLocation": "Goodwin & Main (NW Corner)",
+    "busDropoffTime": "2:45 AM",
+    "busDropoffLocation": "Fourth & Peabody (NE Far Side)"
+  }
+]

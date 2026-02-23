@@ -1,12 +1,4 @@
-import { useEffect, useMemo, useState, useRef, useCallback } from "react";
-import { useEvents } from "./util/useEvents";
-import logo from "./assets/logo2.svg";
-import { useTime } from "./util/useTime";
-// import TopBar from "./assets/topbar.svg"
-// import BottomBar from "./assets/bottombar.svg"
-import TopBar3 from "./assets/topbar3.svg"
-import BottomBar3 from "./assets/bottombar3.svg"
-import EventCard from "./Event";
+import { useEffect, useState, useRef, useCallback } from "react";
 import bg1 from "./assets/bg1.svg"
 import bg2 from "./assets/bg2.svg"
 import bg3 from "./assets/bg3.svg"
@@ -15,16 +7,33 @@ import earth2 from "./assets/earth2.svg"
 import earth3 from "./assets/earth3.svg"
 import sun1 from "./assets/sun1.svg"
 import sun2 from "./assets/sun2.svg"
-import Leaderboard from "./Leaderboard";
 import ufo11 from "./assets/ufo11.svg"
 import ufo12 from "./assets/ufo12.svg"
 import ufo21 from "./assets/ufo21.svg"
 import ufo22 from "./assets/ufo22.svg"
 import ufo31 from "./assets/ufo31.svg"
 import ufo32 from "./assets/ufo32.svg"
-import Countdown from "./Countdown";
 import useTimeSyncedReload from "./util/useReload";
-import TeamLeaderboard from "./TeamLeaderboard";
+import fridayNight from "./util/fridayNight.json";
+import logo from "./assets/logo2.svg";
+import { useTime } from "./util/useTime";
+
+
+type Row = {
+  buildingExitTime: string;
+  busPickupTime: string;
+  busPickupLocation: string;
+  busDropoffTime: string;
+  busDropoffLocation: string;
+};
+
+const columns: { key: keyof Row; label: string }[] = [
+  { key: "buildingExitTime", label: "Building Exit Time" },
+  { key: "busPickupTime", label: "Bus Pickup Time" },
+  { key: "busPickupLocation", label: "Bus Pickup Location" },
+  { key: "busDropoffTime", label: "Bus Dropoff Time" },
+  { key: "busDropoffLocation", label: "Bus Dropoff Location" },
+];
 
 
 
@@ -172,9 +181,7 @@ function getSunProgress(now = new Date()): number {
   return t;
 }
 
-function App() {
-    const events = useEvents();
-    const eventCards = useMemo(() => events, [events]);
+function App3() {
     const { now } = useTime();
     const [pos, setPos] = useState(0);
     const [sunProgress, setSunProgress] = useState(() => getSunProgress(new Date()));
@@ -196,23 +203,6 @@ useEffect(() => {
   rafId = requestAnimationFrame(tick);
   return () => cancelAnimationFrame(rafId);
 }, []);
-
-const travelStart = -65;  // starts above the panel
-const travelEnd = 155;    // ends below the panel
-const p1 = travelStart + pos * (travelEnd - travelStart);
-
-  const backgroundImage = `
-  radial-gradient(ellipse 140% 120% at 50% ${p1}%,
-    rgba(0, 255, 60, 0.23) 0%,
-    rgba(0, 255, 60, 0.12) 35%,
-    rgba(0, 255, 60, 0.00) 50%
-  ),
-  linear-gradient(180deg,
-    rgba(0, 135, 3, 0.38)
-  ),
-    linear-gradient(to right, rgba(84, 172, 72, 0.20) 3px, transparent 1px),
-      linear-gradient(to bottom, rgba(84, 172, 72, 0.20) 3px, transparent 1px)
-`;
 
 //identify which time of day it is for bg, ufos, sun position
 type TimeSegment = "day" | "evening" | "night";
@@ -325,9 +315,41 @@ const ufo3 = getPosForPhase({
 
 const raysOpacity = getRaysOpacity(phase, t);
 
+
+
+const rows = fridayNight as Row[];
+
+  const gridCols = "1.3fr 1.2fr 2.4fr 1.3fr 2.0fr";
+
+  
+  
+  //          background animation
+    useEffect(() => {
+      const duration = 15000; // ms per position change, it is randomized
+      const start = performance.now();
+      let rafId: number;
+    
+      const tick = (now: number) => {
+        const t = ((now - start) % duration) / duration;
+        setPos(t);
+        rafId = requestAnimationFrame(tick);
+      };
+    
+      rafId = requestAnimationFrame(tick);
+      return () => cancelAnimationFrame(rafId);
+    }, []);
+    
+    
+    const travelStart = -65;  // starts above the panel
+    const travelEnd = 155;    // ends below the panel
+    const p1 = travelStart + pos * (travelEnd - travelStart);
+
+
+
+
     return (
         <div
-            className="App"
+            className="App3"
             style={{
                 textAlign: "center",
                 overflow: "hidden",
@@ -456,7 +478,8 @@ const raysOpacity = getRaysOpacity(phase, t);
     />
   </>
 )}
-                    <img src={logo} alt="logo" className="logo" style={{
+
+ <img src={logo} alt="logo" className="logo" style={{
                         position: "absolute",
                         top: "4vh",
                         left: "6vh",
@@ -465,11 +488,12 @@ const raysOpacity = getRaysOpacity(phase, t);
                     }} />
                      <h2 style={{
                    position:"absolute",
-                   top:"13.5vh",
-                   left:"6vh",
+                   top:"5vh",
+                   right:"6vh",
                    fontFamily:"Tsukimi Rounded",
                    color:"white",
-                   zIndex:999
+                   zIndex:999,
+                   textShadow:"0 0 .8vh rgba(0,0,0,0.9), 0 0.3vh 0.5vh rgba(0,0,0,0.8)"
                 }}>
                                       {now.toLocaleTimeString([], {
                                               hour: "numeric",
@@ -477,143 +501,117 @@ const raysOpacity = getRaysOpacity(phase, t);
                                                          second:"2-digit"
                                                                   })}
                                                                         </h2>
-
-
-
-
-
-
-<div
-  style={{
-    position: "absolute",
-    inset: 0,
-    zIndex: 5,
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "stretch",
-    paddingLeft: "4vh",
-    paddingRight: "4vh",
-    paddingTop: "2vh",
-    paddingBottom: "2vh",
-    gap:"9vh",
-  }}
->
- 
- {/* left column */}
+                   
   <div
-    style={{
-    flex: "1 1 0",
-      display: "flex",
-      flexDirection: "column",
-      marginTop: "18vh",
-      maxWidth:"45vh",
-    }}
-  >
-    <Leaderboard />
-  </div>
-
-  {/* middle column */}
-  
-
-<div
-  style={{
-    flex: "1 1 0",    
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    gap: "2vh",
-    minWidth: 0,
-    pointerEvents: "auto",
-  }}
->
-  <Countdown />
-
-  <div
-    style={{
-        maxWidth: "75vh",
-        marginTop:"2vh",
-      position: "relative",
-      width: "100%",
-      height: "71vh",
-    }}
-  >
-    <img
-    alt="topbar"
-      src={TopBar3}
       style={{
         position: "absolute",
-        left: "50%",
-        top: 0,
-        transform: "translate(-51.1%, -10%)",
-        width: "116.5%",
-        zIndex: 999,
-        pointerEvents: "none",
-        display: "block",
-      }}
-    />
-    <div
-      style={{
-        height: "100%",
-        width: "100%",
-        border: "0.13vh solid #00FF2B",
-        backgroundImage,
-        backgroundRepeat: "no-repeat, no-repeat, repeat, repeat",
-        backgroundSize: "100% 100%, 100% 100%, 12% 12%, 12% 12%",
-        backgroundPosition: "center, center, 0 0, 0 0",
-        overflow: "hidden",
+        inset: 0,
+        zIndex: 5,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "flex-start",
+        paddingTop: "15vh",
       }}
     >
-      <div style={{ marginTop:
-      window.innerWidth / window.innerHeight > 3/1.9
-        ? "2vh"
-        : ".8vh", marginRight: "4vh", fontFamily: "Tsukimi Rounded", fontSize: "3vh", fontWeight: 700, color: "#DDFFE4", textShadow:"0 0 .8vh rgba(0,0,0,0.9), 0 0.3vh 0.5vh rgba(0,0,0,0.8)" }}>
-        UPCOMING EVENTS
-      </div>
+      <div
+        style={{
+          width: "min(175vh, 94vw)",
+          overflow: "hidden",
+          borderRadius:"3vh",
+              border:"0.13vh solid #00FF2B", 
+          backdropFilter: "blur(1.5vh)",
+          backgroundImage:`
+           radial-gradient(ellipse 140% 120% at 50% ${p1}%,
+        rgba(0, 255, 60, 0.23) 0%,
+        rgba(0, 255, 60, 0.12) 35%,
+        rgba(0, 255, 60, 0.00) 50%
+      ),
+      linear-gradient(180deg,
+        rgba(0, 135, 3, 0.38)
+      ),
+        linear-gradient(to right, rgba(84, 172, 72, 0.20) 3px, transparent 1px),
+          linear-gradient(to bottom, rgba(84, 172, 72, 0.20) 3px, transparent 1px)`
+        }}
+      >
+        {/* column names */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: gridCols,
+            padding: "1.6vh 2vh",
+            background: "rgba(255,255,255,0.10)",
+            borderBottom: "1px solid rgba(255,255,255,0.16)",
+          }}
+        >
+          {columns.map((c) => (
+            <div
+              key={c.key}
+              style={{
+                color:"#DDFFE4",
+                fontWeight: 800,
+                fontSize: "2vh",
+                textAlign: "left",
+                whiteSpace: "nowrap",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                fontFamily:"Tsukimi Rounded",
+                textShadow:"0 0 .8vh rgba(0,0,0,0.9), 0 0.3vh 0.5vh rgba(0,0,0,0.8)"
+              }}
+            >
+              {c.label}
+            </div>
+          ))}
+        </div>
 
-      <div style={{ marginTop:
-      window.innerWidth / window.innerHeight > 3/1.8
-        ? "7.5vh"
-        : "7vh", marginLeft:"2.8vh" }}>
-        {eventCards.map((event, index) => (
-          <EventCard key={event.id} event={event} isLast={index === eventCards.length - 1} />
-        ))}
+        {/* rows */}
+        <div>
+          {rows.map((r, i) => (
+            <div
+              key={`${r.buildingExitTime}-${i}`}
+              style={{
+                display: "grid",
+                gridTemplateColumns: gridCols,
+                padding: "1.5vh 2vh",
+                borderBottom: "1px solid rgba(255,255,255,0.10)",
+                background:
+                  i % 2 === 0 ? "rgba(255,255,255,0.03)" : "transparent",
+              }}
+            >
+              <Cell>{r.buildingExitTime}</Cell>
+              <Cell>{r.busPickupTime}</Cell>
+              <Cell>{r.busPickupLocation}</Cell>
+              <Cell>{r.busDropoffTime}</Cell>
+              <Cell>{r.busDropoffLocation}</Cell>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
-    <img
-        alt="bottombar"
-      src={BottomBar3}
-      style={{
-        position: "absolute",
-        left: "50%",
-        bottom: 0,
-        transform: "translate(-50%, 74%)",
-        width: "110%",
-        zIndex: 999,
-        pointerEvents: "none",
-        display: "block",
-      }}
-    />
-  </div>
-</div>
-  {/* right column */}
-  <div
-    style={{
-      flex: "0 0 auto",    
-    //   width: "fit-content",
-      display: "grid",
-      flexDirection: "row",
-      gap: "0vh",
-    //   marginTop: "3vh",
-    }}
-  >
-                        <TeamLeaderboard/>
-
-  </div>
-</div>       
-         {/* columns end here */}
-         
+    </div>     
         </div>
     );
 }
 
-export default App;
+export default App3;
+
+
+
+function Cell({ children }: { children: React.ReactNode }) {
+  return (
+    <div
+      style={{
+        color: "white",
+        fontSize: "2.2vh",
+        textAlign: "left",
+        whiteSpace: "nowrap",
+        overflow: "hidden",
+        textOverflow: "ellipsis",
+        fontFamily:"Tsukimi Rounded",
+        fontWeight:600,
+        textShadow:"0 0 .8vh rgba(0,0,0,0.9), 0 0.3vh 0.5vh rgba(0,0,0,0.8)"
+      }}
+    >
+      {children}
+    </div>
+  );
+}
