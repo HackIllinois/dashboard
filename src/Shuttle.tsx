@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef, useCallback } from "react";
+import { useEffect, useState, useCallback } from "react";
 import bg1 from "./assets/bg1.svg"
 import bg2 from "./assets/bg2.svg"
 import bg3 from "./assets/bg3.svg"
