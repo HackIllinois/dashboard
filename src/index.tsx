@@ -26,7 +26,9 @@ function getAutoComponent() {
   return Dashboard;
 }
 
-const mode: string = 'launch';
+// TODO: Make this an env variable.
+// TODO: enforce that this is one of the 4 allowed options below!
+const mode: string = 'shuttle';
 
 let ComponentToRender;
 
