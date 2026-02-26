@@ -332,8 +332,8 @@ const sunLeft = lerp(sunStart.left, sunEnd.left, sunProgress);
         backgroundSize: "100% 100%, 25% 25%, 25% 25%",
         // backgroundPosition: "center, center, 0 0, 0 0",
         overflow: "hidden",
-        backdropFilter: "blur(.2vh)",
-WebkitBackdropFilter: "blur(.2vh)",
+        // backdropFilter: "blur(.2vh)",
+// WebkitBackdropFilter: "blur(.2vh)",
       }}
     >
       <div style={{ marginTop:
