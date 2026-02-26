@@ -339,11 +339,7 @@ function pickSchedule(now: Date): Row[] {
       // ),
       //   linear-gradient(to right, rgba(84, 172, 72, 0.20) 3px, transparent 1px),
       //     linear-gradient(to bottom, rgba(84, 172, 72, 0.20) 3px, transparent 1px)`
-      background:`
-      linear-gradient(180deg, rgba(1, 98, 2, 0.7), rgba(0, 135, 3, 0.38)),
-      linear-gradient(to right, rgba(32, 122, 20, 0.6) .3vh, transparent 1px),
-      linear-gradient(to bottom, rgba(44, 137, 32, 0.6) .3vh, transparent 1px)
-      `,
+      backgroundColor:"rgba(1, 98, 2, 0.7)",
         // backgroundRepeat: "no-repeat, no-repeat, repeat, repeat",
         backgroundSize: "100% 100%, 25% 25%, 25% 25%",
         }}
