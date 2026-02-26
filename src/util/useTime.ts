@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 // import {getLeaderboard, Profile} from "./api";
 
-const HACK_START = 1772172000000;
-const HACK_END = 1772344800000;
+const HACK_START = 1772236800000;
+const HACK_END = 1772366400000;
 
 export const useTime = (refreshCycle = 1000) => {
     const [now, setNow] = useState(getTime());

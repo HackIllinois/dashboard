@@ -18,7 +18,7 @@ export const useEvents = (refreshCycle = 600000) => {
 
       // count long titles ONLY within the top 6
       const longTitleCount = top6.filter(
-        (e) => e.name && e.name.length >= 29
+        (e) => e.name && e.name.length >= 32
       ).length;
 
       const reduction = Math.ceil(longTitleCount / 2);
