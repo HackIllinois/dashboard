@@ -85,21 +85,7 @@ export default function EventCard({
     return nowSec >= event.startTime && nowSec <= event.endTime;
   }, [nowSec, event.startTime, event.endTime]);
 
-
-const [pos, setPos] = useState(0);
-useEffect(() => {
-  const duration = 8000; // 10 seconds
-
-  let rafId: number;
-
-  const tick = (time: number) => {
-    setPos((time % duration) / duration);
-    rafId = requestAnimationFrame(tick);
-  };
-
-  rafId = requestAnimationFrame(tick);
-  return () => cancelAnimationFrame(rafId);
-}, []);
+  
 
 function hexToRGBA(hex:string, alpha: number) {
   const r = parseInt(hex.slice(1, 3), 16);
@@ -129,10 +115,10 @@ useEffect(() => {
   const cardStyle = {
     padding: "0.9vh 2vh 0.6vh 2vh",
     borderLeft: `0.4vh solid ${isHappeningNow ? 
-      hexToRGBA(eventColor, 0.75 + 0.25 * Math.pow(0.5 + 0.5 * Math.sin(pos * Math.PI * 2), 1.5)) : hexToRGBA(eventColor,.5)
+      hexToRGBA(eventColor, 1) : hexToRGBA(eventColor,.25)
     }`,
   boxShadow: isHappeningNow ? `
-  -0.8vh 0 1vh -1vh ${hexToRGBA(eventColor, 0.75 + 0.25 * Math.pow(0.5 + 0.5 * Math.sin(pos * Math.PI * 2), 1.5))}
+  -0.8vh 0 1vh -1vh ${hexToRGBA(eventColor, 1)}
 ` : "none",
   };
 

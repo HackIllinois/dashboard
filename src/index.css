@@ -18,3 +18,141 @@ p, span {
   margin: 0;
   padding: 0;
 }
+
+
+
+:root{
+  --enter: 3000ms;
+  --topHold: 2000ms;
+  --hold: 7000ms;
+  --exit: 3000ms;
+  --wait: 5000ms;
+  --cycle: calc(var(--enter) + var(--hold) + var(--exit) + var(--wait));
+}
+
+.ufo.ufo1 { animation-name: ufoPath; }
+.ufo.ufo2 { animation-name: ufoPath2; }
+.ufo.ufo3 { animation-name: ufoPath3; }
+
+.ufo{
+  position: absolute;
+  pointer-events: none;
+  animation: ufoPath var(--cycle) linear infinite;
+  will-change: transform;
+  z-index: 2;
+
+  width: 100vh;
+  height: 100vh;
+}
+
+.ufo.ufo2{
+  width: 70vh;
+  height: 70vh;
+}
+
+.ufo img{
+  width:100%;
+  height: 100%;
+}
+
+.ufoBob{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  animation: ufoBob var(--cycle) ease-in-out infinite;
+  will-change: transform;
+}
+
+.ufoBody{
+  animation:
+    ufoBodyOpacity var(--cycle) linear infinite;
+  will-change: opacity;
+}
+
+@keyframes ufoBodyOpacity{
+  0%, 25% { opacity: 1; }
+  30%     { opacity: 0; }
+  55%     { opacity: 0; }
+  60%     { opacity: 1; }
+  100%    { opacity: 1; }
+}
+
+
+.ufo.ufo1 { animation-delay: 0ms; }
+.ufo.ufo2 { animation-delay: -300ms; }
+.ufo.ufo3 { animation-delay: -800ms; }
+
+
+.ufo.ufo1 .ufoBob  { animation-delay: 0ms; }
+.ufo.ufo2 .ufoBob  { animation-delay: -300ms; }
+.ufo.ufo3 .ufoBob  { animation-delay: -800ms; }
+
+.ufo.ufo1 .ufoBody { animation-delay: 0ms; }
+.ufo.ufo2 .ufoBody { animation-delay: -300ms; }
+.ufo.ufo3 .ufoBody { animation-delay: -800ms; }
+
+.ufo.ufo1 .ufoRays { animation-delay: 0ms; }
+.ufo.ufo2 .ufoRays { animation-delay: -300ms; }
+.ufo.ufo3 .ufoRays { animation-delay: -800ms; }
+
+.ufoRays{
+  position:absolute;
+  inset:0;
+  animation: 
+  ufoRaysOpacity var(--cycle) linear infinite;
+  will-change: opacity;
+}
+
+@keyframes ufoPath{
+  0%   { transform: translate(-10vh, -40vh); }
+  10%  { transform: translate(-10vh, -40vh); }
+
+  25%  { transform: translate(  -12vh,  21vh); }
+  60%  { transform: translate(  -12vh,  21vh); }
+
+  75%  { transform: translate(-10vh, -40vh); }
+  100% { transform: translate(-10vh, -40vh); }
+}
+
+@keyframes ufoPath2{
+  0%   { transform: translate( 45vh, -40vh); }
+  10%  { transform: translate( 45vh, -40vh); }
+
+  25%  { transform: translate( 55vh,  15vh); }
+  60%  { transform: translate( 55vh,  15vh); }
+
+  75%  { transform: translate( 45vh, -40vh); }
+  100% { transform: translate( 45vh, -40vh); }
+}
+
+@keyframes ufoPath3{
+  0%   { transform: translate(110vh, -40vh); }
+  10%  { transform: translate(110vh, -40vh); }
+
+  25%  { transform: translate(93vh,  5vh); }
+  60%  { transform: translate(93vh,  5vh); }
+
+  75%  { transform: translate(110vh, -40vh); }
+  100% { transform: translate(110vh, -40vh); }
+}
+
+@keyframes ufoBob{
+  0%, 25% { transform: translateY(0); }
+
+  30% { transform: translateY(-1.5vh); }
+  35% { transform: translateY(0); }
+  40% { transform: translateY(-1.5vh); }
+  45% { transform: translateY(0); }
+  50% { transform: translateY(-1.5vh); }
+  55% { transform: translateY(0); }
+
+  60%, 100% { transform: translateY(0); }
+}
+
+@keyframes ufoRaysOpacity{
+  0%, 25% { opacity: 0; }
+  30%     { opacity: 1; }
+  55%     { opacity: 1; }
+  60%     { opacity: 0; }
+  100%    { opacity: 0; }
+}
