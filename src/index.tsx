@@ -17,6 +17,8 @@ function getAutoComponent() {
   // sat 7:50am -> 9:40 am
   // if(day === 6 && minutes >= 470 && minutes <= 580) return Shuttle;
 
+  if(day === 4 && minutes >= 919) return Shuttle;
+
   // sun 12:15am -> 2:20am
   if(day === 0 && minutes >= 15 && minutes <= 140) return Shuttle;
 
@@ -28,7 +30,7 @@ function getAutoComponent() {
 
 // TODO: Make this an env variable.
 // TODO: enforce that this is one of the 4 allowed options below!
-const mode: string = 'shuttle';
+const mode: string = 'auto';
 
 let ComponentToRender;
 
