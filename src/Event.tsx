@@ -152,7 +152,7 @@ useEffect(() => {
     marginLeft:"auto",
     padding: "0.3vh 1vh",
     color: "#F5F7FA",
-    backgroundColor: "#ed783d",
+    backgroundColor: "#fa6a23",
     borderRadius: "2vh",
     fontWeight: 600,
     fontSize: "2vh",
