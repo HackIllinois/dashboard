@@ -243,22 +243,22 @@ const sunLeft = lerp(sunStart.left, sunEnd.left, sunProgress);
 
         <div className="ufo ufo1">
           <div className="ufoBob">
-            <img className="ufoBody" src={ufo11} />
-            <img className="ufoRays" src={ufo12} />
+            <img className="ufoBody" src={ufo11} alt="ufo11"/>
+            <img className="ufoRays" src={ufo12} alt="ufo12"/>
           </div>
         </div>
 
         <div className="ufo ufo2">
           <div className="ufoBob">
-            <img className="ufoBody" src={ufo21} />
-            <img className="ufoRays" src={ufo22} />
+            <img className="ufoBody" src={ufo21} alt="ufo21"/>
+            <img className="ufoRays" src={ufo22} alt="ufo22"/>
           </div>
         </div>
 
         <div className="ufo ufo3">
           <div className="ufoBob">
-            <img className="ufoBody" src={ufo31} />
-            <img className="ufoRays" src={ufo32} />
+            <img className="ufoBody" src={ufo31} alt="ufo31"/>
+            <img className="ufoRays" src={ufo32} alt="ufo32"/>
           </div>
         </div>
 
