@@ -2,7 +2,7 @@ import { useEffect } from "react";
 
 // What interval to reload on
 // not tested outside of 1-5 range - beware
-const EVERY_MINUTES = 5;
+const EVERY_MINUTES = 1;
 
 export default function useTimeSyncedReload() {
   useEffect(() => {
