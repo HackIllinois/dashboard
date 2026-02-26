@@ -23,15 +23,39 @@ function formatDateTime(startEpoch: number, endEpoch: number) {
   const startWeekday = start.toLocaleString([], { weekday: "short" });
   const endWeekday = end.toLocaleString([], { weekday: "short" });
 
-  const startTime = start.toLocaleString([], {
-    hour: "numeric",
-    minute: "2-digit",
-  }).replace(/ AM| PM/, "");
+  function stripAmPm(str:string) {
+  let result = "";
 
-  const endTime = end.toLocaleString([], {
+  for (let i = 0; i < str.length; i++) {
+    // Check if we are at a space followed by AM or PM
+    if (
+      str[i] === " " &&
+      i + 2 < str.length &&
+      (str[i + 1] === "A" || str[i + 1] === "P") &&
+      str[i + 2] === "M"
+    ) {
+      break; // stop copying once we hit " AM" or " PM"
+    }
+
+    result += str[i];
+  }
+
+  return result;
+}
+
+const startTime = stripAmPm(
+  start.toLocaleString([], {
     hour: "numeric",
     minute: "2-digit",
-  }).replace(/ AM| PM/, "");
+  })
+);
+
+const endTime = stripAmPm(
+  end.toLocaleString([], {
+    hour: "numeric",
+    minute: "2-digit",
+  })
+);
 
   if (sameDay) {
     // Same day and AM/PM -> compress
