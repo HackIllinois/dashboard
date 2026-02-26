@@ -28,8 +28,9 @@ export default function Countdown() {
         fontSize: "2.5vh",
         opacity: 0.9,
         textTransform: "uppercase",
-        color: isHacking ? "#F73F3F" : "#E9FFE9",
+        color: isHacking ? "#F73F3F" : "#ffffff",
         fontWeight:700,
+        textShadow:"0 0 .8vh rgba(0,0,0,0.1), 0 0.1vh 0.2vh rgba(0,0,0,0.8)"
     }}
   >
     {isHacking && <img alt="caution" src={caution} style={{width:"2.3vh", marginRight: "1vh"}}></img>}
