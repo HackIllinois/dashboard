@@ -235,9 +235,9 @@ export default function LeaderboardCanvas({ players, backgroundImage }: Props) {
         border: "0.13vh solid #00FF2B",
         overflow: "hidden",
         backgroundImage,
-        backgroundSize: "100% 100%, 100% 100%, 14% 10%, 10% 10%, 10% 10%, 10% 10%",
-        backgroundRepeat: "no-repeat, no-repeat, repeat, repeat",
-        backgroundPosition: "center, center, 0 0, 0 0",
+        backgroundSize: "100% 100%, 25% 25%, 25% 25%"
+        // backgroundRepeat: "no-repeat, no-repeat, repeat, repeat",
+        // backgroundPosition: "center, center, 0 0, 0 0",
       }}
     >
       <div
