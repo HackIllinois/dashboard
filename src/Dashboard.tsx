@@ -332,14 +332,14 @@ const sunLeft = lerp(sunStart.left, sunEnd.left, sunProgress);
         backgroundSize: "100% 100%, 25% 25%, 25% 25%",
         // backgroundPosition: "center, center, 0 0, 0 0",
         overflow: "hidden",
-        backdropFilter: "blur(1vh)",
-WebkitBackdropFilter: "blur(1vh)",
+        backdropFilter: "blur(.5vh)",
+WebkitBackdropFilter: "blur(.5vh)",
       }}
     >
       <div style={{ marginTop:
       window.innerWidth / window.innerHeight > 3/1.9
         ? "2vh"
-        : ".8vh", marginRight: "4vh", fontFamily: "Tsukimi Rounded", fontSize: "3vh", fontWeight: 700, color: "#DDFFE4", textShadow:"0 0 .8vh rgba(0,0,0,0.9), 0 0.3vh 0.5vh rgba(0,0,0,0.8)" }}>
+        : ".8vh", marginRight: "4vh", fontFamily: "Tsukimi Rounded", fontSize: "3vh", fontWeight: 700, color: "#DDFFE4", textShadow:"0 0 .8vh rgba(0,0,0,0.1), 0 0.1vh 0.2vh rgba(0,0,0,0.8)" }}>
         UPCOMING EVENTS
       </div>
 
