@@ -67,20 +67,6 @@ function Dashboard() {
 
     useTimeSyncedReload();
 
-
-  const backgroundImage = `
-  radial-gradient(ellipse 140% 120% at 50% 0%,
-    rgba(0, 255, 60, 0.23) 0%,
-    rgba(0, 255, 60, 0.12) 35%,
-    rgba(0, 255, 60, 0.00) 50%
-  ),
-  linear-gradient(180deg,
-    rgba(0, 135, 3, 0.38)
-  ),
-    linear-gradient(to right, rgba(84, 172, 72, 0.20) .3vh, transparent 1px),
-      linear-gradient(to bottom, rgba(84, 172, 72, 0.20) .3vh, transparent 1px)
-`;
-
 //identify which time of day it is for bg, ufos, sun position
 type TimeSegment = "day" | "evening" | "night";
 
@@ -337,10 +323,14 @@ const sunLeft = lerp(sunStart.left, sunEnd.left, sunProgress);
         height: "100%",
         width: "100%",
         border: "0.13vh solid #00FF2B",
-        backgroundImage,
-        backgroundRepeat: "no-repeat, no-repeat, repeat, repeat",
-        backgroundSize: "100% 100%, 100% 100%, 12% 12%, 12% 12%",
-        backgroundPosition: "center, center, 0 0, 0 0",
+        background:`
+      linear-gradient(180deg, rgba(0, 135, 3, 0.38), rgba(0, 135, 3, 0.38)),
+      linear-gradient(to right, rgba(84, 172, 72, 0.20) .3vh, transparent 1px),
+      linear-gradient(to bottom, rgba(84, 172, 72, 0.20) .3vh, transparent 1px)
+      `,
+        // backgroundRepeat: "no-repeat, no-repeat, repeat, repeat",
+        backgroundSize: "100% 100%, 25% 25%, 25% 25%",
+        // backgroundPosition: "center, center, 0 0, 0 0",
         overflow: "hidden",
       }}
     >
