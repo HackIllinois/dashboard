@@ -163,7 +163,7 @@ function getSunProgress(now = new Date()): number {
   return t;
 }
 
-function App2() {
+function Launch() {
     const [pos, setPos] = useState(0);
     const [sunProgress, setSunProgress] = useState(() => getSunProgress(new Date()));
 
@@ -298,7 +298,7 @@ const raysOpacity = getRaysOpacity(phase, t);
 
     return (
         <div
-            className="App2"
+            className="Launch"
             style={{
                 textAlign: "center",
                 overflow: "hidden",
@@ -493,4 +493,4 @@ const raysOpacity = getRaysOpacity(phase, t);
     );
 }
 
-export default App2;
+export default Launch;

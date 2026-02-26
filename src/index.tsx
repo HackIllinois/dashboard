@@ -1,19 +1,59 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
-import App2 from "./App2"
-import App3 from "./App3"
+import Dashboard from './Dashboard';
+import Launch from "./Launch"
+import Shuttle from "./Shuttle"
 import reportWebVitals from './reportWebVitals';
+
+function getAutoComponent() {
+  const now = new Date();
+  const day = now.getDay();
+  const minutes = now.getHours() * 60 + now.getMinutes();
+
+  // sat 12:25am -> 2:25 am
+  if(day === 6 && minutes >= 25 && minutes <= 145) return Shuttle;
+
+  // sat 7:50am -> 9:40 am
+  if(day === 6 && minutes >= 470 && minutes <= 580) return Shuttle;
+
+  // sun 12:15am -> 2:20am
+  if(day === 0 && minutes >= 15 && minutes <= 140) return Shuttle;
+
+  // sun 8:30am -> 10:00am
+  if(day === 0 && minutes >= 510 && minutes <= 600) return Shuttle;
+  
+  return Dashboard;
+}
+
+const mode = process.env.REACT_APP_DASHBOARD_STATE
+
+let ComponentToRender;
+
+switch (mode) {
+  case "launch":
+    ComponentToRender = Launch;
+    break;
+  case "shuttle":
+    ComponentToRender = Shuttle;
+    break;
+  case "dashboard":
+    ComponentToRender = Dashboard;
+    break;
+  case "auto":
+    ComponentToRender = getAutoComponent();
+    break;
+  default:
+    ComponentToRender = getAutoComponent();
+}
+
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <App />
-    {/* <App2/> */}
-    {/* <App3/> */}
+    <ComponentToRender />
   </React.StrictMode>
 );
 
