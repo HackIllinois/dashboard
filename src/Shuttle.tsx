@@ -328,17 +328,24 @@ function pickSchedule(now: Date): Row[] {
           borderRadius:"3vh",
               border:"0.13vh solid #00FF2B", 
           backdropFilter: "blur(1.5vh)",
-          backgroundImage:`
-           radial-gradient(ellipse 140% 120% at 50% 0%,
-        rgba(0, 255, 60, 0.23) 0%,
-        rgba(0, 255, 60, 0.12) 35%,
-        rgba(0, 255, 60, 0.00) 50%
-      ),
-      linear-gradient(180deg,
-        rgba(0, 135, 3, 0.38)
-      ),
-        linear-gradient(to right, rgba(84, 172, 72, 0.20) 3px, transparent 1px),
-          linear-gradient(to bottom, rgba(84, 172, 72, 0.20) 3px, transparent 1px)`
+      //     backgroundImage:`
+      //      radial-gradient(ellipse 140% 120% at 50% 0%,
+      //   rgba(0, 255, 60, 0.23) 0%,
+      //   rgba(0, 255, 60, 0.12) 35%,
+      //   rgba(0, 255, 60, 0.00) 50%
+      // ),
+      // linear-gradient(180deg,
+      //   rgba(0, 135, 3, 0.38)
+      // ),
+      //   linear-gradient(to right, rgba(84, 172, 72, 0.20) 3px, transparent 1px),
+      //     linear-gradient(to bottom, rgba(84, 172, 72, 0.20) 3px, transparent 1px)`
+      background:`
+      linear-gradient(180deg, rgba(1, 98, 2, 0.7), rgba(0, 135, 3, 0.38)),
+      linear-gradient(to right, rgba(32, 122, 20, 0.6) .3vh, transparent 1px),
+      linear-gradient(to bottom, rgba(44, 137, 32, 0.6) .3vh, transparent 1px)
+      `,
+        // backgroundRepeat: "no-repeat, no-repeat, repeat, repeat",
+        backgroundSize: "100% 100%, 25% 25%, 25% 25%",
         }}
       >
         {/* column names */}
