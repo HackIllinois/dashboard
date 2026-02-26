@@ -17,5 +17,6 @@ export const useAttendeeTeams = (refreshCycle = 600000) => {
     }, [refreshCycle, setTeams]);
 
 
+        // console.log(teams)
     return teams;
 };

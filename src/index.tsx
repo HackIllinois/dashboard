@@ -15,13 +15,13 @@ function getAutoComponent() {
   if(day === 6 && minutes >= 25 && minutes <= 145) return Shuttle;
 
   // sat 7:50am -> 9:40 am
-  if(day === 6 && minutes >= 470 && minutes <= 580) return Shuttle;
+  // if(day === 6 && minutes >= 470 && minutes <= 580) return Shuttle;
 
   // sun 12:15am -> 2:20am
   if(day === 0 && minutes >= 15 && minutes <= 140) return Shuttle;
 
   // sun 8:30am -> 10:00am
-  if(day === 0 && minutes >= 510 && minutes <= 600) return Shuttle;
+  // if(day === 0 && minutes >= 510 && minutes <= 600) return Shuttle;
   
   return Dashboard;
 }
