@@ -20,13 +20,13 @@ function getAutoComponent() {
   // sun 12:15am -> 2:20am
   if(day === 0 && minutes >= 15 && minutes <= 140) return Shuttle;
 
-  // sun 8:30am -> 10:00am
+  // sun 8:30am -> 10:00am 
   // if(day === 0 && minutes >= 510 && minutes <= 600) return Shuttle;
   
   return Dashboard;
 }
 
-const mode = process.env.REACT_APP_DASHBOARD_STATE
+const mode: string = 'launch';
 
 let ComponentToRender;
 
