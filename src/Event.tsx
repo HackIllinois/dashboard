@@ -89,6 +89,15 @@ export default function EventCard({
   event.eventType === "OTHER" ? "#00FF3B" :
   "#00FF3B";
 
+  const eventTagColor =
+  event.eventType === "MEAL" ? "#aa8903" :
+  event.eventType === "MINIEVENT" ? "#c20095" :
+  event.eventType === "SPEAKER" ? "#9B5CFF" :
+  event.eventType === "WORKSHOP" ? "#bd0000" :
+  event.eventType === "QNA" ? "#53DDFF" :
+  event.eventType === "OTHER" ? "#008c21" :
+  "#008c21";
+
   const isHappeningNow = useMemo(() => {
     return nowSec >= event.startTime && nowSec <= event.endTime;
   }, [nowSec, event.startTime, event.endTime]);
@@ -152,7 +161,7 @@ useEffect(() => {
     marginLeft:"auto",
     padding: "0.3vh 1vh",
     color: "#F5F7FA",
-    backgroundColor: "#fa6a23",
+    backgroundColor: eventTagColor,
     borderRadius: "2vh",
     fontWeight: 600,
     fontSize: "2vh",
