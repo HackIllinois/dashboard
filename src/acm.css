@@ -1,0 +1,331 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Syne:wght@600;700;800&display=swap");
+
+.acm-dashboard {
+  --bg: #060815;
+  --panel: rgba(34, 16, 62, 0.92);
+  --text: #f7f2ff;
+  --muted: #d9c8f4;
+  --line: rgba(215, 172, 255, 0.18);
+  --accent: #d79cff;
+  --accent-soft: rgba(215, 156, 255, 0.2);
+  --live: #f3b0ff;
+
+  position: relative;
+  min-height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+  background: radial-gradient(110% 120% at 20% 0%, #4f2390 0%, #2c1158 48%, #17082f 100%);
+  color: var(--text);
+  overflow: hidden;
+  font-family: "Space Grotesk", "Montserrat", sans-serif;
+}
+
+.acm-glow {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(85px);
+  pointer-events: none;
+}
+
+.acm-glow-one {
+  top: -20vh;
+  left: -12vw;
+  width: 34vw;
+  height: 34vw;
+  background: rgba(219, 140, 255, 0.12);
+}
+
+.acm-glow-two {
+  right: -8vw;
+  bottom: -20vh;
+  width: 26vw;
+  height: 26vw;
+  background: rgba(186, 126, 255, 0.1);
+}
+
+.acm-header {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 14px;
+}
+
+.acm-header h1 {
+  font-family: "Syne", sans-serif;
+  font-size: clamp(24px, 3vw, 44px);
+  letter-spacing: 0.02em;
+}
+
+.acm-header p {
+  color: var(--muted);
+  margin-top: 6px;
+  font-size: 18px;
+}
+
+.acm-clock-wrap {
+  text-align: right;
+}
+
+.acm-clock-wrap strong {
+  font-family: "Syne", sans-serif;
+  font-size: clamp(24px, 2.4vw, 38px);
+}
+
+.acm-clock-label {
+  display: block;
+  color: var(--muted);
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+
+.acm-body {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 330px minmax(0, 1fr);
+  gap: 16px;
+  height: calc(100vh - 120px);
+}
+
+.acm-side {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.acm-panel {
+  background: var(--panel);
+  border: 1px solid rgba(219, 172, 255, 0.14);
+  border-radius: 14px;
+  padding: 14px;
+  backdrop-filter: blur(8px);
+}
+
+.acm-panel h2 {
+  font-family: "Syne", sans-serif;
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+.acm-metric {
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 3px;
+}
+
+.acm-submetric {
+  color: var(--muted);
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.acm-compact-item {
+  border-top: 1px solid var(--line);
+  padding-top: 8px;
+  margin-top: 8px;
+}
+
+.acm-compact-item strong {
+  display: block;
+  font-size: 18px;
+}
+
+.acm-compact-item span {
+  color: var(--muted);
+  font-size: 15px;
+  display: block;
+}
+
+.acm-upnext-lead {
+  color: #f0ddff !important;
+  font-size: 14px !important;
+  margin-top: 4px;
+  font-weight: 600;
+}
+
+.acm-timeline-panel {
+  background: var(--panel);
+  border: 1px solid rgba(219, 172, 255, 0.14);
+  border-radius: 14px;
+  padding: 12px;
+  display: grid;
+  grid-template-columns: 74px minmax(0, 1fr);
+  gap: 10px;
+}
+
+.acm-time-rail {
+  position: relative;
+}
+
+.acm-time-marker {
+  position: absolute;
+  transform: translateY(-50%);
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.acm-timeline {
+  position: relative;
+  border-radius: 10px;
+  background: rgba(14, 6, 29, 0.78);
+  overflow: hidden;
+}
+
+.acm-grid-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  border-top: 1px dashed var(--line);
+}
+
+.acm-item {
+  position: absolute;
+  box-sizing: border-box;
+  padding: 12px;
+  border-radius: 12px;
+  background: linear-gradient(160deg, rgba(63, 30, 109, 0.94) 0%, rgba(38, 16, 76, 0.95) 100%);
+  border: 1px solid rgba(230, 190, 255, 0.34);
+  box-shadow: 0 3px 16px rgba(8, 2, 18, 0.34), inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+  overflow: hidden;
+}
+
+.acm-item-live {
+  border-color: var(--live);
+  box-shadow:
+    0 0 0 1px rgba(243, 176, 255, 0.7),
+    0 0 12px rgba(225, 122, 255, 0.42),
+    0 0 28px rgba(194, 90, 255, 0.28);
+  animation: acmPulseGlow 1.8s ease-in-out infinite;
+}
+
+@keyframes acmPulseGlow {
+  0%, 100% {
+    box-shadow:
+      0 0 0 1px rgba(243, 176, 255, 0.65),
+      0 0 10px rgba(225, 122, 255, 0.34),
+      0 0 22px rgba(194, 90, 255, 0.22);
+  }
+  50% {
+    box-shadow:
+      0 0 0 1px rgba(243, 176, 255, 0.9),
+      0 0 16px rgba(225, 122, 255, 0.55),
+      0 0 36px rgba(194, 90, 255, 0.38);
+  }
+}
+
+.acm-item h3 {
+  font-size: 16px;
+  font-family: "Syne", sans-serif;
+  margin-bottom: 5px;
+  line-height: 1.18;
+  letter-spacing: 0.01em;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.acm-item p {
+  margin-top: 3px;
+  color: #d4e3ff;
+  font-size: 13px;
+  line-height: 1.28;
+}
+
+.acm-time-range {
+  color: var(--accent) !important;
+  font-weight: 700;
+  margin: 0;
+  font-size: 14px !important;
+}
+
+.acm-time-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  align-items: baseline;
+  flex-wrap: wrap;
+}
+
+.acm-helpdesk-lead {
+  margin: 0;
+  color: #e5f3ff !important;
+  font-weight: 700;
+  text-align: right;
+  margin-left: auto;
+  font-size: 13px !important;
+}
+
+.acm-detail {
+  color: #d8e9ff !important;
+}
+
+.acm-muted-detail {
+  color: #b9cff4 !important;
+}
+
+.acm-staff {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.acm-item-compact {
+  padding: 8px 10px;
+}
+
+.acm-item-compact h3 {
+  font-size: 14px;
+  margin-bottom: 3px;
+  -webkit-line-clamp: 2;
+}
+
+.acm-item-compact .acm-time-range {
+  font-size: 13px !important;
+  margin-top: 0;
+}
+
+.acm-item-compact .acm-detail {
+  font-size: 12px;
+  margin-top: 2px;
+}
+
+.acm-compact-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.acm-item-tight h3 {
+  font-size: 13px;
+  margin-bottom: 2px;
+  -webkit-line-clamp: 1;
+}
+
+.acm-item-tight .acm-time-range {
+  font-size: 12px !important;
+}
+
+.acm-item-tight .acm-detail {
+  font-size: 11px;
+}
+
+@media (max-width: 960px) {
+  .acm-dashboard {
+    overflow: auto;
+  }
+
+  .acm-body {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+
+  .acm-timeline-panel {
+    min-height: 70vh;
+  }
+}

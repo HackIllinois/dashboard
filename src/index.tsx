@@ -4,6 +4,7 @@ import './index.css';
 import Dashboard from './Dashboard';
 import Launch from "./Launch"
 import Shuttle from "./Shuttle"
+import AcmDashboard from "./AcmDashboard"
 import reportWebVitals from './reportWebVitals';
 
 function getAutoComponent() {
@@ -31,24 +32,29 @@ function getAutoComponent() {
 // TODO: Make this an env variable.
 // TODO: enforce that this is one of the 4 allowed options below!
 const mode: string = 'launch';
+const useParam = new URLSearchParams(window.location.search).get("use");
 
 let ComponentToRender;
 
-switch (mode) {
-  case "launch":
-    ComponentToRender = Launch;
-    break;
-  case "shuttle":
-    ComponentToRender = Shuttle;
-    break;
-  case "dashboard":
-    ComponentToRender = Dashboard;
-    break;
-  case "auto":
-    ComponentToRender = getAutoComponent();
-    break;
-  default:
-    ComponentToRender = getAutoComponent();
+if (useParam === "acm") {
+  ComponentToRender = AcmDashboard;
+} else {
+  switch (mode) {
+    case "launch":
+      ComponentToRender = Launch;
+      break;
+    case "shuttle":
+      ComponentToRender = Shuttle;
+      break;
+    case "dashboard":
+      ComponentToRender = Dashboard;
+      break;
+    case "auto":
+      ComponentToRender = getAutoComponent();
+      break;
+    default:
+      ComponentToRender = getAutoComponent();
+  }
 }
 
 
