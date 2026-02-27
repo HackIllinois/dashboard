@@ -1,4 +1,7 @@
-const APIv2 = "https://adonix.hackillinois.org";
+const APIv2 = (process.env.REACT_APP_ADONIX_URL || "https://adonix.hackillinois.org").replace(
+    /\/+$/,
+    ""
+);
 
 export type Profile = {
     displayName: string;
@@ -15,6 +18,9 @@ export type AttendeeTeam = {
 
 export interface Event {
     id: string;
+    eventId?: string;
+    isStaff?: boolean;
+    isPrivate?: boolean;
     name: string;
     description: string;
     isAsync?: boolean;
@@ -32,17 +38,44 @@ export interface Event {
     isPro: boolean;
 }
 
-async function request(endpoint: string) {
-    // const token = localStorage.getItem("jwt");
+export type EventAttendeesResponse = {
+    eventId: string;
+    attendees: string[];
+    excusedAttendees: string[];
+};
 
+export type ShiftAssignment = {
+    userId: string;
+    shifts: string[];
+};
 
+export type ShiftAssignmentsResponse = {
+    assignments: ShiftAssignment[];
+};
+
+export type ShiftCandidateUser = {
+    userId: string;
+    name: string;
+    email: string;
+};
+
+export type ShiftCandidatesResponse = {
+    users: ShiftCandidateUser[];
+};
+
+async function request(endpoint: string, token?: string) {
     const response = await fetch(APIv2 + endpoint, {
         method: "GET",
+        credentials: "include",
         headers: {
-            // "Authorization": `Bearer ${token}`,
             "Content-Type": "application/json",
+            ...(token ? { Authorization: token } : {})
         }
     });
+
+    if (!response.ok) {
+        throw new Error(`Request failed for ${endpoint}: ${response.status}`);
+    }
 
     return response.json();
 };
@@ -53,6 +86,38 @@ export function getLeaderboard(): Promise<Profile[]> {
 
 export function getEvents(): Promise<Event[]> {
     return request("/event").then((res) => res.events);
+}
+
+export function getEventsWithToken(token: string): Promise<Event[]> {
+    return request("/event/", token).then((res) => res.events);
+}
+
+export function getStaffEventsWithToken(token: string): Promise<Event[]> {
+    return request("/event/staff/", token).then((res) => res.events);
+}
+
+export function getEventAttendeesWithToken(eventId: string, token: string): Promise<EventAttendeesResponse> {
+    return request(`/event/attendees/${eventId}/`, token);
+}
+
+export function getStaffShiftAssignmentsWithToken(token: string): Promise<ShiftAssignmentsResponse> {
+    return request("/staff/shift/all/", token);
+}
+
+export function getStaffShiftCandidatesWithToken(token: string): Promise<ShiftCandidatesResponse> {
+    return request("/staff/shift/candidates/", token);
+}
+
+export function getEventsAuthed(): Promise<Event[]> {
+    return request("/event/").then((res) => res.events);
+}
+
+export function getStaffEventsAuthed(): Promise<Event[]> {
+    return request("/event/staff/").then((res) => res.events);
+}
+
+export function getEventAttendeesAuthed(eventId: string): Promise<EventAttendeesResponse> {
+    return request(`/event/attendees/${eventId}/`);
 }
 
 export function getAttendeeTeams(): Promise<AttendeeTeam[]> {
