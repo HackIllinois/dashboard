@@ -96,7 +96,7 @@ export default function EventCard({
   event.eventType === "WORKSHOP" ? "#bd0000" :
   event.eventType === "QNA" ? "#53DDFF" :
   event.eventType === "OTHER" ? "#008c21" :
-  "#00FF3B";
+  "#008c21";
 
   const isHappeningNow = useMemo(() => {
     return nowSec >= event.startTime && nowSec <= event.endTime;
