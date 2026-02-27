@@ -5,6 +5,7 @@ import {
   Event,
   ShiftAssignment,
   ShiftCandidateUser,
+  getEventAttendeesWithToken,
   getEventsWithToken,
   getStaffEventsWithToken,
   getStaffShiftAssignmentsWithToken,
@@ -13,6 +14,7 @@ import {
 
 type LaidOutItem = AcmItem & {
   source: "event" | "staffShift";
+  attendeeCount?: number;
   column: number;
   totalColumns: number;
   topPct: number;
@@ -36,7 +38,11 @@ type DaySummary = {
 type DashboardItem = AcmItem & {
   source: "event" | "staffShift";
   eventIds?: string[];
+  attendeeCount?: number;
 };
+
+const ACM_RELOAD_MS = 60_000;
+const CHECKIN_EVENT_ID = "ac49f5813c92452cc8240e99766410c8";
 
 function dayLabel(dayKey: string): string {
   const [year, month, day] = dayKey.split("-").map(Number);
@@ -185,6 +191,7 @@ export default function AcmDashboard() {
   );
   const [loading, setLoading] = useState(false);
   const [loadError, setLoadError] = useState<string | null>(null);
+  const [totalCheckins, setTotalCheckins] = useState<number | null>(null);
 
   const token = useMemo(() => new URLSearchParams(window.location.search).get("token"), []);
 
@@ -203,19 +210,47 @@ export default function AcmDashboard() {
           getStaffShiftAssignmentsWithToken(token),
           getStaffShiftCandidatesWithToken(token)
         ]);
+
+        const checkinAttendance = await getEventAttendeesWithToken(CHECKIN_EVENT_ID, token);
+        setTotalCheckins(checkinAttendance.attendees.length);
+
+        const regularEventIds = Array.from(
+          new Set(
+            events
+              .filter((event) => event.eventType !== "MEETING" && event.eventType !== "STAFFSHIFT")
+              .map((event) => event.eventId || event.id)
+          )
+        );
+        const attendeeCountByEventId = new Map<string, number>();
+        const attendeeCountResponses = await Promise.allSettled(
+          regularEventIds.map((eventId) => getEventAttendeesWithToken(eventId, token))
+        );
+        attendeeCountResponses.forEach((result, idx) => {
+          if (result.status !== "fulfilled") return;
+          const eventId = regularEventIds[idx];
+          attendeeCountByEventId.set(eventId, result.value.attendees.length);
+        });
+
         const shiftStaffMap = buildShiftStaffMap(
           assignmentsResponse.assignments,
           candidatesResponse.users
         );
+        const shiftAssigneeCountMap = new Map(
+          Array.from(shiftStaffMap.entries()).map(([shiftId, names]) => [shiftId, names.length])
+        );
 
         const regularItemsRaw = events
           .filter((event) => event.eventType !== "MEETING" && event.eventType !== "STAFFSHIFT")
-          .map((event) => eventToDashboardItem(event, shiftStaffMap, "event"));
+          .map((event) =>
+            eventToDashboardItem(event, shiftStaffMap, shiftAssigneeCountMap, attendeeCountByEventId, "event")
+          );
         const collapsedRegularItems = collapseExpoItems(regularItemsRaw);
 
         const staffShiftItemsRaw = staffEvents
           .filter((event) => event.eventType === "STAFFSHIFT")
-          .map((event) => eventToDashboardItem(event, shiftStaffMap, "staffShift"));
+          .map((event) =>
+            eventToDashboardItem(event, shiftStaffMap, shiftAssigneeCountMap, attendeeCountByEventId, "staffShift")
+          );
         const collapsedStaffShiftItems = collapseExpoItems(staffShiftItemsRaw);
 
         const merged = dedupeItems([...collapsedRegularItems, ...collapsedStaffShiftItems])
@@ -232,15 +267,17 @@ export default function AcmDashboard() {
     };
 
     void loadAcmItems();
+    const refreshTimer = window.setInterval(() => {
+      window.location.reload();
+    }, ACM_RELOAD_MS);
+
+    return () => {
+      window.clearInterval(refreshTimer);
+    };
   }, [token]);
 
   useEffect(() => {
     const timer = window.setInterval(() => setNow(new Date()), 30_000);
-    return () => window.clearInterval(timer);
-  }, []);
-
-  useEffect(() => {
-    const timer = window.setInterval(() => window.location.reload(), 300_000);
     return () => window.clearInterval(timer);
   }, []);
 
@@ -273,8 +310,14 @@ export default function AcmDashboard() {
           {loadError && <p className="acm-api-error">{loadError}</p>}
         </div>
         <div className="acm-clock-wrap">
-          <span className="acm-clock-label">Local Time</span>
-          <strong>{formatClock(now)}</strong>
+          <div className="acm-inline-metric-row">
+            <span className="acm-clock-label-inline">Local Time:</span>
+            <strong>{formatClock(now)}</strong>
+          </div>
+          <div className="acm-inline-metric-row">
+            <span className="acm-checkins-label-inline">Attendees:</span>
+            <strong className="acm-checkins-value-inline">{totalCheckins ?? "--"}</strong>
+          </div>
         </div>
       </header>
 
@@ -295,6 +338,9 @@ export default function AcmDashboard() {
                 </span>
                 {item.source === "staffShift" && item.staff && (
                   <span className="acm-upnext-lead">Assigned: {item.staff}</span>
+                )}
+                {item.source === "event" && item.attendeeCount !== undefined && (
+                  <span className="acm-upnext-lead">({item.attendeeCount} attendees)</span>
                 )}
               </div>
             ))}
@@ -367,6 +413,9 @@ export default function AcmDashboard() {
                       </div>
                       <p className="acm-item-type">{item.source === "staffShift" ? "Staff Shift" : "Event"}</p>
                       {sizeTier !== "tight" && item.needed !== undefined && <p className="acm-detail">Needed: {item.needed}</p>}
+                      {isLive && item.source === "event" && item.attendeeCount !== undefined && (
+                        <p className="acm-detail">({item.attendeeCount} attendees)</p>
+                      )}
                       {sizeTier === "full" && item.staff && <p className="acm-detail acm-staff">Staff: {item.staff}</p>}
                       {sizeTier === "full" && item.backup && <p className="acm-detail acm-muted-detail">Backup: {item.backup}</p>}
                     </>
@@ -394,6 +443,8 @@ function toDayKeyFromSeconds(epochSeconds: number): string {
 function eventToDashboardItem(
   event: Event,
   shiftStaffMap: Map<string, string[]>,
+  shiftAssigneeCountMap: Map<string, number>,
+  attendeeCountByEventId: Map<string, number>,
   source: "event" | "staffShift"
 ): DashboardItem {
   const eventId = event.eventId || event.id;
@@ -405,6 +456,8 @@ function eventToDashboardItem(
     start: new Date(event.startTime * 1000),
     end: new Date(event.endTime * 1000),
     title: event.name,
+    needed: isStaffShift && eventId ? (shiftAssigneeCountMap.get(eventId) ?? 0) : undefined,
+    attendeeCount: !isStaffShift && eventId ? attendeeCountByEventId.get(eventId) : undefined,
     source,
     staff:
       isStaffShift && eventId
@@ -444,10 +497,14 @@ function collapseExpoItems(items: DashboardItem[]): DashboardItem[] {
     }
 
     const mergedIds = new Set([...(existing.eventIds ?? []), ...(item.eventIds ?? (item.id ? [item.id] : []))]);
+    const hasNeeded = existing.needed !== undefined || item.needed !== undefined;
+    const hasAttendeeCount = existing.attendeeCount !== undefined || item.attendeeCount !== undefined;
     grouped.set(key, {
       ...existing,
       start: item.start < existing.start ? item.start : existing.start,
       end: item.end > existing.end ? item.end : existing.end,
+      needed: hasNeeded ? (existing.needed ?? 0) + (item.needed ?? 0) : undefined,
+      attendeeCount: hasAttendeeCount ? (existing.attendeeCount ?? 0) + (item.attendeeCount ?? 0) : undefined,
       eventIds: Array.from(mergedIds)
     });
   }
