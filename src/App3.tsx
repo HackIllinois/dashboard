@@ -15,8 +15,12 @@ import ufo31 from "./assets/ufo31.svg"
 import ufo32 from "./assets/ufo32.svg"
 import useTimeSyncedReload from "./util/useReload";
 import fridayNight from "./util/fridayNight.json";
+import saturdayMorning from "./util/saturdayMorning.json"
+import saturdayNight from "./util/saturdayNight.json"
+import sundayMorning from "./util/sundayMorning.json"
 import logo from "./assets/logo2.svg";
 import { useTime } from "./util/useTime";
+import fulcrumgt from "./assets/fulcrumgt.svg"
 
 
 type Row = {
@@ -315,9 +319,40 @@ const ufo3 = getPosForPhase({
 
 const raysOpacity = getRaysOpacity(phase, t);
 
+function pickSchedule(now: Date): Row[] {
+  const day = now.getDay(); // 0=Sun, 5=Fri, 6=Sat
+  const m = now.getHours() * 60 + now.getMinutes();
 
+  const SAT_3AM = 3 * 60;          // 03:00
+  const SAT_10AM = 10 * 60;        // 10:00
+  const SUN_230AM = 2 * 60 + 30;   // 02:30
 
-const rows = fridayNight as Row[];
+  // Friday: always fridayNight
+  if (day === 5) return fridayNight as Row[];
+
+  // Saturday:
+  // 12:00am–2:59am -> fridayNight
+  // 3:00am–9:59am  -> saturdayMorning
+  // 10:00am–11:59pm -> saturdayNight
+  if (day === 6) {
+    if (m < SAT_3AM) return fridayNight as Row[];
+    if (m < SAT_10AM) return saturdayMorning as Row[];
+    return saturdayNight as Row[];
+  }
+
+  // Sunday:
+  // 12:00am–2:29am -> saturdayNight
+  // 2:30am+        -> sundayMorning
+  if (day === 0) {
+    if (m < SUN_230AM) return saturdayNight as Row[];
+    return sundayMorning as Row[];
+  }
+
+  // Fallback schedule
+  return sundayMorning as Row[];
+}
+
+  const rows = pickSchedule(now);
 
   const gridCols = "1.3fr 1.2fr 2.4fr 1.3fr 2.0fr";
 
@@ -481,14 +516,14 @@ const rows = fridayNight as Row[];
 
  <img src={logo} alt="logo" className="logo" style={{
                         position: "absolute",
-                        top: "4vh",
+                        top: "3vh",
                         left: "6vh",
                         width: "24vh",
                         zIndex:999
                     }} />
                      <h2 style={{
                    position:"absolute",
-                   top:"5vh",
+                   top:"4vh",
                    right:"6vh",
                    fontFamily:"Tsukimi Rounded",
                    color:"white",
@@ -501,6 +536,45 @@ const rows = fridayNight as Row[];
                                                          second:"2-digit"
                                                                   })}
                                                                         </h2>
+
+                                                                        <div
+    style={{
+      display: "flex",
+      flexDirection: "row",
+      alignItems: "center",
+      gap: "2vh",
+      position:'absolute',
+      top:"4vh",
+      left:"70vh"
+    }}
+  >
+    <div
+      style={{
+        color: "white",
+        fontFamily: "Tsukimi Rounded",
+        fontWeight: 700,
+        textShadow: "0 3px 6.239px #0D084D",
+        fontSize: "2.4vh",
+        lineHeight: 1,
+        whiteSpace: "nowrap",
+        zIndex:999
+      }}
+    >
+      POWERED BY
+    </div>
+
+    <img
+      alt="fulcrumgt"
+      src={fulcrumgt}
+      style={{
+        zIndex: 2,
+        height: "5vh",
+        pointerEvents: "none",
+        marginTop:"1vh",
+        marginLeft:"-1.5vh",
+      }}
+    />
+    </div>
                    
   <div
       style={{

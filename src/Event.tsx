@@ -5,23 +5,46 @@ import Pin from "./assets/pin2.svg";
 
 type EventCardProps = {
   isLast: boolean
-  event: any; // you can tighten this type later
-  // Clock: string;
-  // Pin: string;
-  // formatDateTime: (t: any) => string;
-  // getLocationLabel: (e: any) => string;
+  event: any;
 };
 
-function formatDateTime(epochSeconds: number) {
-    const date = new Date(epochSeconds * 1000);
-    return date.toLocaleString([], {
-        // month: "short",
-        // day: "numeric",
-        hour: "numeric",
-        minute: "2-digit",
-        weekday:"short"
-    });
+function formatDateTime(startEpoch: number, endEpoch: number) {
+  const start = new Date(startEpoch * 1000);
+  const end = new Date(endEpoch * 1000);
+
+  const sameDay =
+    start.getFullYear() === end.getFullYear() &&
+    start.getMonth() === end.getMonth() &&
+    start.getDate() === end.getDate();
+
+  const startPeriod = start.getHours() >= 12 ? "PM" : "AM";
+  const endPeriod = end.getHours() >= 12 ? "PM" : "AM";
+
+  const startWeekday = start.toLocaleString([], { weekday: "short" });
+  const endWeekday = end.toLocaleString([], { weekday: "short" });
+
+  const startTime = start.toLocaleString([], {
+    hour: "numeric",
+    minute: "2-digit",
+  }).replace(/ AM| PM/, "");
+
+  const endTime = end.toLocaleString([], {
+    hour: "numeric",
+    minute: "2-digit",
+  }).replace(/ AM| PM/, "");
+
+  if (sameDay) {
+    // Same day and AM/PM -> compress
+    if (startPeriod === endPeriod) {
+      return `${startWeekday} ${startTime} - ${endTime} ${endPeriod}`;
+    }
+    // same day and AM/PM switch -> show both periods, but day only once
+    return `${startWeekday} ${startTime} ${startPeriod} - ${endTime} ${endPeriod}`;
+  }
+  // diff day -> full format
+  return `${startWeekday} ${startTime} ${startPeriod} - ${endWeekday} ${endTime} ${endPeriod}`;
 }
+
 
 function getLocationLabel(event: Event) {
     if (!event.locations || event.locations.length === 0) {
@@ -37,10 +60,6 @@ function getLocationLabel(event: Event) {
 export default function EventCard({
   event,
   isLast
-  // Clock,
-  // Pin,
-  // formatDateTime,
-  // getLocationLabel,
 }: EventCardProps) {
 
   const [nowSec, setNowSec] = useState(() => Math.floor(Date.now() / 1000));
@@ -81,22 +100,6 @@ useEffect(() => {
   rafId = requestAnimationFrame(tick);
   return () => cancelAnimationFrame(rafId);
 }, []);
-
-// const hashStr = (s: string) => {
-//   let h = 21661362632;
-//   for (let i = 0; i < s.length; i++) {
-//     h ^= s.charCodeAt(i);
-//     h = Math.imul(h, 16777619);
-//   }
-//   return h >>> 0;
-// };
-// const rand01 = (key: string, salt: string) => {
-//   const h = hashStr(key + "|" + salt);
-//   return (h % 10000) / 10000;
-// };
-// const phase = rand01("strobe35356", "phase134") * Math.PI * 2;
-// const floatAmp = 3;
-// const randSpeed = Math.floor(rand01("strobe3535", "ph542") * 2) + 1;
 
 function hexToRGBA(hex:string, alpha: number) {
   const r = parseInt(hex.slice(1, 3), 16);
@@ -222,9 +225,7 @@ useEffect(() => {
         <p style={infoText}>{getLocationLabel(event)}</p>
         <img src={Clock} alt="clock" style={iconStyle} />
         <p style={infoText}>
-          {formatDateTime(event.startTime)}
-          {event.startTime !== event.endTime &&
-            ` – ${formatDateTime(event.endTime)}`}
+            {formatDateTime(event.startTime, event.endTime)}
         </p>
       </div>
     </article>

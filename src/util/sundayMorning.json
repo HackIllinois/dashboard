@@ -1,0 +1,30 @@
+[
+  {
+    "buildingExitTime": "8:36 AM",
+    "busPickupTime": "8:41 AM",
+    "busPickupLocation": "Gregory / Ikenberry Commons (South)",
+    "busDropoffTime": "8:50 AM",
+    "busDropoffLocation": "Goodwin & Main (SE Corner)"
+  },
+  {
+    "buildingExitTime": "8:57 AM",
+    "busPickupTime": "9:03 AM",
+    "busPickupLocation": "Gregory / Ikenberry Commons (South)",
+    "busDropoffTime": "9:10 AM",
+    "busDropoffLocation": "Goodwin & Main (SE Corner)"
+  },
+  {
+    "buildingExitTime": "9:17 AM",
+    "busPickupTime": "9:23 AM",
+    "busPickupLocation": "Gregory / Ikenberry Commons (South)",
+    "busDropoffTime": "9:30 AM",
+    "busDropoffLocation": "Goodwin & Main (SE Corner)"
+  },
+  {
+    "buildingExitTime": "9:37 AM",
+    "busPickupTime": "9:43 AM",
+    "busPickupLocation": "Gregory / Ikenberry Commons (South)",
+    "busDropoffTime": "9:50 AM",
+    "busDropoffLocation": "Goodwin & Main (SE Corner)"
+  }
+]

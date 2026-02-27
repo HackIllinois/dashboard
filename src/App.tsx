@@ -25,6 +25,7 @@ import ufo32 from "./assets/ufo32.svg"
 import Countdown from "./Countdown";
 import useTimeSyncedReload from "./util/useReload";
 import TeamLeaderboard from "./TeamLeaderboard";
+import fulcrumgt from "./assets/fulcrumgt.svg"
 
 
 
@@ -456,16 +457,56 @@ const raysOpacity = getRaysOpacity(phase, t);
     />
   </>
 )}
+
+<div
+    style={{
+      display: "flex",
+      flexDirection: "row",
+      alignItems: "center",
+      gap: "2vh",
+      position:'absolute',
+      top:"11vh",
+      left:"6vh"
+    }}
+  >
+    <div
+      style={{
+        color: "white",
+        fontFamily: "Tsukimi Rounded",
+        fontWeight: 700,
+        textShadow: "0 3px 6.239px #0D084D",
+        fontSize: "2.4vh",
+        lineHeight: 1,
+        whiteSpace: "nowrap",
+        zIndex:999
+      }}
+    >
+      POWERED BY
+    </div>
+
+    <img
+      alt="fulcrumgt"
+      src={fulcrumgt}
+      style={{
+        zIndex: 2,
+        height: "5vh",
+        pointerEvents: "none",
+        marginTop:"1vh",
+        marginLeft:"-1.5vh",
+      }}
+    />
+    </div>
+
                     <img src={logo} alt="logo" className="logo" style={{
                         position: "absolute",
-                        top: "4vh",
+                        top: "3vh",
                         left: "6vh",
                         width: "24vh",
                         zIndex:999
                     }} />
                      <h2 style={{
                    position:"absolute",
-                   top:"13.5vh",
+                   top:"16.5vh",
                    left:"6vh",
                    fontFamily:"Tsukimi Rounded",
                    color:"white",
@@ -505,7 +546,7 @@ const raysOpacity = getRaysOpacity(phase, t);
     flex: "1 1 0",
       display: "flex",
       flexDirection: "column",
-      marginTop: "18vh",
+      marginTop: "20.5vh",
       maxWidth:"45vh",
     }}
   >
