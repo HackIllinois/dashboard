@@ -79,6 +79,10 @@
 
 .acm-clock-wrap {
   text-align: right;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
 }
 
 .acm-clock-wrap strong {
@@ -86,12 +90,24 @@
   font-size: clamp(24px, 2.4vw, 38px);
 }
 
-.acm-clock-label {
-  display: block;
+.acm-inline-metric-row {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 10px;
+  white-space: nowrap;
+}
+
+.acm-clock-label-inline,
+.acm-checkins-label-inline {
   color: var(--muted);
   font-size: 14px;
   text-transform: uppercase;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.08em;
+}
+
+.acm-checkins-value-inline {
+  color: #f3cbff;
+  text-shadow: 0 0 18px rgba(215, 156, 255, 0.28);
 }
 
 .acm-body {
@@ -379,6 +395,17 @@
 @media (max-width: 960px) {
   .acm-dashboard {
     overflow: auto;
+  }
+
+  .acm-inline-metric-row {
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    white-space: normal;
+  }
+
+  .acm-checkins-value-inline {
+    font-size: clamp(28px, 8vw, 42px);
   }
 
   .acm-body {
