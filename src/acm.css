@@ -13,6 +13,7 @@
   position: relative;
   min-height: 100vh;
   padding: 20px;
+  padding-bottom: 28px;
   box-sizing: border-box;
   background: radial-gradient(110% 120% at 20% 0%, #4f2390 0%, #2c1158 48%, #17082f 100%);
   color: var(--text);
@@ -64,6 +65,18 @@
   font-size: 18px;
 }
 
+.acm-api-mode {
+  color: #b7ffcd !important;
+  font-size: 13px !important;
+  margin-top: 4px !important;
+}
+
+.acm-api-error {
+  color: #ffd4d4 !important;
+  font-size: 13px !important;
+  margin-top: 4px !important;
+}
+
 .acm-clock-wrap {
   text-align: right;
 }
@@ -87,7 +100,7 @@
   display: grid;
   grid-template-columns: 330px minmax(0, 1fr);
   gap: 16px;
-  height: calc(100vh - 120px);
+  height: calc(100vh - 160px);
 }
 
 .acm-side {
@@ -146,6 +159,22 @@
   font-weight: 600;
 }
 
+.acm-badge {
+  color: #f5e8ff !important;
+  font-size: 12px !important;
+  margin-top: 3px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.acm-badge-event {
+  color: #91d1ff !important;
+}
+
+.acm-badge-staffShift {
+  color: #e9b7ff !important;
+}
+
 .acm-timeline-panel {
   background: var(--panel);
   border: 1px solid rgba(219, 172, 255, 0.14);
@@ -191,6 +220,16 @@
   border: 1px solid rgba(230, 190, 255, 0.34);
   box-shadow: 0 3px 16px rgba(8, 2, 18, 0.34), inset 0 0 0 1px rgba(255, 255, 255, 0.02);
   overflow: hidden;
+}
+
+.acm-item-event {
+  background: linear-gradient(160deg, rgba(25, 66, 123, 0.94) 0%, rgba(10, 37, 73, 0.95) 100%);
+  border-color: rgba(149, 207, 255, 0.4);
+}
+
+.acm-item-shift {
+  background: linear-gradient(160deg, rgba(63, 30, 109, 0.94) 0%, rgba(38, 16, 76, 0.95) 100%);
+  border-color: rgba(230, 190, 255, 0.34);
 }
 
 .acm-item-live {
@@ -249,6 +288,15 @@
   gap: 8px;
   align-items: baseline;
   flex-wrap: wrap;
+}
+
+.acm-item-type {
+  color: #efe0ff !important;
+  font-size: 12px !important;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-top: 2px;
 }
 
 .acm-helpdesk-lead {
@@ -313,6 +361,19 @@
 
 .acm-item-tight .acm-detail {
   font-size: 11px;
+}
+
+.acm-loading {
+  position: fixed;
+  right: 16px;
+  bottom: 12px;
+  z-index: 10;
+  background: rgba(5, 10, 26, 0.9);
+  color: #f1deff;
+  border: 1px solid rgba(231, 190, 255, 0.32);
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-size: 12px;
 }
 
 @media (max-width: 960px) {

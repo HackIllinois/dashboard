@@ -1,8 +1,18 @@
 import { useEffect, useMemo, useState } from "react";
 import "./acm.css";
 import { AcmItem, acmSchedule } from "./acmSchedule";
+import {
+  Event,
+  ShiftAssignment,
+  ShiftCandidateUser,
+  getEventsWithToken,
+  getStaffEventsWithToken,
+  getStaffShiftAssignmentsWithToken,
+  getStaffShiftCandidatesWithToken
+} from "./util/api";
 
 type LaidOutItem = AcmItem & {
+  source: "event" | "staffShift";
   column: number;
   totalColumns: number;
   topPct: number;
@@ -20,7 +30,12 @@ type DaySummary = {
   label: string;
   start: Date;
   end: Date;
-  items: AcmItem[];
+  items: DashboardItem[];
+};
+
+type DashboardItem = AcmItem & {
+  source: "event" | "staffShift";
+  eventIds?: string[];
 };
 
 function dayLabel(dayKey: string): string {
@@ -36,11 +51,11 @@ function formatClock(date: Date): string {
   return date.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
 }
 
-function getDaySummaries(items: AcmItem[]): DaySummary[] {
-  const byDay = new Map<string, AcmItem[]>();
+function getDaySummaries(items: DashboardItem[]): DaySummary[] {
+  const byDay = new Map<string, DashboardItem[]>();
 
   for (const item of items) {
-    const list = byDay.get(item.dayKey) ?? [];
+    const list: DashboardItem[] = byDay.get(item.dayKey) ?? [];
     list.push(item);
     byDay.set(item.dayKey, list);
   }
@@ -71,7 +86,7 @@ function chooseVisibleDay(days: DaySummary[], now: Date): DaySummary {
   return enclosing ?? days[0];
 }
 
-function layoutItems(items: AcmItem[]): LaidOutItem[] {
+function layoutItems(items: DashboardItem[]): LaidOutItem[] {
   if (!items.length) return [];
 
   const minStartMs = Math.min(...items.map((item) => item.start.getTime()));
@@ -142,7 +157,7 @@ function layoutItems(items: AcmItem[]): LaidOutItem[] {
   });
 }
 
-function buildTimeMarkers(items: AcmItem[]): TimeMarker[] {
+function buildTimeMarkers(items: DashboardItem[]): TimeMarker[] {
   if (!items.length) return [];
 
   const minStartMs = Math.min(...items.map((item) => item.start.getTime()));
@@ -165,6 +180,59 @@ function buildTimeMarkers(items: AcmItem[]): TimeMarker[] {
 
 export default function AcmDashboard() {
   const [now, setNow] = useState(new Date());
+  const [items, setItems] = useState<DashboardItem[]>(
+    acmSchedule.map((item) => ({ ...item, source: "staffShift" }))
+  );
+  const [loading, setLoading] = useState(false);
+  const [loadError, setLoadError] = useState<string | null>(null);
+
+  const token = useMemo(() => new URLSearchParams(window.location.search).get("token"), []);
+
+  useEffect(() => {
+    if (!token) {
+      return;
+    }
+
+    const loadAcmItems = async () => {
+      setLoading(true);
+      setLoadError(null);
+      try {
+        const [events, staffEvents, assignmentsResponse, candidatesResponse] = await Promise.all([
+          getEventsWithToken(token),
+          getStaffEventsWithToken(token),
+          getStaffShiftAssignmentsWithToken(token),
+          getStaffShiftCandidatesWithToken(token)
+        ]);
+        const shiftStaffMap = buildShiftStaffMap(
+          assignmentsResponse.assignments,
+          candidatesResponse.users
+        );
+
+        const regularItemsRaw = events
+          .filter((event) => event.eventType !== "MEETING" && event.eventType !== "STAFFSHIFT")
+          .map((event) => eventToDashboardItem(event, shiftStaffMap, "event"));
+        const collapsedRegularItems = collapseExpoItems(regularItemsRaw);
+
+        const staffShiftItemsRaw = staffEvents
+          .filter((event) => event.eventType === "STAFFSHIFT")
+          .map((event) => eventToDashboardItem(event, shiftStaffMap, "staffShift"));
+        const collapsedStaffShiftItems = collapseExpoItems(staffShiftItemsRaw);
+
+        const merged = dedupeItems([...collapsedRegularItems, ...collapsedStaffShiftItems])
+          .sort((a, b) => a.start.getTime() - b.start.getTime());
+
+        if (merged.length > 0) {
+          setItems(merged);
+        }
+      } catch (_error) {
+        setLoadError("Failed to fetch ACM events from API.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    void loadAcmItems();
+  }, [token]);
 
   useEffect(() => {
     const timer = window.setInterval(() => setNow(new Date()), 30_000);
@@ -176,7 +244,7 @@ export default function AcmDashboard() {
     return () => window.clearInterval(timer);
   }, []);
 
-  const daySummaries = useMemo(() => getDaySummaries(acmSchedule), []);
+  const daySummaries = useMemo(() => getDaySummaries(items), [items]);
   const activeDay = useMemo(() => chooseVisibleDay(daySummaries, now), [daySummaries, now]);
   const laidOut = useMemo(() => layoutItems(activeDay.items), [activeDay]);
   const markers = useMemo(() => buildTimeMarkers(activeDay.items), [activeDay]);
@@ -185,8 +253,8 @@ export default function AcmDashboard() {
     [activeDay, now]
   );
   const upcomingItems = useMemo(
-    () => acmSchedule.filter((item) => item.start >= now).slice(0, 8),
-    [now]
+    () => items.filter((item) => item.start >= now).slice(0, 8),
+    [items, now]
   );
 
   const totalNeeded = liveItems.reduce((sum, item) => sum + (item.needed ?? 0), 0);
@@ -201,6 +269,8 @@ export default function AcmDashboard() {
         <div>
           <h1>Internal Events Dash</h1>
           <p>{activeDay.label}</p>
+          {token && <p className="acm-api-mode">API mode enabled</p>}
+          {loadError && <p className="acm-api-error">{loadError}</p>}
         </div>
         <div className="acm-clock-wrap">
           <span className="acm-clock-label">Local Time</span>
@@ -220,6 +290,12 @@ export default function AcmDashboard() {
                 <span>
                   {formatClock(item.start)} - {formatClock(item.end)}
                 </span>
+                <span className={`acm-badge acm-badge-${item.source}`}>
+                  {item.source === "staffShift" ? "Staff Shift" : "Event"}
+                </span>
+                {item.source === "staffShift" && item.staff && (
+                  <span className="acm-upnext-lead">Assigned: {item.staff}</span>
+                )}
               </div>
             ))}
           </article>
@@ -232,6 +308,12 @@ export default function AcmDashboard() {
                 <span>
                   {dayLabel(item.dayKey).split(",")[0]} {formatClock(item.start)}
                 </span>
+                <span className={`acm-badge acm-badge-${item.source}`}>
+                  {item.source === "staffShift" ? "Staff Shift" : "Event"}
+                </span>
+                {item.source === "staffShift" && item.staff && (
+                  <span className="acm-upnext-lead">Assigned: {item.staff}</span>
+                )}
                 {item.lead && <span className="acm-upnext-lead">Lead: {item.lead}</span>}
               </div>
             ))}
@@ -267,7 +349,7 @@ export default function AcmDashboard() {
               return (
                 <article
                   key={item.id}
-                  className={`acm-item ${isLive ? "acm-item-live" : ""} ${isDetailed ? "acm-item-detailed" : "acm-item-compact"} acm-item-${sizeTier}`}
+                  className={`acm-item ${item.source === "staffShift" ? "acm-item-shift" : "acm-item-event"} ${isLive ? "acm-item-live" : ""} ${isDetailed ? "acm-item-detailed" : "acm-item-compact"} acm-item-${sizeTier}`}
                   style={{
                     top: `${item.topPct}%`,
                     height: `${item.heightPct}%`,
@@ -283,6 +365,7 @@ export default function AcmDashboard() {
                           {formatClock(item.start)} - {formatClock(item.end)}
                         </p>
                       </div>
+                      <p className="acm-item-type">{item.source === "staffShift" ? "Staff Shift" : "Event"}</p>
                       {sizeTier !== "tight" && item.needed !== undefined && <p className="acm-detail">Needed: {item.needed}</p>}
                       {sizeTier === "full" && item.staff && <p className="acm-detail acm-staff">Staff: {item.staff}</p>}
                       {sizeTier === "full" && item.backup && <p className="acm-detail acm-muted-detail">Backup: {item.backup}</p>}
@@ -298,6 +381,118 @@ export default function AcmDashboard() {
           </div>
         </section>
       </section>
+      {loading && <div className="acm-loading">Refreshing from API...</div>}
     </main>
   );
+}
+
+function toDayKeyFromSeconds(epochSeconds: number): string {
+  const date = new Date(epochSeconds * 1000);
+  return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
+}
+
+function eventToDashboardItem(
+  event: Event,
+  shiftStaffMap: Map<string, string[]>,
+  source: "event" | "staffShift"
+): DashboardItem {
+  const eventId = event.eventId || event.id;
+  const isStaffShift = source === "staffShift";
+  return {
+    id: eventId,
+    eventIds: eventId ? [eventId] : [],
+    dayKey: toDayKeyFromSeconds(event.startTime),
+    start: new Date(event.startTime * 1000),
+    end: new Date(event.endTime * 1000),
+    title: event.name,
+    source,
+    staff:
+      isStaffShift && eventId
+        ? (shiftStaffMap.get(eventId) ?? []).join(", ")
+        : undefined
+  };
+}
+
+function collapseExpoItems(items: DashboardItem[]): DashboardItem[] {
+  const grouped = new Map<string, DashboardItem>();
+  const passthrough: DashboardItem[] = [];
+
+  for (const item of items) {
+    const lower = item.title.toLowerCase();
+    const category = lower.includes("company expo")
+      ? "Company Expo"
+      : lower.includes("rso expo")
+        ? "RSO Expo"
+        : lower.includes("solar search")
+          ? "Solar Search"
+        : null;
+        
+    if (!category) {
+      passthrough.push(item);
+      continue;
+    }
+
+    const key = `${item.dayKey}|${category}`;
+    const existing = grouped.get(key);
+    if (!existing) {
+      grouped.set(key, {
+        ...item,
+        title: category,
+        eventIds: [...(item.eventIds ?? (item.id ? [item.id] : []))]
+      });
+      continue;
+    }
+
+    const mergedIds = new Set([...(existing.eventIds ?? []), ...(item.eventIds ?? (item.id ? [item.id] : []))]);
+    grouped.set(key, {
+      ...existing,
+      start: item.start < existing.start ? item.start : existing.start,
+      end: item.end > existing.end ? item.end : existing.end,
+      eventIds: Array.from(mergedIds)
+    });
+  }
+
+  return [...passthrough, ...Array.from(grouped.values())];
+}
+
+function dedupeItems(items: DashboardItem[]): DashboardItem[] {
+  const seen = new Set<string>();
+  const deduped: DashboardItem[] = [];
+  for (const item of items) {
+    const key = `${item.source}|${item.title}|${item.start.getTime()}|${item.end.getTime()}`;
+    if (seen.has(key)) {
+      continue;
+    }
+    seen.add(key);
+    deduped.push(item);
+  }
+  return deduped;
+}
+
+function buildShiftStaffMap(
+  assignments: ShiftAssignment[],
+  users: ShiftCandidateUser[]
+): Map<string, string[]> {
+  const userNameById = new Map<string, string>();
+  for (const user of users) {
+    userNameById.set(user.userId, user.name || user.userId);
+  }
+
+  const shiftToNames = new Map<string, string[]>();
+  for (const assignment of assignments) {
+    const resolvedName = userNameById.get(assignment.userId) ?? assignment.userId;
+    for (const shiftId of assignment.shifts) {
+      const current = shiftToNames.get(shiftId) ?? [];
+      current.push(resolvedName);
+      shiftToNames.set(shiftId, current);
+    }
+  }
+
+  for (const shiftId of Array.from(shiftToNames.keys())) {
+    const names = shiftToNames.get(shiftId) ?? [];
+    const uniqueSorted = Array.from(new Set(names)).sort((a, b) => a.localeCompare(b));
+    shiftToNames.set(shiftId, uniqueSorted);
+  }
+
+  return shiftToNames;
 }
