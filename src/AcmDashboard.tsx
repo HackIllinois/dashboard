@@ -57,6 +57,19 @@ function formatClock(date: Date): string {
   return date.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
 }
 
+function getLocationLabel(event: Event): string | undefined {
+  if (!event.locations || event.locations.length === 0) {
+    return undefined;
+  }
+
+  const label = event.locations
+    .map((location) => location.description.trim())
+    .filter(Boolean)
+    .join(" • ");
+
+  return label || undefined;
+}
+
 function getDaySummaries(items: DashboardItem[]): DaySummary[] {
   const byDay = new Map<string, DashboardItem[]>();
 
@@ -82,6 +95,15 @@ function getDaySummaries(items: DashboardItem[]): DaySummary[] {
 
 function chooseVisibleDay(days: DaySummary[], now: Date): DaySummary {
   const localDayKey = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
+  if (!days.length) {
+    return {
+      dayKey: localDayKey,
+      label: dayLabel(localDayKey),
+      start: now,
+      end: now,
+      items: []
+    };
+  }
   const exact = days.find((d) => d.dayKey === localDayKey);
   if (exact) return exact;
 
@@ -281,7 +303,11 @@ export default function AcmDashboard() {
     return () => window.clearInterval(timer);
   }, []);
 
-  const daySummaries = useMemo(() => getDaySummaries(items), [items]);
+  const visibleItems = useMemo(
+    () => items.filter((item) => item.end.getTime() >= now.getTime()),
+    [items, now]
+  );
+  const daySummaries = useMemo(() => getDaySummaries(visibleItems), [visibleItems]);
   const activeDay = useMemo(() => chooseVisibleDay(daySummaries, now), [daySummaries, now]);
   const laidOut = useMemo(() => layoutItems(activeDay.items), [activeDay]);
   const markers = useMemo(() => buildTimeMarkers(activeDay.items), [activeDay]);
@@ -290,8 +316,8 @@ export default function AcmDashboard() {
     [activeDay, now]
   );
   const upcomingItems = useMemo(
-    () => items.filter((item) => item.start >= now).slice(0, 8),
-    [items, now]
+    () => visibleItems.filter((item) => item.start >= now).slice(0, 8),
+    [visibleItems, now]
   );
 
   const totalNeeded = liveItems.reduce((sum, item) => sum + (item.needed ?? 0), 0);
@@ -333,6 +359,7 @@ export default function AcmDashboard() {
                 <span>
                   {formatClock(item.start)} - {formatClock(item.end)}
                 </span>
+                <span>{item.location ?? "Location TBA"}</span>
                 <span className={`acm-badge acm-badge-${item.source}`}>
                   {item.source === "staffShift" ? "Staff Shift" : "Event"}
                 </span>
@@ -354,6 +381,7 @@ export default function AcmDashboard() {
                 <span>
                   {dayLabel(item.dayKey).split(",")[0]} {formatClock(item.start)}
                 </span>
+                <span>{item.location ?? "Location TBA"}</span>
                 <span className={`acm-badge acm-badge-${item.source}`}>
                   {item.source === "staffShift" ? "Staff Shift" : "Event"}
                 </span>
@@ -456,6 +484,7 @@ function eventToDashboardItem(
     start: new Date(event.startTime * 1000),
     end: new Date(event.endTime * 1000),
     title: event.name,
+    location: getLocationLabel(event),
     needed: isStaffShift && eventId ? (shiftAssigneeCountMap.get(eventId) ?? 0) : undefined,
     attendeeCount: !isStaffShift && eventId ? attendeeCountByEventId.get(eventId) : undefined,
     source,
@@ -503,6 +532,7 @@ function collapseExpoItems(items: DashboardItem[]): DashboardItem[] {
       ...existing,
       start: item.start < existing.start ? item.start : existing.start,
       end: item.end > existing.end ? item.end : existing.end,
+      location: existing.location ?? item.location,
       needed: hasNeeded ? (existing.needed ?? 0) + (item.needed ?? 0) : undefined,
       attendeeCount: hasAttendeeCount ? (existing.attendeeCount ?? 0) + (item.attendeeCount ?? 0) : undefined,
       eventIds: Array.from(mergedIds)

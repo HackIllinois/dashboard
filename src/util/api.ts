@@ -63,6 +63,12 @@ export type ShiftCandidatesResponse = {
     users: ShiftCandidateUser[];
 };
 
+const OMITTED_EVENT_NAMES = new Set(["mentor office hours"]);
+
+function filterOmittedEvents(events: Event[]): Event[] {
+    return events.filter((event) => !OMITTED_EVENT_NAMES.has(event.name.trim().toLowerCase()));
+}
+
 async function request(endpoint: string, token?: string) {
     const response = await fetch(APIv2 + endpoint, {
         method: "GET",
@@ -85,15 +91,15 @@ export function getLeaderboard(): Promise<Profile[]> {
 }
 
 export function getEvents(): Promise<Event[]> {
-    return request("/event").then((res) => res.events);
+    return request("/event").then((res) => filterOmittedEvents(res.events));
 }
 
 export function getEventsWithToken(token: string): Promise<Event[]> {
-    return request("/event/", token).then((res) => res.events);
+    return request("/event/", token).then((res) => filterOmittedEvents(res.events));
 }
 
 export function getStaffEventsWithToken(token: string): Promise<Event[]> {
-    return request("/event/staff/", token).then((res) => res.events);
+    return request("/event/staff/", token).then((res) => filterOmittedEvents(res.events));
 }
 
 export function getEventAttendeesWithToken(eventId: string, token: string): Promise<EventAttendeesResponse> {
@@ -109,11 +115,11 @@ export function getStaffShiftCandidatesWithToken(token: string): Promise<ShiftCa
 }
 
 export function getEventsAuthed(): Promise<Event[]> {
-    return request("/event/").then((res) => res.events);
+    return request("/event/").then((res) => filterOmittedEvents(res.events));
 }
 
 export function getStaffEventsAuthed(): Promise<Event[]> {
-    return request("/event/staff/").then((res) => res.events);
+    return request("/event/staff/").then((res) => filterOmittedEvents(res.events));
 }
 
 export function getEventAttendeesAuthed(eventId: string): Promise<EventAttendeesResponse> {
