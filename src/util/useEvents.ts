@@ -12,6 +12,9 @@ export const useEvents = (refreshCycle = 600000) => {
       const base = res
         .slice() // avoid mutating res when sorting
         .sort((a, b) => a.startTime - b.startTime)
+        .filter(
+          (e) => e.eventType !== "MEETING" && e.eventType !== "STAFFSHIFT"
+        )
         .filter((e) => e.endTime >= Date.now() / 1000);
 
       const top6 = base.slice(0, 6);

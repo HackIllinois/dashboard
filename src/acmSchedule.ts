@@ -4,6 +4,7 @@ export type AcmItem = {
   start: Date;
   end: Date;
   title: string;
+  location?: string;
   needed?: number;
   lead?: string;
   staff?: string;
@@ -15,6 +16,7 @@ type RawItem = {
   start: string;
   end: string;
   title: string;
+  location?: string;
   needed?: number;
   lead?: string;
   staff?: string;
@@ -153,6 +155,7 @@ function toAcmItem(item: RawItem, index: number): AcmItem {
     start: buildDate(item.dayKey, startMin, startCarryDay),
     end: buildDate(item.dayKey, endMin, endCarryDay),
     title: item.title,
+    location: item.location,
     needed: item.needed,
     lead: item.lead,
     staff: item.staff,

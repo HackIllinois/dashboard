@@ -61,8 +61,11 @@ function getSunProgress(now = new Date()): number {
 
 function Dashboard() {
     const events = useEvents();
-    const eventCards = useMemo(() => events, [events]);
     const { now } = useTime();
+    const eventCards = useMemo(
+      () => events.filter((event) => event.endTime >= now.getTime() / 1000),
+      [events, now]
+    );
     const [sunProgress, setSunProgress] = useState(() => getSunProgress(new Date()));
 
     useTimeSyncedReload();
