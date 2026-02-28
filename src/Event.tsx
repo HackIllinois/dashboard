@@ -128,7 +128,7 @@ function hexToRGBA(hex:string, alpha: number) {
     color: "#F7F8FF",
     fontFamily: '"Tsukimi Rounded", "Montserrat", sans-serif',
     textTransform: "uppercase" as const,
-    textShadow: isHappeningNow ? `0 0 .8vh ${eventColor}, 0 0.1vh 0.5vh ${eventColor}` : `0 0 0.1vh ${eventColor}, 0 0.05vh 0.3vh ${eventColor}`,
+    textShadow: isHappeningNow ? `0 0 .8vh ${eventColor}, 0 0.1vh 0.5vh ${eventColor}` : `0 0 0.1vh ${eventColor}, 0 0.05vh 0.1vh ${eventColor}`,
     textAlign: "left" as const,
   };
 
@@ -155,7 +155,7 @@ function hexToRGBA(hex:string, alpha: number) {
     // color: "rgba(247, 248, 255, 0.82)",
     color: "#F5F7FA",
     fontSize: "1.8vh",
-    textShadow: isHappeningNow ? `0 0 .8vh ${eventColor}, 0 0.1vh 0.5vh ${eventColor}` : `0 0 0.1vh ${eventColor}, 0 0.05vh 0.3vh ${eventColor}`,
+    textShadow: isHappeningNow ? `0 0 .8vh ${eventColor}, 0 0.1vh 0.5vh ${eventColor}` : `0 0 0.1vh ${eventColor}, 0 0.05vh 0.1vh ${eventColor}`,
     textAlign: "left" as const,
   };
 
