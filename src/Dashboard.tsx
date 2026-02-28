@@ -297,7 +297,7 @@ const sunLeft = lerp(sunStart.left, sunEnd.left, sunProgress);
 
   <div
     style={{
-        maxWidth: "75vh",
+        maxWidth: "80vh",
         marginTop:"2vh",
       position: "relative",
       width: "100%",
